@@ -1,38 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1628"/>
-      <stop offset="100%" stop-color="#040c18"/>
-    </linearGradient>
-    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="zv" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#00d4ff"/>
       <stop offset="100%" stop-color="#1a6cf6"/>
     </linearGradient>
   </defs>
 
-  <!-- Dark square badge, rounded corners -->
-  <rect x="2" y="2" width="96" height="96" rx="22" ry="22" fill="url(#bgGrad)"/>
-
-  <!-- Blue border -->
-  <rect x="2" y="2" width="96" height="96" rx="22" ry="22"
-        fill="none" stroke="url(#blueGrad)" stroke-width="3" opacity="0.7"/>
-
   <!--
-    Z constructed from 3 solid parallelogram/trapezoid shapes
-    giving it weight and a "block letter" feel
+    ZV Wordmark — geometric, Ledger/Fireblocks minimal style
+    Z: three bold strokes with slashed diagonal (vector/lightning feel)
+    V: sharp convergence, shares visual weight
+    Transparent background
   -->
 
-  <!-- Top bar of Z (blue, left-to-right) -->
-  <rect x="22" y="22" width="56" height="11" rx="5" fill="url(#blueGrad)"/>
+  <!-- Z -->
+  <!-- Top bar -->
+  <polygon points="4,6  52,6  52,14  18,14" fill="url(#zv)"/>
+  <!-- Diagonal slash (skewed — lightning/vector feel) -->
+  <polygon points="44,12  52,12  16,48  8,48" fill="white" opacity="0.92"/>
+  <!-- Bottom bar -->
+  <polygon points="4,46  52,46  38,54  4,54" fill="url(#zv)"/>
 
-  <!-- Diagonal of Z (white, top-right to bottom-left) -->
-  <!-- Using a rotated rect via polygon -->
-  <polygon points="65,33  74,33  35,67  26,67" fill="white" opacity="0.95"/>
-
-  <!-- Bottom bar of Z (blue, left-to-right) -->
-  <rect x="22" y="67" width="56" height="11" rx="5" fill="url(#blueGrad)"/>
-
-  <!-- Arrow head at top-right corner (vector accent) -->
-  <circle cx="75" cy="27" r="7" fill="#00d4ff"/>
-  <circle cx="75" cy="27" r="3.5" fill="white"/>
+  <!-- V -->
+  <!-- Left arm -->
+  <polygon points="62,6  72,6  80,46  70,46" fill="url(#zv)"/>
+  <!-- Right arm -->
+  <polygon points="104,6  114,6  88,46  78,46" fill="white" opacity="0.92"/>
+  <!-- Tip accent -->
+  <circle cx="84" cy="50" r="4" fill="#00d4ff"/>
 </svg>

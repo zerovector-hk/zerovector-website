@@ -335,13 +335,15 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     });
 });
 
-// ===== Smooth Scroll (CSS scroll-margin-top handles offset) =====
+// ===== Smooth Scroll (auto nav-height offset) =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const offset = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
+            window.scrollTo({ top: offset, behavior: 'smooth' });
         }
     });
 });
