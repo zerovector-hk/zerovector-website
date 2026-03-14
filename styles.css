@@ -957,3 +957,8 @@ body {
     background: rgba(26, 108, 246, 0.3);
     color: #e8edf5;
 }
+
+/* Scroll offset for fixed nav */
+section[id] { scroll-margin-top: 100px; }
+#contact { scroll-margin-top: 100px; }
+
