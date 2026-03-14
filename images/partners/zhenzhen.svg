@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" fill="none">
+  <!-- 北京甄真司法鉴定 — badge style -->
+  <rect x="2" y="8" width="36" height="36" rx="4" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="6" y="24" font-family="'Noto Sans SC','Arial',sans-serif" font-weight="700" font-size="11" fill="#8b5cf6">甄真</text>
+  <text x="6" y="38" font-family="'Noto Sans SC','Arial',sans-serif" font-weight="400" font-size="9" fill="#8b5cf6">鑑定</text>
+  <text x="48" y="22" font-family="'Noto Sans SC','Arial',sans-serif" font-weight="700" font-size="12" fill="#8b5cf6">北京甄真</text>
+  <text x="48" y="37" font-family="'Noto Sans SC','Arial',sans-serif" font-weight="400" font-size="10" fill="#8b5cf6">司法鑑定中心</text>
+</svg>

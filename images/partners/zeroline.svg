@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 52" fill="none">
+  <!-- 零号线科技 — 0# mark + wordmark -->
+  <circle cx="18" cy="26" r="12" stroke="#00d4ff" stroke-width="2.5" fill="none"/>
+  <text x="13" y="30" font-family="'Arial',monospace" font-weight="700" font-size="10" fill="#00d4ff">0#</text>
+  <text x="40" y="23" font-family="'Noto Sans SC','Arial',sans-serif" font-weight="700" font-size="13" fill="#00d4ff">零號線科技</text>
+  <text x="40" y="38" font-family="'Arial',sans-serif" font-weight="400" font-size="10" fill="#00d4ff" letter-spacing="1">ZERO LINE TECH</text>
+</svg>
