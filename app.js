@@ -114,7 +114,15 @@ function animate() {
 animate();
 
 // ===== Language Toggle =====
-let currentLang = localStorage.getItem('zv-lang') || 'zh-TW';
+function detectLang() {
+    var saved = localStorage.getItem('zv-lang');
+    if (saved) return saved;
+    var bl = (navigator.language || navigator.languages && navigator.languages[0] || 'zh-TW').toLowerCase();
+    if (bl.startsWith('zh-tw') || bl.startsWith('zh-hk') || bl.startsWith('zh-hant')) return 'zh-TW';
+    if (bl.startsWith('zh')) return 'zh-CN';
+    return 'en';
+}
+let currentLang = detectLang();
 
 const translations = {
     'zh-TW': {

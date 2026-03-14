@@ -32,7 +32,15 @@
     <!-- Standalone Language Switcher (no app.js dependency) -->
     <script>
     (function() {
-        var lang = localStorage.getItem('zv-lang') || 'zh-TW';
+        function detectLang() {
+            var saved = localStorage.getItem('zv-lang');
+            if (saved) return saved;
+            var bl = (navigator.language || navigator.languages && navigator.languages[0] || 'zh-TW').toLowerCase();
+            if (bl.startsWith('zh-tw') || bl.startsWith('zh-hk') || bl.startsWith('zh-hant')) return 'zh-TW';
+            if (bl.startsWith('zh')) return 'zh-CN';
+            return 'en';
+        }
+        var lang = detectLang();
         document.documentElement.lang = lang;
 
         var btnLabels = { 'zh-TW': '簡中', 'zh-CN': 'EN', 'en': '繁中' };
