@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" fill="none">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="vGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Logo mark (scaled to 100x100, centered at 50,60) -->
+  <circle cx="60" cy="60" r="52" stroke="url(#ringGrad)" stroke-width="4" fill="none"/>
+  <circle cx="60" cy="60" r="44" stroke="url(#ringGrad)" stroke-width="1" fill="none" opacity="0.2"/>
+  <!-- ZV -->
+  <line x1="34" y1="37" x2="86" y2="37" stroke="url(#ringGrad)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="86" y1="37" x2="34" y2="83" stroke="url(#vGrad)" stroke-width="7" stroke-linecap="round"/>
+  <line x1="34" y1="83" x2="60" y2="83" stroke="url(#ringGrad)" stroke-width="7" stroke-linecap="round"/>
+  <line x1="60" y1="83" x2="86" y2="37" stroke="url(#ringGrad)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="86" cy="37" r="5" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="86" cy="37" r="3" fill="#ffffff"/>
+
+  <!-- ZEROVECTOR wordmark -->
+  <text x="130" y="46" font-family="'Space Grotesk', 'Arial', sans-serif" font-weight="700" font-size="28"
+        letter-spacing="6" fill="#00d4ff">ZERO</text>
+  <text x="130" y="82" font-family="'Space Grotesk', 'Arial', sans-serif" font-weight="700" font-size="28"
+        letter-spacing="6" fill="#ffffff">VECTOR</text>
+</svg>

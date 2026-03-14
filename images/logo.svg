@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+  <defs>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="vGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer ring (ZERO) -->
+  <circle cx="120" cy="120" r="104" stroke="url(#ringGrad)" stroke-width="7" fill="none"/>
+
+  <!-- Inner ring accent -->
+  <circle cx="120" cy="120" r="90" stroke="url(#ringGrad)" stroke-width="1.5" fill="none" opacity="0.25"/>
+
+  <!-- ZV unified letterform -->
+  <!-- Z top bar -->
+  <line x1="74" y1="78" x2="166" y2="78"
+        stroke="url(#ringGrad)" stroke-width="13" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Z diagonal = V left arm (shared stroke) -->
+  <line x1="166" y1="78" x2="74" y2="162"
+        stroke="url(#vGrad)" stroke-width="13" stroke-linecap="round"/>
+  <!-- Z bottom = V bottom point -->
+  <line x1="74" y1="162" x2="120" y2="162"
+        stroke="url(#ringGrad)" stroke-width="13" stroke-linecap="round"/>
+  <!-- V right arm -->
+  <line x1="120" y1="162" x2="166" y2="78"
+        stroke="url(#ringGrad)" stroke-width="13" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Vector arrow dot (top-right corner) — the "direction" accent -->
+  <circle cx="166" cy="78" r="9" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="166" cy="78" r="5" fill="#ffffff"/>
+</svg>
