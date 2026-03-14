@@ -29,6 +29,80 @@
         }
     </script>
 
+    <!-- Standalone Language Switcher (no app.js dependency) -->
+    <script>
+    (function() {
+        var lang = localStorage.getItem('zv-lang') || 'zh-TW';
+        document.documentElement.lang = lang;
+
+        var btnLabels = { 'zh-TW': '簡中', 'zh-CN': 'EN', 'en': '繁中' };
+        var nextLang = { 'zh-TW': 'zh-CN', 'zh-CN': 'en', 'en': 'zh-TW' };
+
+        function applyLang() {
+            // Update all elements with data-zh-tw / data-zh-cn / data-en
+            var els = document.querySelectorAll('[data-zh-tw],[data-zh-cn],[data-en]');
+            els.forEach(function(el) {
+                var key = 'data-' + lang.toLowerCase();
+                var val = el.getAttribute(key);
+                if (!val && lang === 'zh-CN') val = el.getAttribute('data-zh-cn');
+                if (!val) val = el.getAttribute('data-zh-tw');
+                if (val) {
+                    if (el.tagName === 'OPTION' || el.tagName === 'SPAN' || el.tagName === 'P' ||
+                        el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' ||
+                        el.tagName === 'H4' || el.tagName === 'A' || el.tagName === 'BUTTON' ||
+                        el.tagName === 'STRONG' || el.tagName === 'LI') {
+                        el.textContent = val;
+                    } else {
+                        el.textContent = val;
+                    }
+                }
+                // Handle placeholder
+                var phTw = el.getAttribute('data-ph-zh-tw');
+                var phCn = el.getAttribute('data-ph-zh-cn');
+                var phEn = el.getAttribute('data-ph-en');
+                if (phTw || phCn || phEn) {
+                    var ph = (lang === 'zh-TW' ? phTw : lang === 'zh-CN' ? phCn : phEn) || phTw;
+                    if (ph) el.setAttribute('placeholder', ph);
+                }
+            });
+
+            // Update lang button
+            var langBtn = document.getElementById('langText');
+            if (langBtn) langBtn.textContent = btnLabels[lang] || '簡中';
+
+            document.documentElement.lang = lang;
+        }
+
+        function toggleLang() {
+            lang = nextLang[lang] || 'zh-TW';
+            localStorage.setItem('zv-lang', lang);
+            applyLang();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            applyLang();
+
+            var btn = document.getElementById('langToggle');
+            if (btn) btn.addEventListener('click', toggleLang);
+
+            // Mobile menu
+            var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            var mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    var icon = mobileMenuBtn.querySelector('i');
+                    if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+                });
+            }
+
+            // Year
+            var yearEl = document.getElementById('currentYear');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+        });
+    })();
+    </script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -54,10 +128,10 @@
                         <span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span>
                     </a>
                 </div>
-
                 <div class="flex items-center space-x-4">
-                    <a href="index.html" class="text-gray-300 hover:text-ice-blue transition-colors text-sm">
-                        <i class="fas fa-arrow-left mr-2"></i><span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back">返回主站</span>
+                    <a href="index.html" class="text-gray-300 hover:text-ice-blue transition-colors text-sm"
+                       data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Home">
+                        <i class="fas fa-arrow-left mr-2"></i>返回主站
                     </a>
                     <button id="langToggle" class="lang-btn">
                         <i class="fas fa-globe mr-2"></i>
@@ -71,7 +145,8 @@
         </div>
         <div id="mobileMenu" class="hidden md:hidden bg-deep-blue/95 backdrop-blur-lg border-t border-ice-blue/20">
             <div class="px-4 py-4 space-y-3">
-                <a href="index.html" class="block nav-link" data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Main">返回主站</a>
+                <a href="index.html" class="block nav-link"
+                   data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Home">返回主站</a>
             </div>
         </div>
     </nav>
@@ -82,9 +157,13 @@
             <!-- Header -->
             <div class="text-center mb-12 fade-in-up">
                 <h1 class="text-5xl font-bold font-space mb-4">
-                    <span class="gradient-text" data-i18n="pageTitle">案件提交</span>
+                    <span class="gradient-text"
+                          data-zh-tw="案件提交" data-zh-cn="案件提交" data-en="Case Submission">案件提交</span>
                 </h1>
-                <p class="text-xl text-gray-400" data-i18n="pageSubtitle">填寫以下資料，我們將在 24 小時內與您聯繫</p>
+                <p class="text-xl text-gray-400"
+                   data-zh-tw="填寫以下資料，我們將在 24 小時內與您聯繫"
+                   data-zh-cn="填写以下信息，我们将在24小时内与您联系"
+                   data-en="Please fill in the details below. We will respond within 24 hours.">填寫以下資料，我們將在 24 小時內與您聯繫</p>
             </div>
 
             <!-- Important Notice -->
@@ -94,27 +173,39 @@
                         <i class="fas fa-exclamation-triangle text-amber-500 text-2xl mr-4"></i>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-amber-500 mb-4 font-space" data-i18n="noticeTitle">重要須知</h3>
+                        <h3 class="text-xl font-bold text-amber-500 mb-4 font-space"
+                            data-zh-tw="重要須知" data-zh-cn="重要须知" data-en="Important Notice">重要須知</h3>
                         <ul class="space-y-3 text-gray-300 text-sm leading-relaxed">
                             <li class="flex items-start">
                                 <i class="fas fa-check-circle text-ice-blue mr-3 mt-1 flex-shrink-0"></i>
-                                <span>提交後我們將<strong class="text-white">免費提供初步鏈上追蹤評估</strong>和資金流向分析</span>
+                                <span data-zh-tw="提交後我們將免費提供初步鏈上追蹤評估和資金流向分析"
+                                      data-zh-cn="提交后我们将免费提供初步链上追踪评估和资金流向分析"
+                                      data-en="After submission, we will provide a free preliminary on-chain tracking assessment and fund flow analysis">提交後我們將免費提供初步鏈上追蹤評估和資金流向分析</span>
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-check-circle text-ice-blue mr-3 mt-1 flex-shrink-0"></i>
-                                <span>涉案黑客地址將<strong class="text-white">同步至情報共享網絡</strong>進行標記</span>
+                                <span data-zh-tw="涉案黑客地址將同步至情報共享網絡進行標記"
+                                      data-zh-cn="涉案黑客地址将同步至情报共享网络进行标记"
+                                      data-en="Involved hacker addresses will be synced to threat intelligence networks for flagging">涉案黑客地址將同步至情報共享網絡進行標記</span>
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-check-circle text-ice-blue mr-3 mt-1 flex-shrink-0"></i>
-                                <span>資金追回需<strong class="text-white">配合執法機構介入</strong>，ZEROVECTOR 為第三方技術支持方</span>
+                                <span data-zh-tw="資金追回需配合執法機構介入，ZEROVECTOR 為第三方技術支持方"
+                                      data-zh-cn="资金追回需配合执法机构介入，ZEROVECTOR 为第三方技术支持方"
+                                      data-en="Asset recovery requires law enforcement involvement. ZEROVECTOR serves as a third-party technical support provider">資金追回需配合執法機構介入，ZEROVECTOR 為第三方技術支持方</span>
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-check-circle text-ice-blue mr-3 mt-1 flex-shrink-0"></i>
-                                <span>已立案案件可申請<strong class="text-white">深度介入服務（收費）</strong></span>
+                                <span data-zh-tw="已立案案件可申請深度介入服務（收費）"
+                                      data-zh-cn="已立案案件可申请深度介入服务（收费）"
+                                      data-en="Cases with police reports may apply for in-depth investigation services (paid)">已立案案件可申請深度介入服務（收費）</span>
                             </li>
                             <li class="flex items-start">
                                 <i class="fas fa-exclamation-circle text-amber-500 mr-3 mt-1 flex-shrink-0"></i>
-                                <span class="text-gray-400">評估結果僅供參考，不作為法律依據</span>
+                                <span class="text-gray-400"
+                                      data-zh-tw="評估結果僅供參考，不作為法律依據"
+                                      data-zh-cn="评估结果仅供参考，不作为法律依据"
+                                      data-en="Assessment results are for reference only and do not constitute legal advice">評估結果僅供參考，不作為法律依據</span>
                             </li>
                         </ul>
                     </div>
@@ -123,20 +214,26 @@
 
             <!-- Form -->
             <div class="glass-card fade-in-up" style="animation-delay: 0.2s">
-                <form id="reportForm" action="#" method="POST" class="space-y-6">                    <!-- Name -->
+                <form id="reportForm" action="#" method="POST" class="space-y-6">
+
+                    <!-- Name -->
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-user mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelName">姓名</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="姓名" data-zh-cn="姓名" data-en="Full Name">姓名</span>
+                            <span class="text-red-400">*</span>
                         </label>
-                        <input type="text" name="name" required class="form-input" data-i18n-ph="phName" placeholder="請輸入您的姓名">
+                        <input type="text" name="name" required class="form-input"
+                               data-ph-zh-tw="請輸入您的姓名" data-ph-zh-cn="请输入您的姓名" data-ph-en="Enter your name"
+                               placeholder="請輸入您的姓名">
                     </div>
 
                     <!-- Email -->
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-envelope mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelEmail">聯絡郵箱</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="聯絡郵箱" data-zh-cn="联络邮箱" data-en="Email">聯絡郵箱</span>
+                            <span class="text-red-400">*</span>
                         </label>
                         <input type="email" name="email" required class="form-input" placeholder="your@email.com">
                     </div>
@@ -145,7 +242,7 @@
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-phone mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelPhone">聯絡電話</span>
+                            <span data-zh-tw="聯絡電話" data-zh-cn="联络电话" data-en="Phone">聯絡電話</span>
                         </label>
                         <input type="tel" name="phone" class="form-input" placeholder="+852 1234 5678">
                     </div>
@@ -154,14 +251,15 @@
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-tags mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelType">受害類型</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="受害類型" data-zh-cn="受害类型" data-en="Case Type">受害類型</span>
+                            <span class="text-red-400">*</span>
                         </label>
                         <select name="case_type" required class="form-input">
-                            <option value="" data-i18n="typeSelect">請選擇受害類型</option>
-                            <option value="asset_theft" data-i18n="typeHack">資產被盜</option>
-                            <option value="scam" data-i18n="typeScam">詐騙案件</option>
-                            <option value="private_key_leak" data-i18n="typeRug">私鑰洩露</option>
-                            <option value="other" data-i18n="typeOther">其他</option>
+                            <option value="" data-zh-tw="請選擇受害類型" data-zh-cn="请选择受害类型" data-en="Select Case Type">請選擇受害類型</option>
+                            <option value="asset_theft" data-zh-tw="資產被盜" data-zh-cn="资产被盗" data-en="Asset Theft">資產被盜</option>
+                            <option value="scam" data-zh-tw="詐騙案件" data-zh-cn="诈骗案件" data-en="Fraud">詐騙案件</option>
+                            <option value="private_key_leak" data-zh-tw="私鑰洩露" data-zh-cn="私钥泄露" data-en="Private Key Leak">私鑰洩露</option>
+                            <option value="other" data-zh-tw="其他" data-zh-cn="其他" data-en="Other">其他</option>
                         </select>
                     </div>
 
@@ -169,7 +267,8 @@
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-dollar-sign mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelAmount">涉案金額（USD）</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="涉案金額（USD）" data-zh-cn="涉案金额（USD）" data-en="Amount Involved (USD)">涉案金額（USD）</span>
+                            <span class="text-red-400">*</span>
                         </label>
                         <input type="number" name="amount" required class="form-input" placeholder="100000" min="0" step="0.01">
                     </div>
@@ -178,7 +277,8 @@
                     <div>
                         <label class="block text-sm font-medium mb-3 text-white">
                             <i class="fas fa-link mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelChain">涉案鏈</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="涉案鏈" data-zh-cn="涉案链" data-en="Blockchain">涉案鏈</span>
+                            <span class="text-red-400">*</span>
                         </label>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                             <label class="flex items-center p-3 rounded-lg border border-ice-blue/20 hover:border-ice-blue/50 cursor-pointer transition-all bg-deep-blue/30">
@@ -203,7 +303,7 @@
                             </label>
                             <label class="flex items-center p-3 rounded-lg border border-ice-blue/20 hover:border-ice-blue/50 cursor-pointer transition-all bg-deep-blue/30">
                                 <input type="checkbox" name="chains[]" value="Other" class="mr-2 accent-ice-blue">
-                                <span class="text-sm" data-i18n="typeOther">其他</span>
+                                <span class="text-sm" data-zh-tw="其他" data-zh-cn="其他" data-en="Other">其他</span>
                             </label>
                         </div>
                     </div>
@@ -212,38 +312,48 @@
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-file-alt mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelDescription">事件經過</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="事件經過" data-zh-cn="事件经过" data-en="Incident Description">事件經過</span>
+                            <span class="text-red-400">*</span>
                         </label>
-                        <textarea name="description" rows="6" required class="form-input" data-i18n-ph="phDescription" placeholder="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."></textarea>
+                        <textarea name="description" rows="6" required class="form-input"
+                                  data-ph-zh-tw="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."
+                                  data-ph-zh-cn="请详细描述事件经过、时间线、涉案金额、受害过程等关键信息..."
+                                  data-ph-en="Describe the incident in detail..."
+                                  placeholder="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."></textarea>
                     </div>
 
                     <!-- Transaction Info -->
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-exchange-alt mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelTransaction">涉案地址或交易 Hash</span>
+                            <span data-zh-tw="涉案地址或交易 Hash" data-zh-cn="涉案地址或交易Hash" data-en="Address / Tx Hash">涉案地址或交易 Hash</span>
                         </label>
-                        <textarea name="transaction" rows="4" class="form-input font-jetbrains text-xs" placeholder="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"></textarea>
+                        <textarea name="transaction" rows="4" class="form-input font-jetbrains text-xs"
+                                  data-ph-zh-tw="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"
+                                  data-ph-zh-cn="0x1234...&#10;TxHash: 0xabcd...&#10;（可填写多个地址或交易哈希）"
+                                  data-ph-en="0x1234...&#10;TxHash: 0xabcd...&#10;(Multiple addresses or hashes accepted)"
+                                  placeholder="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"></textarea>
                     </div>
 
                     <!-- Police Report -->
                     <div>
                         <label class="block text-sm font-medium mb-3 text-white">
                             <i class="fas fa-shield-halved mr-2 text-ice-blue"></i>
-                            <span data-i18n="labelPolice">是否已報警</span> <span class="text-red-400">*</span>
+                            <span data-zh-tw="是否已報警" data-zh-cn="是否已报警" data-en="Police Report Filed?">是否已報警</span>
+                            <span class="text-red-400">*</span>
                         </label>
                         <div class="flex flex-col sm:flex-row gap-3">
                             <label class="flex items-center p-3 rounded-lg border border-ice-blue/20 hover:border-ice-blue/50 cursor-pointer transition-all bg-deep-blue/30 flex-1">
                                 <input type="radio" name="police_report" value="yes" required class="mr-2 accent-ice-blue">
-                                <span class="text-sm" data-i18n="policeYes">是</span>
+                                <span class="text-sm" data-zh-tw="是" data-zh-cn="是" data-en="Yes">是</span>
                             </label>
                             <label class="flex items-center p-3 rounded-lg border border-ice-blue/20 hover:border-ice-blue/50 cursor-pointer transition-all bg-deep-blue/30 flex-1">
                                 <input type="radio" name="police_report" value="no" required class="mr-2 accent-ice-blue">
-                                <span class="text-sm" data-i18n="policeNo">否</span>
+                                <span class="text-sm" data-zh-tw="否" data-zh-cn="否" data-en="No">否</span>
                             </label>
                             <label class="flex items-center p-3 rounded-lg border border-ice-blue/20 hover:border-ice-blue/50 cursor-pointer transition-all bg-deep-blue/30 flex-1">
                                 <input type="radio" name="police_report" value="in_progress" required class="mr-2 accent-ice-blue">
-                                <span class="text-sm" data-i18n="policePending">進行中</span>
+                                <span class="text-sm" data-zh-tw="進行中" data-zh-cn="进行中" data-en="In Progress">進行中</span>
                             </label>
                         </div>
                     </div>
@@ -252,9 +362,12 @@
                     <div class="bg-deep-blue/50 border border-ice-blue/20 rounded-lg p-4">
                         <h4 class="font-semibold mb-2 text-white flex items-center">
                             <i class="fas fa-paperclip mr-2 text-ice-blue"></i>
-                            案件材料附件說明
+                            <span data-zh-tw="案件材料附件說明" data-zh-cn="案件材料附件说明" data-en="Attachment Instructions">案件材料附件說明</span>
                         </h4>
-                        <p class="text-sm text-gray-400 leading-relaxed">
+                        <p class="text-sm text-gray-400 leading-relaxed"
+                           data-zh-tw="如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至 support@zerovector.hk，並在郵件主旨註明您的案件編號。"
+                           data-zh-cn="如需提交相关证据材料（截图、聊天记录、钱包记录等），请在提交表单后通过邮件发送至 support@zerovector.hk，并在邮件主旨注明您的案件编号。"
+                           data-en="To submit supporting evidence (screenshots, chat logs, wallet records, etc.), please email them to support@zerovector.hk after submitting the form, and include your case ID in the subject line.">
                             如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至
                             <a href="mailto:support@zerovector.hk" class="text-ice-blue hover:underline">support@zerovector.hk</a>，
                             並在郵件主旨註明您的案件編號。
@@ -265,12 +378,15 @@
                     <div class="pt-4">
                         <button type="submit" class="cta-primary w-full text-lg">
                             <i class="fas fa-paper-plane mr-2"></i>
-                            <span data-i18n="submitBtn">提交案件</span>
+                            <span data-zh-tw="提交案件" data-zh-cn="提交案件" data-en="Submit Case">提交案件</span>
                         </button>
                     </div>
 
                     <!-- Privacy Note -->
-                    <p class="text-xs text-gray-500 text-center leading-relaxed">
+                    <p class="text-xs text-gray-500 text-center leading-relaxed"
+                       data-zh-tw="提交即表示您同意我們收集並處理您的案件信息。我們將嚴格保密您的個人信息，僅用於案件處理和技術分析。"
+                       data-zh-cn="提交即表示您同意我们收集并处理您的案件信息。我们将严格保密您的个人信息，仅用于案件处理和技术分析。"
+                       data-en="By submitting, you agree to the collection and processing of your case information. All personal data will be kept strictly confidential and used only for case handling and technical analysis.">
                         提交即表示您同意我們收集並處理您的案件信息。我們將嚴格保密您的個人信息，僅用於案件處理和技術分析。
                     </p>
                 </form>
@@ -282,16 +398,26 @@
                     <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-check-circle text-green-500 text-4xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4 font-space" data-i18n="successTitle">提交成功！</h3>
-                    <p class="text-gray-300 mb-2" data-i18n="successMsg">您的案件已成功提交</p>
-                    <p class="text-ice-blue font-jetbrains text-lg mb-4">案件編號：<span id="caseNumber"></span></p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        我們已收到您的案件，專業團隊將在 <strong class="text-white">3-5 個工作日</strong>內通過郵件回復初步評估結果。<br>
-                        請留意您的郵箱 <span class="text-ice-blue" id="submittedEmail"></span>
+                    <h3 class="text-2xl font-bold text-white mb-4 font-space"
+                        data-zh-tw="提交成功！" data-zh-cn="提交成功！" data-en="Submitted!">提交成功！</h3>
+                    <p class="text-gray-300 mb-2"
+                       data-zh-tw="您的案件已成功提交" data-zh-cn="您的案件已成功提交" data-en="Your case has been submitted successfully.">您的案件已成功提交</p>
+                    <p class="text-ice-blue font-jetbrains text-lg mb-4">
+                        <span data-zh-tw="案件編號：" data-zh-cn="案件编号：" data-en="Case ID: ">案件編號：</span><span id="caseNumber"></span>
                     </p>
-                    <a href="index.html" class="cta-secondary inline-flex">
-                        <i class="fas fa-home mr-2"></i>
-                        返回主站
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6"
+                       data-zh-tw="我們已收到您的案件，專業團隊將在 3-5 個工作日內通過郵件回復初步評估結果。"
+                       data-zh-cn="我们已收到您的案件，专业团队将在 3-5 个工作日内通过邮件回复初步评估结果。"
+                       data-en="We will reply with an initial assessment within 3-5 business days.">
+                        我們已收到您的案件，專業團隊將在 3-5 個工作日內通過郵件回復初步評估結果。
+                    </p>
+                    <p class="text-gray-400 text-sm mb-6">
+                        <span data-zh-tw="請留意您的郵箱" data-zh-cn="请留意您的邮箱" data-en="Please check your email">請留意您的郵箱</span>
+                        <span class="text-ice-blue" id="submittedEmail"></span>
+                    </p>
+                    <a href="index.html" class="cta-secondary inline-flex"
+                       data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Home">
+                        <i class="fas fa-home mr-2"></i>返回主站
                     </a>
                 </div>
             </div>
@@ -305,92 +431,65 @@
                 <div class="text-2xl font-bold font-space mb-4">
                     <span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span>
                 </div>
-                <p class="text-gray-400 text-sm mb-4">鏈上資產，我們守護</p>
+                <p class="text-gray-400 text-sm mb-4"
+                   data-zh-tw="鏈上資產，我們守護" data-zh-cn="链上资产，我们守护" data-en="Protecting Your On-Chain Assets">鏈上資產，我們守護</p>
                 <p class="text-gray-500 text-xs">
-                    &copy; <span id="currentYear"></span> ZEROVECTOR. 版權所有.
+                    &copy; <span id="currentYear"></span> ZEROVECTOR.
+                    <span data-zh-tw="版權所有" data-zh-cn="版权所有" data-en="All Rights Reserved">版權所有</span>.
                 </p>
             </div>
         </div>
     </footer>
 
-    <script src="lang.js"></script>
     <script>
-        // Form submission handling
-        const form = document.getElementById('reportForm');
-        const successMessage = document.getElementById('successMessage');
+        // Form submission handling (mailto)
+        var form = document.getElementById('reportForm');
+        var successMessage = document.getElementById('successMessage');
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // Collect form data
-            const data = new FormData(form);
-            const name = data.get('name') || '';
-            const email = data.get('email') || '';
-            const phone = data.get('phone') || '未提供';
-            const type = data.get('type') || '';
-            const amount = data.get('amount') || '';
-            const chains = data.getAll('chain').join(', ') || '未選擇';
-            const description = data.get('description') || '';
-            const transaction = data.get('transaction') || '無';
-            const police = data.get('police') || '';
+            var data = new FormData(form);
+            var name = data.get('name') || '';
+            var email = data.get('email') || '';
+            var phone = data.get('phone') || '未提供';
+            var caseType = data.get('case_type') || '';
+            var amount = data.get('amount') || '';
+            var chains = data.getAll('chains[]').join(', ') || '未選擇';
+            var description = data.get('description') || '';
+            var transaction = data.get('transaction') || '無';
+            var police = data.get('police_report') || '';
 
-            // Build email subject and body
-            const caseId = 'ZV' + Date.now().toString().slice(-8);
-            const subject = encodeURIComponent('[ZeroVector案件] ' + caseId + ' - ' + name);
-            const body = encodeURIComponent(
-                '案件編號：' + caseId + '
-
-' +
-                '═══════ 基本資料 ═══════
-' +
-                '姓名：' + name + '
-' +
-                '聯絡郵箱：' + email + '
-' +
-                '聯絡電話：' + phone + '
-
-' +
-                '═══════ 案件資料 ═══════
-' +
-                '受害類型：' + type + '
-' +
-                '涉案金額：' + amount + ' USD
-' +
-                '涉案鏈：' + chains + '
-' +
-                '是否報警：' + police + '
-
-' +
-                '═══════ 事件經過 ═══════
-' +
-                description + '
-
-' +
-                '═══════ 涉案地址/交易Hash ═══════
-' +
+            var caseId = 'ZV' + Date.now().toString().slice(-8);
+            var subject = encodeURIComponent('[ZeroVector] ' + caseId + ' - ' + name);
+            var body = encodeURIComponent(
+                '案件編號：' + caseId + '\n\n' +
+                '═══════ 基本資料 ═══════\n' +
+                '姓名：' + name + '\n' +
+                '聯絡郵箱：' + email + '\n' +
+                '聯絡電話：' + phone + '\n\n' +
+                '═══════ 案件資料 ═══════\n' +
+                '受害類型：' + caseType + '\n' +
+                '涉案金額：' + amount + ' USD\n' +
+                '涉案鏈：' + chains + '\n' +
+                '是否報警：' + police + '\n\n' +
+                '═══════ 事件經過 ═══════\n' +
+                description + '\n\n' +
+                '═══════ 涉案地址/交易Hash ═══════\n' +
                 transaction
             );
 
-            // Open mail client
-            const mailtoLink = 'mailto:support@zerovector.hk?subject=' + subject + '&body=' + body;
-            window.location.href = mailtoLink;
+            window.location.href = 'mailto:support@zerovector.hk?subject=' + subject + '&body=' + body;
 
-            // Show success after short delay
             setTimeout(function() {
                 document.getElementById('caseNumber').textContent = caseId;
-                const emailInput = form.querySelector('[name="email"]');
+                var emailInput = form.querySelector('[name="email"]');
                 if (emailInput) document.getElementById('submittedEmail').textContent = emailInput.value;
                 form.closest('.glass-card').style.display = 'none';
                 successMessage.classList.remove('hidden');
                 successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 1000);
         });
-
-        // Language is auto-applied by app.js via localStorage on init
-        // No additional setup needed
-
-        // Set current year
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
