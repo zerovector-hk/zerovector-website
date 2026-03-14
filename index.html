@@ -41,6 +41,12 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+    <!-- hreflang for multilingual SEO -->
+    <link rel="canonical" href="https://zerovector.hk/">
+    <link rel="alternate" hreflang="zh-TW" href="https://zerovector.hk/">
+    <link rel="alternate" hreflang="zh-CN" href="https://zerovector.hk/">
+    <link rel="alternate" hreflang="en"    href="https://zerovector.hk/">
+    <link rel="alternate" hreflang="x-default" href="https://zerovector.hk/">
     <!-- Open Graph / Social Share -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://zerovector.hk">
@@ -713,5 +719,122 @@
     </button>
 
     <script src="app.js"></script>
+
+    <!-- Structured Data: Schema.org JSON-LD (SEO + AEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://zerovector.hk/#organization",
+          "name": "ZEROVECTOR",
+          "legalName": "ZEROVECTOR LIMITED",
+          "url": "https://zerovector.hk",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://zerovector.hk/images/logo.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "support@zerovector.hk",
+            "contactType": "customer support",
+            "availableLanguage": ["Chinese", "English"]
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "Hong Kong",
+            "addressCountry": "HK"
+          },
+          "sameAs": [
+            "https://x.com/ZEROVECTORhk"
+          ],
+          "description": "Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, law enforcement technical support, and virtual currency judicial forensics."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://zerovector.hk/#website",
+          "url": "https://zerovector.hk",
+          "name": "ZEROVECTOR",
+          "publisher": {"@id": "https://zerovector.hk/#organization"},
+          "inLanguage": ["zh-TW", "zh-CN", "en"]
+        },
+        {
+          "@type": "ItemList",
+          "name": "ZEROVECTOR Services",
+          "itemListElement": [
+            {
+              "@type": "Service",
+              "position": 1,
+              "name": "Crypto Asset Recovery",
+              "alternateName": "加密資產追回",
+              "provider": {"@id": "https://zerovector.hk/#organization"},
+              "description": "Professional on-chain tracing, fund flow mapping, and exchange cooperation to recover stolen cryptocurrency. Successfully identified multiple APT-level hacker groups, with cumulative recovery exceeding $1B.",
+              "serviceType": "Blockchain Forensics",
+              "areaServed": "Worldwide"
+            },
+            {
+              "@type": "Service",
+              "position": 2,
+              "name": "Law Enforcement Technical Support",
+              "alternateName": "執法機構技術支援",
+              "provider": {"@id": "https://zerovector.hk/#organization"},
+              "description": "On-chain behavioral profiling, asset attribution, transaction graph analysis, and investigative support for police and judicial bodies.",
+              "serviceType": "Blockchain Intelligence",
+              "areaServed": "Worldwide"
+            },
+            {
+              "@type": "Service",
+              "position": 3,
+              "name": "Virtual Currency Judicial Forensics",
+              "alternateName": "虛擬貨幣司法取證",
+              "provider": {"@id": "https://zerovector.hk/#organization"},
+              "description": "Digital evidence preservation, expert forensic reports, and court witness testimony for cryptocurrency-related legal proceedings.",
+              "serviceType": "Digital Forensics",
+              "areaServed": "Worldwide"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is ZEROVECTOR?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ZEROVECTOR is a Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, and law enforcement technical support. We have successfully identified multiple APT-level professional hacker groups and assisted in recovering over $1 billion in stolen digital assets."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can ZEROVECTOR help recover stolen cryptocurrency?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. ZEROVECTOR provides professional on-chain tracing and crypto asset recovery services. We use advanced blockchain analytics to trace funds, identify perpetrators, and coordinate with exchanges and law enforcement to freeze and recover stolen assets. Submit your case at zerovector.hk/report.html."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does ZEROVECTOR work with law enforcement?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. ZEROVECTOR provides technical support to law enforcement agencies including on-chain behavioral profiling, asset tracing, transaction graph analysis, and judicial forensic reports. We support investigations across multiple jurisdictions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is the initial case assessment free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the initial case assessment is free. Submit your case at zerovector.hk/report.html and our team will review and respond. In-depth investigation services are paid on a case-by-case basis."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
 </body>
 </html>

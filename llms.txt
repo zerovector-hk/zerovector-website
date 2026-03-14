@@ -1,0 +1,44 @@
+# ZEROVECTOR
+
+> 鏈上資產，我們守護 | Blockchain Asset Protection | 链上资产，我们守护
+
+ZEROVECTOR is a Hong Kong-based blockchain security and crypto asset recovery company. We provide professional on-chain forensics, crypto asset tracing, law enforcement technical support, and judicial forensics services across the Asia-Pacific region and globally.
+
+## Services
+
+- **Crypto Asset Recovery**: On-chain tracing, fund flow mapping, exchange cooperation for asset freezing. We have successfully identified and attributed multiple APT-level professional hacker groups, with cumulative recovery exceeding $1 billion USD.
+- **Law Enforcement Technical Support**: On-chain behavioral profiling, asset attribution, transaction graph analysis for police and judicial bodies.
+- **Virtual Currency Judicial Forensics (虛擬貨幣司法取證)**: Digital evidence preservation, expert forensic reports, court witness testimony.
+
+## Products
+
+- **Sealr**: iOS wallet monitoring and security alert application. Real-time on-chain activity alerts for digital asset holders.
+- **ZeroVector CTIS (Crypto Threat Intelligence System)**: Professional crypto threat intelligence platform for enterprise and institutional clients.
+- **CryptoThreat Intelligence**: AI-powered threat intelligence service for blockchain security analysis.
+
+## Key Facts
+
+- Jurisdiction: Hong Kong Special Administrative Region
+- Strategic position: International financial center serving Asia-Pacific and global clients
+- Contact: support@zerovector.hk
+- Website: https://zerovector.hk
+- Case submission: https://zerovector.hk/report.html
+- X (Twitter): @ZEROVECTORhk
+
+## Languages
+
+This website is available in Traditional Chinese (zh-TW, default), Simplified Chinese (zh-CN), and English (en).
+
+## Use Cases We Handle
+
+- Cryptocurrency theft and fraud recovery
+- Exchange hack investigation
+- NFT fraud tracing
+- DeFi exploit forensics
+- Ransomware crypto tracing
+- Money laundering via crypto investigation
+- Cross-chain asset tracing
+
+## How to Engage
+
+Individuals or institutions who have suffered crypto asset theft can submit a case at https://zerovector.hk/report.html. Initial case assessments are free of charge.
