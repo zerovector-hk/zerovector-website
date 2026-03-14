@@ -507,6 +507,30 @@ window.addEventListener('scroll', () => {
 
 // ===== Initialize =====
 document.addEventListener('DOMContentLoaded', () => {
+    // Apply saved language on page load (shared via localStorage across all pages)
+    if (currentLang !== 'zh-TW') {
+        const elements = document.querySelectorAll('[data-zh-tw], [data-zh-cn], [data-zh], [data-en]');
+        elements.forEach(element => {
+            let value;
+            if (currentLang === 'zh-CN') {
+                value = element.getAttribute('data-zh-cn') || element.getAttribute('data-zh');
+            } else {
+                value = element.getAttribute('data-en');
+            }
+            if (!value) return;
+            if (element.tagName === 'OPTION') {
+                element.textContent = value;
+            } else if (!element.children.length || element.classList.contains('lang-text')) {
+                element.textContent = value;
+            } else {
+                element.setAttribute('data-translated', 'true');
+                element.textContent = value;
+            }
+        });
+        const langTextEl = document.getElementById('langText');
+        if (langTextEl) langTextEl.textContent = translations[currentLang].langText;
+    }
+
     // Trigger initial navigation highlight
     highlightNavigation();
 
