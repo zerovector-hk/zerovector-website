@@ -117,11 +117,95 @@ let currentLang = 'zh';
 const translations = {
     zh: {
         langText: 'EN',
-        addressDisplay: 'addressZh'
+        addressDisplay: 'addressZh',
+        // Products section
+        products: {
+            title: '产品矩阵',
+            subtitle: '三大核心产品 · 全方位守护',
+            sealr: {
+                name: 'Sealr',
+                tagline: 'Web3资产监控终端',
+                description: '下一代 Web3 原生只读资产监控 iOS App，非托管、零私钥',
+                features: [
+                    '多链资产聚合监控',
+                    '毫秒级交易推送',
+                    '智能风险预警',
+                    '生物识别锁定'
+                ],
+                tags: ['iOS App', '免费/Pro'],
+                btnText: '前往官网'
+            },
+            ctis: {
+                name: 'ZeroVector CTIS',
+                tagline: '加密货币威胁情报系统',
+                description: '专业级加密货币威胁情报分析与犯罪追踪平台（面向执法机构）',
+                features: [
+                    '地址风险评估与AI研判',
+                    '案件全生命周期管理',
+                    '多部门协同办案',
+                    'UTXO关联分析'
+                ],
+                tags: ['企业级', '执法专用']
+            },
+            threat: {
+                name: 'CryptoThreat Intelligence',
+                tagline: '链上威胁情报社区',
+                description: 'AI驱动的虚拟货币威胁分析与情报共享社区平台',
+                features: [
+                    '实时链上监控',
+                    '智能合约安全扫描',
+                    '黑客画像系统',
+                    '攻击图谱分析'
+                ],
+                tags: ['社区', '情报共享']
+            }
+        }
     },
     en: {
         langText: '中文',
-        addressDisplay: 'addressEn'
+        addressDisplay: 'addressEn',
+        // Products section
+        products: {
+            title: 'Our Products',
+            subtitle: 'Three Core Products · Comprehensive Protection',
+            sealr: {
+                name: 'Sealr',
+                tagline: 'Web3 Asset Monitor Terminal',
+                description: 'Next-gen Web3 native read-only asset monitoring iOS App, non-custodial, zero private keys',
+                features: [
+                    'Multi-chain Asset Aggregation',
+                    'Millisecond Transaction Push',
+                    'Smart Risk Alerts',
+                    'Biometric Lock'
+                ],
+                tags: ['iOS App', 'Free/Pro'],
+                btnText: 'Visit Website'
+            },
+            ctis: {
+                name: 'ZeroVector CTIS',
+                tagline: 'Crypto Threat Intelligence System',
+                description: 'Professional crypto threat intelligence analysis and crime tracking platform (for law enforcement)',
+                features: [
+                    'Address Risk & AI Analysis',
+                    'Full Case Lifecycle Management',
+                    'Multi-department Collaboration',
+                    'UTXO Correlation Analysis'
+                ],
+                tags: ['Enterprise', 'Law Enforcement']
+            },
+            threat: {
+                name: 'CryptoThreat Intelligence',
+                tagline: 'On-chain Threat Intel Community',
+                description: 'AI-driven crypto threat analysis and intelligence sharing community platform',
+                features: [
+                    'Real-time Chain Monitor',
+                    'Smart Contract Scanner',
+                    'Hacker Profiles',
+                    'Attack Atlas Analysis'
+                ],
+                tags: ['Community', 'Intel Sharing']
+            }
+        }
     }
 };
 
