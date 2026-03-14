@@ -111,12 +111,7 @@
 
             <!-- Form -->
             <div class="glass-card fade-in-up" style="animation-delay: 0.2s">
-                <form id="reportForm" action="https://formsubmit.co/support@zerovector.hk" method="POST" class="space-y-6">
-                            <input type="hidden" name="_subject" value="[ZeroVector] 新案件提交">
-                            <input type="hidden" name="_template" value="box">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_next" value="https://zerovector.hk/report.html?success=1">
-                    <!-- Name -->
+                <form id="reportForm" action="#" method="POST" class="space-y-6">                    <!-- Name -->
                     <div>
                         <label class="block text-sm font-medium mb-2 text-white">
                             <i class="fas fa-user mr-2 text-ice-blue"></i>
@@ -318,21 +313,71 @@
         const form = document.getElementById('reportForm');
         const successMessage = document.getElementById('successMessage');
 
-        // Show success message if redirected back with ?success=1
-        if (window.location.search.includes('success=1')) {
-            const caseNumber = 'ZV' + Date.now().toString().slice(-10);
-            document.getElementById('caseNumber').textContent = caseNumber;
-            const form = document.getElementById('reportForm');
-            if (form) form.closest('.glass-card').style.display = 'none';
-            successMessage.classList.remove('hidden');
-            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
         form.addEventListener('submit', function(e) {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>提交中...';
-            submitBtn.disabled = true;
-            // Native form submit to formsubmit.co
+            e.preventDefault();
+
+            // Collect form data
+            const data = new FormData(form);
+            const name = data.get('name') || '';
+            const email = data.get('email') || '';
+            const phone = data.get('phone') || '未提供';
+            const type = data.get('type') || '';
+            const amount = data.get('amount') || '';
+            const chains = data.getAll('chain').join(', ') || '未選擇';
+            const description = data.get('description') || '';
+            const transaction = data.get('transaction') || '無';
+            const police = data.get('police') || '';
+
+            // Build email subject and body
+            const caseId = 'ZV' + Date.now().toString().slice(-8);
+            const subject = encodeURIComponent('[ZeroVector案件] ' + caseId + ' - ' + name);
+            const body = encodeURIComponent(
+                '案件編號：' + caseId + '
+
+' +
+                '═══════ 基本資料 ═══════
+' +
+                '姓名：' + name + '
+' +
+                '聯絡郵箱：' + email + '
+' +
+                '聯絡電話：' + phone + '
+
+' +
+                '═══════ 案件資料 ═══════
+' +
+                '受害類型：' + type + '
+' +
+                '涉案金額：' + amount + ' USD
+' +
+                '涉案鏈：' + chains + '
+' +
+                '是否報警：' + police + '
+
+' +
+                '═══════ 事件經過 ═══════
+' +
+                description + '
+
+' +
+                '═══════ 涉案地址/交易Hash ═══════
+' +
+                transaction
+            );
+
+            // Open mail client
+            const mailtoLink = 'mailto:support@zerovector.hk?subject=' + subject + '&body=' + body;
+            window.location.href = mailtoLink;
+
+            // Show success after short delay
+            setTimeout(function() {
+                document.getElementById('caseNumber').textContent = caseId;
+                const emailInput = form.querySelector('[name="email"]');
+                if (emailInput) document.getElementById('submittedEmail').textContent = emailInput.value;
+                form.closest('.glass-card').style.display = 'none';
+                successMessage.classList.remove('hidden');
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1000);
         });
 
         // Apply saved language on load
