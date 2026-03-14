@@ -11,7 +11,7 @@ const mouse = { x: null, y: null, radius: 150 };
 
 // Resize canvas
 function resizeCanvas() {
-    if (!canvas) return;
+    if (!canvas || !ctx) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
@@ -304,7 +304,7 @@ function toggleLanguage() {
     }
 }
 
-document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+const _langToggleEl = document.getElementById('langToggle'); if (_langToggleEl) _langToggleEl.addEventListener('click', toggleLanguage);
 
 // ===== Mobile Menu Toggle =====
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -348,9 +348,9 @@ const scrollTopBtn = document.getElementById('scrollTop');
 
 window.addEventListener('scroll', () => {
     if (window.pageYOffset > 500) {
-        scrollTopBtn.classList.add('visible');
+        if (scrollTopBtn) scrollTopBtn.classList.add('visible');
     } else {
-        scrollTopBtn.classList.remove('visible');
+        if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
     }
 });
 
@@ -466,7 +466,7 @@ window.addEventListener('scroll', highlightNavigation);
 // ===== Contact Form Handling =====
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', (e) => {
+if (contactForm) contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -489,7 +489,7 @@ contactForm.addEventListener('submit', (e) => {
 });
 
 // ===== Set Current Year in Footer =====
-document.getElementById('currentYear').textContent = new Date().getFullYear();
+const _yearEl = document.getElementById('currentYear'); if (_yearEl) _yearEl.textContent = new Date().getFullYear();
 
 // ===== Navbar Scroll Effect =====
 const navbar = document.querySelector('nav');
