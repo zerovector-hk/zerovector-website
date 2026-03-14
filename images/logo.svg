@@ -1,31 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 56" fill="none">
   <defs>
-    <linearGradient id="zv" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#00d4ff"/>
       <stop offset="100%" stop-color="#1a6cf6"/>
     </linearGradient>
   </defs>
 
   <!--
-    ZV Wordmark — geometric, Ledger/Fireblocks minimal style
-    Z: three bold strokes with slashed diagonal (vector/lightning feel)
-    V: sharp convergence, shares visual weight
-    Transparent background
+    ZV Wordmark
+    Z = ZERO (起點 · 零信任 · 品牌首字)
+      - 三條幾何橫條構成 Z 字形
+      - 中間白色斜切 = 向量方向 / 閃電追蹤路徑
+    V = VECTOR (方向 · 精準 · 目標)
+      - V 形收斂 = 聚焦 / 追蹤鎖定
+      - 底部冰藍圓點 = 向量終點 / 目標鎖定
+    整體寓意：從 ZERO（起點）出發，沿向量（VECTOR）精準追蹤至目標
   -->
 
-  <!-- Z -->
-  <!-- Top bar -->
-  <polygon points="4,6  52,6  52,14  18,14" fill="url(#zv)"/>
-  <!-- Diagonal slash (skewed — lightning/vector feel) -->
-  <polygon points="44,12  52,12  16,48  8,48" fill="white" opacity="0.92"/>
-  <!-- Bottom bar -->
-  <polygon points="4,46  52,46  38,54  4,54" fill="url(#zv)"/>
+  <!-- ── Z ── -->
+  <!-- Top bar (ice-blue) -->
+  <polygon points="4,5   58,5   52,16  16,16" fill="url(#blue)"/>
+  <!-- Diagonal slash (white — vector path) -->
+  <polygon points="48,14  58,14  18,42  8,42" fill="white"/>
+  <!-- Bottom bar (ice-blue) -->
+  <polygon points="4,40  52,40  58,51  4,51" fill="url(#blue)"/>
 
-  <!-- V -->
-  <!-- Left arm -->
-  <polygon points="62,6  72,6  80,46  70,46" fill="url(#zv)"/>
-  <!-- Right arm -->
-  <polygon points="104,6  114,6  88,46  78,46" fill="white" opacity="0.92"/>
-  <!-- Tip accent -->
-  <circle cx="84" cy="50" r="4" fill="#00d4ff"/>
+  <!-- gap between Z and V -->
+
+  <!-- ── V ── -->
+  <!-- Left arm (ice-blue) -->
+  <polygon points="68,5   80,5   90,42  78,42" fill="url(#blue)"/>
+  <!-- Right arm (white) -->
+  <polygon points="116,5  128,5  102,42  90,42" fill="white"/>
+  <!-- Tip dot (ice-blue — target lock) -->
+  <circle cx="84" cy="48" r="5" fill="#00d4ff"/>
 </svg>
