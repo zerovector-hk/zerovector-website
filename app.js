@@ -1,116 +1,176 @@
 // ===== ZEROVECTOR Web3 Professional JavaScript =====
 
-// ===== Canvas Particle Network Animation =====
+// ===== Blockchain Tracing Network Animation =====
+// Visual: Wallet nodes + transaction edges + tracing particles moving along paths
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas ? canvas.getContext('2d') : null;
 
-let particles = [];
-const particleCount = 30;
-const connectionDistance = 120;
-const mouse = { x: null, y: null, radius: 150 };
-
-// Resize canvas
 function resizeCanvas() {
     if (!canvas || !ctx) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
-
 resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener('resize', () => { resizeCanvas(); initNetwork(); });
 
-// Track mouse movement
-window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-});
-
-// Particle class
-class Particle {
-    constructor() {
+// ── Node: represents a wallet address ──
+class WalletNode {
+    constructor() { this.reset(); }
+    reset() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.radius = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.18;
+        this.vy = (Math.random() - 0.5) * 0.18;
+        // node type: 0=normal wallet, 1=hub(exchange), 2=flagged
+        this.type = Math.random() < 0.12 ? 1 : Math.random() < 0.08 ? 2 : 0;
+        this.r = this.type === 1 ? 4.5 : this.type === 2 ? 3.5 : 2.5;
+        this.pulse = Math.random() * Math.PI * 2; // pulse phase
+        this.pulseSpeed = 0.025 + Math.random() * 0.02;
     }
-
     update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // Bounce off edges
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-        // Mouse interaction
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < mouse.radius) {
-            const force = (mouse.radius - distance) / mouse.radius;
-            const angle = Math.atan2(dy, dx);
-            this.vx -= Math.cos(angle) * force * 0.2;
-            this.vy -= Math.sin(angle) * force * 0.2;
-        }
-
-        // Limit velocity
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-        if (speed > 2) {
-            this.vx = (this.vx / speed) * 2;
-            this.vy = (this.vy / speed) * 2;
-        }
+        this.pulse += this.pulseSpeed;
     }
-
     draw() {
+        const glow = 0.7 + 0.3 * Math.sin(this.pulse);
+        const color = this.type === 2 ? [255, 100, 80] : [0, 212, 255];
+        const [r,g,b] = color;
+
+        // Outer glow ring (hub nodes)
+        if (this.type !== 0) {
+            const pulsedR = this.r + 3 * Math.sin(this.pulse);
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, pulsedR, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(${r},${g},${b},${0.15 * glow})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+
+        // Node core
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(26, 108, 246, 0.5)';
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${0.75 * glow})`;
+        ctx.fill();
+
+        // Inner bright dot
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r * 0.45, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${0.6 * glow})`;
         ctx.fill();
     }
 }
 
-// Initialize particles
-for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
+// ── Tracer: moves along an edge (simulates investigation tracing a transaction) ──
+class Tracer {
+    constructor(from, to) {
+        this.from = from; this.to = to;
+        this.t = 0;
+        this.speed = 0.003 + Math.random() * 0.004;
+        this.done = false;
+        this.tail = [];
+        this.maxTail = 14;
+    }
+    update() {
+        this.t += this.speed;
+        if (this.t >= 1) { this.done = true; return; }
+        const x = this.from.x + (this.to.x - this.from.x) * this.t;
+        const y = this.from.y + (this.to.y - this.from.y) * this.t;
+        this.tail.push({x, y});
+        if (this.tail.length > this.maxTail) this.tail.shift();
+    }
+    draw() {
+        if (this.tail.length < 2) return;
+        for (let i = 1; i < this.tail.length; i++) {
+            const alpha = (i / this.tail.length) * 0.85;
+            const width = (i / this.tail.length) * 2.5;
+            ctx.beginPath();
+            ctx.moveTo(this.tail[i-1].x, this.tail[i-1].y);
+            ctx.lineTo(this.tail[i].x, this.tail[i].y);
+            ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+            ctx.lineWidth = width;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+        // Bright head
+        const head = this.tail[this.tail.length - 1];
+        ctx.beginPath();
+        ctx.arc(head.x, head.y, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.fill();
+    }
 }
 
-// Draw connections
-function drawConnections() {
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+// ── Network state ──
+const NODE_COUNT = window.innerWidth < 768 ? 22 : 38;
+let nodes = [], edges = [], tracers = [];
+const EDGE_DIST = 200;
 
-            if (distance < connectionDistance) {
-                ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                const opacity = (1 - distance / connectionDistance) * 0.15;
-                ctx.strokeStyle = `rgba(26, 108, 246, ${opacity})`;
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
+function initNetwork() {
+    nodes = Array.from({length: NODE_COUNT}, () => new WalletNode());
+    edges = [];
+    // Build edges: connect nodes within distance at init
+    for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x;
+            const dy = nodes[i].y - nodes[j].y;
+            if (Math.sqrt(dx*dx + dy*dy) < EDGE_DIST) {
+                edges.push([i, j]);
             }
         }
     }
 }
+initNetwork();
 
-// Animation loop
+// Spawn tracers periodically
+let tracerTimer = 0;
+function spawnTracer() {
+    if (nodes.length < 2) return;
+    const a = Math.floor(Math.random() * nodes.length);
+    let b = Math.floor(Math.random() * nodes.length);
+    while (b === a) b = Math.floor(Math.random() * nodes.length);
+    tracers.push(new Tracer(nodes[a], nodes[b]));
+    if (tracers.length > 25) tracers.shift();
+}
+
+function drawEdges() {
+    for (const [i, j] of edges) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > EDGE_DIST * 1.8) continue; // skip if nodes drifted too far
+        const opacity = Math.max(0, (1 - dist / (EDGE_DIST * 1.6)) * 0.12);
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.strokeStyle = `rgba(26,108,246,${opacity})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+    }
+}
+
+// ── Main animation loop ──
 function animate() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-    });
+    // Update & draw edges
+    drawEdges();
 
-    drawConnections();
+    // Update nodes
+    nodes.forEach(n => { n.update(); n.draw(); });
+
+    // Update tracers
+    tracers = tracers.filter(t => !t.done);
+    tracers.forEach(t => { t.update(); t.draw(); });
+
+    // Spawn new tracer
+    tracerTimer++;
+    if (tracerTimer > 55) { spawnTracer(); tracerTimer = 0; }
+
     requestAnimationFrame(animate);
 }
-
 animate();
 
 // ===== Language Toggle =====
