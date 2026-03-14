@@ -5,7 +5,7 @@ const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
 
 let particles = [];
-const particleCount = 80;
+const particleCount = 30;
 const connectionDistance = 120;
 const mouse = { x: null, y: null, radius: 150 };
 
@@ -65,7 +65,7 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
+        ctx.fillStyle = 'rgba(26, 108, 246, 0.5)';
         ctx.fill();
     }
 }
@@ -87,9 +87,9 @@ function drawConnections() {
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
-                const opacity = (1 - distance / connectionDistance) * 0.3;
-                ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                ctx.lineWidth = 1;
+                const opacity = (1 - distance / connectionDistance) * 0.15;
+                ctx.strokeStyle = `rgba(26, 108, 246, ${opacity})`;
+                ctx.lineWidth = 0.5;
                 ctx.stroke();
             }
         }
