@@ -380,18 +380,8 @@
             }, 1000);
         });
 
-        // Apply saved language on load
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedLang = localStorage.getItem('zv-lang') || 'zh-TW';
-            if (typeof applyLanguage === 'function') {
-                window.currentLang = savedLang;
-                applyLanguage();
-                const langTextEl = document.getElementById('langText');
-                if (langTextEl && typeof translations !== 'undefined') {
-                    langTextEl.textContent = translations[savedLang] && translations[savedLang].langText || savedLang;
-                }
-            }
-        });
+        // Language is auto-applied by app.js via localStorage on init
+        // No additional setup needed
 
         // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();

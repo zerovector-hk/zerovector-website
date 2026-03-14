@@ -112,7 +112,7 @@ function animate() {
 animate();
 
 // ===== Language Toggle =====
-let currentLang = 'zh-TW';
+let currentLang = localStorage.getItem('zv-lang') || 'zh-TW';
 
 const translations = {
     'zh-TW': {
