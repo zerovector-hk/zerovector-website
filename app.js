@@ -318,22 +318,24 @@ const _langToggleEl = document.getElementById('langToggle'); if (_langToggleEl) 
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    const icon = mobileMenuBtn.querySelector('i');
-    icon.classList.toggle('fa-bars');
-    icon.classList.toggle('fa-times');
-});
-
-// Close mobile menu when clicking a link
-document.querySelectorAll('#mobileMenu a').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
+if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
         const icon = mobileMenuBtn.querySelector('i');
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
     });
-});
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+}
 
 // ===== Smooth Scroll (auto nav-height offset) =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -490,7 +492,6 @@ if (contactForm) contactForm.addEventListener('submit', (e) => {
         submitBtn.disabled = false;
     }, 3000);
 
-    console.log('Form submitted - Data would be sent to server');
 });
 
 // ===== Set Current Year in Footer =====
