@@ -56,10 +56,22 @@
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <a href="index.html" class="text-gray-300 hover:text-ice-blue transition-colors">
-                        <i class="fas fa-arrow-left mr-2"></i>返回主站
+                    <a href="index.html" class="text-gray-300 hover:text-ice-blue transition-colors text-sm">
+                        <i class="fas fa-arrow-left mr-2"></i><span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back">返回主站</span>
                     </a>
+                    <button id="langToggle" class="lang-btn">
+                        <i class="fas fa-globe mr-2"></i>
+                        <span id="langText">簡中</span>
+                    </button>
+                    <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-deep-blue/95 backdrop-blur-lg border-t border-ice-blue/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block nav-link" data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Main">返回主站</a>
             </div>
         </div>
     </nav>
@@ -303,12 +315,6 @@
 
     <script src="app.js"></script>
     <script>
-        // Language sync from main page
-        (function() {
-            const savedLang = localStorage.getItem('zv-lang') || 'zh-TW';
-            window.__initLang = savedLang;
-        })();
-
         // Form submission handling
         const form = document.getElementById('reportForm');
         const successMessage = document.getElementById('successMessage');
