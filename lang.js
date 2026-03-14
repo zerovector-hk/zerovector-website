@@ -7,6 +7,11 @@
     const translations = {
         'zh-TW': {
             langText: '簡中',
+            noticeTitle: '重要須知',
+            policeYes: '是',
+            policeNo: '否',
+            policePending: '進行中',
+            successMsg: '您的案件已成功提交',
             // Nav
             backToMain: '返回主站',
             // Page header
@@ -62,6 +67,11 @@
         },
         'zh-CN': {
             langText: 'EN',
+            noticeTitle: '重要须知',
+            policeYes: '是',
+            policeNo: '否',
+            policePending: '进行中',
+            successMsg: '您的案件已成功提交',
             backToMain: '返回主站',
             pageTitle: '提交案件',
             pageSubtitle: '填写以下资料，我们将在 24 小时内与您联系',
@@ -108,6 +118,11 @@
         },
         'en': {
             langText: '中文',
+            noticeTitle: 'Important Notice',
+            policeYes: 'Yes',
+            policeNo: 'No',
+            policePending: 'In Progress',
+            successMsg: 'Your case has been successfully submitted',
             backToMain: 'Back',
             pageTitle: 'Submit a Case',
             pageSubtitle: 'Fill in the details below and we will contact you within 24 hours',
