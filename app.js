@@ -446,29 +446,41 @@ document.querySelectorAll('.fade-in-up').forEach(element => {
 });
 
 // ===== Active Navigation Highlighting =====
-const sections = document.querySelectorAll('section[id]');
+// ===== Nav Highlight (IntersectionObserver — accurate) =====
 const navLinks = document.querySelectorAll('.nav-link');
 
-function highlightNavigation() {
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.style.color = '';
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.style.color = '#00d4ff';
-                }
-            });
-        }
+function setActiveLink(id) {
+    navLinks.forEach(link => {
+        const isActive = link.getAttribute('href') === `#${id}`;
+        link.style.color = isActive ? '#00d4ff' : '';
+        link.style.fontWeight = isActive ? '600' : '';
     });
 }
 
-window.addEventListener('scroll', highlightNavigation);
+// Observe all sections AND the #contact div
+const observeTargets = document.querySelectorAll('section[id], div[id="contact"]');
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            setActiveLink(entry.target.getAttribute('id'));
+        }
+    });
+}, {
+    rootMargin: '-88px 0px -60% 0px',  // trigger when section top enters nav-bottom zone
+    threshold: 0
+});
+
+observeTargets.forEach(el => navObserver.observe(el));
+
+// Also highlight immediately on click (before scroll settles)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const targetId = link.getAttribute('href').replace('#', '');
+        setActiveLink(targetId);
+    });
+});
+
+function highlightNavigation() {} // kept for compatibility
 
 // ===== Contact Form Handling =====
 const contactForm = document.getElementById('contactForm');
