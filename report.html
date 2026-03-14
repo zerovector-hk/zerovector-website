@@ -55,7 +55,6 @@
                 var val = el.getAttribute(key);
                 if (!val) val = el.getAttribute('data-zh-tw');
                 if (val) {
-                    // Only set textContent on leaf elements (no child elements other than icons)
                     var children = el.children;
                     var hasNonIconChild = false;
                     for (var ci = 0; ci < children.length; ci++) {
@@ -69,14 +68,14 @@
                         }
                     }
                 }
-                // Handle placeholder
-                var phTw = el.getAttribute('data-ph-zh-tw');
-                var phCn = el.getAttribute('data-ph-zh-cn');
-                var phEn = el.getAttribute('data-ph-en');
-                if (phTw || phCn || phEn) {
-                    var ph = (lang === 'zh-TW' ? phTw : lang === 'zh-CN' ? phCn : phEn) || phTw;
-                    if (ph) el.setAttribute('placeholder', ph);
-                }
+            });
+
+            // Handle placeholder translations (separate query — inputs only have data-ph-*)
+            document.querySelectorAll('[data-ph-zh-tw],[data-ph-zh-cn],[data-ph-en]').forEach(function(el) {
+                var ph = (lang === 'zh-TW' ? el.getAttribute('data-ph-zh-tw') :
+                          lang === 'zh-CN' ? el.getAttribute('data-ph-zh-cn') :
+                          el.getAttribute('data-ph-en')) || el.getAttribute('data-ph-zh-tw');
+                if (ph) el.setAttribute('placeholder', ph);
             });
 
             // Update lang button
