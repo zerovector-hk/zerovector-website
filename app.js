@@ -335,18 +335,13 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     });
 });
 
-// ===== Smooth Scroll =====
+// ===== Smooth Scroll (CSS scroll-margin-top handles offset) =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 120;
-            const targetPosition = target.offsetTop - offset;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });

@@ -959,6 +959,6 @@ body {
 }
 
 /* Scroll offset for fixed nav */
-section[id] { scroll-margin-top: 120px; }
-#contact { scroll-margin-top: 120px; }
+section[id] { scroll-margin-top: 88px; }
+#contact { scroll-margin-top: 88px; }
 
