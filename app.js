@@ -112,10 +112,55 @@ function animate() {
 animate();
 
 // ===== Language Toggle =====
-let currentLang = 'zh';
+let currentLang = 'zh-TW';
 
 const translations = {
-    zh: {
+    'zh-TW': {
+        langText: '簡中',
+        // Products section
+        products: {
+            title: '產品矩陣',
+            subtitle: '三大核心產品 · 全方位守護',
+            sealr: {
+                name: 'Sealr',
+                tagline: 'Web3資產監控終端',
+                description: '下一代 Web3 原生唯讀資產監控 iOS App，非託管、零私鑰',
+                features: [
+                    '多鏈資產聚合監控',
+                    '毫秒級交易推送',
+                    '智能風險預警',
+                    '生物識別鎖定'
+                ],
+                tags: ['iOS App', '免費/Pro'],
+                btnText: '前往官網'
+            },
+            ctis: {
+                name: 'ZeroVector CTIS',
+                tagline: '加密貨幣威脅情報系統',
+                description: '專業級加密貨幣威脅情報分析與犯罪追蹤平台（面向執法機構）',
+                features: [
+                    '地址風險評估與AI研判',
+                    '案件全生命週期管理',
+                    '多部門協同辦案',
+                    'UTXO關聯分析'
+                ],
+                tags: ['企業級', '執法專用']
+            },
+            threat: {
+                name: 'CryptoThreat Intelligence',
+                tagline: '鏈上威脅情報社群',
+                description: 'AI驅動的虛擬貨幣威脅分析與情報共享社群平台',
+                features: [
+                    '實時鏈上監控',
+                    '智能合約安全掃描',
+                    '黑客畫像系統',
+                    '攻擊圖譜分析'
+                ],
+                tags: ['社群', '情報共享']
+            }
+        }
+    },
+    'zh-CN': {
         langText: 'EN',
         // Products section
         products: {
@@ -208,13 +253,32 @@ const translations = {
 };
 
 function toggleLanguage() {
-    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    // Cycle through languages: zh-TW -> zh-CN -> en -> zh-TW
+    if (currentLang === 'zh-TW') {
+        currentLang = 'zh-CN';
+    } else if (currentLang === 'zh-CN') {
+        currentLang = 'en';
+    } else {
+        currentLang = 'zh-TW';
+    }
+
     document.getElementById('langText').textContent = translations[currentLang].langText;
 
     // Update all translatable elements
-    const elements = document.querySelectorAll('[data-zh][data-en]');
+    const elements = document.querySelectorAll('[data-zh-tw], [data-zh-cn], [data-zh], [data-en]');
     elements.forEach(element => {
-        const value = element.getAttribute(`data-${currentLang}`);
+        let value;
+
+        // Try language-specific attributes first
+        if (currentLang === 'zh-TW') {
+            value = element.getAttribute('data-zh-tw') || element.getAttribute('data-zh');
+        } else if (currentLang === 'zh-CN') {
+            value = element.getAttribute('data-zh-cn') || element.getAttribute('data-zh');
+        } else {
+            value = element.getAttribute('data-en');
+        }
+
+        if (!value) return;
 
         if (element.tagName === 'OPTION') {
             element.textContent = value;
@@ -227,7 +291,14 @@ function toggleLanguage() {
         }
     });
 
-    document.documentElement.lang = currentLang === 'zh' ? 'zh-HK' : 'en';
+    // Update document language
+    if (currentLang === 'zh-TW') {
+        document.documentElement.lang = 'zh-TW';
+    } else if (currentLang === 'zh-CN') {
+        document.documentElement.lang = 'zh-CN';
+    } else {
+        document.documentElement.lang = 'en';
+    }
 }
 
 document.getElementById('langToggle').addEventListener('click', toggleLanguage);

@@ -344,6 +344,19 @@ body {
     flex-shrink: 0;
 }
 
+.icon-gradient-gold {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+    flex-shrink: 0;
+}
+
 .icon-gradient-blue-small {
     width: 3rem;
     height: 3rem;
@@ -395,6 +408,21 @@ body {
 .service-item:hover {
     background: rgba(0, 212, 255, 0.05);
     padding-left: 1rem;
+}
+
+.service-tag {
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.service-tag-gold {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 /* Tech Cards */
