@@ -117,7 +117,6 @@ let currentLang = 'zh';
 const translations = {
     zh: {
         langText: 'EN',
-        addressDisplay: 'addressZh',
         // Products section
         products: {
             title: '产品矩阵',
@@ -163,7 +162,6 @@ const translations = {
     },
     en: {
         langText: '中文',
-        addressDisplay: 'addressEn',
         // Products section
         products: {
             title: 'Our Products',
@@ -228,10 +226,6 @@ function toggleLanguage() {
             element.textContent = value;
         }
     });
-
-    // Update address display
-    document.getElementById('addressZh').classList.toggle('hidden');
-    document.getElementById('addressEn').classList.toggle('hidden');
 
     document.documentElement.lang = currentLang === 'zh' ? 'zh-HK' : 'en';
 }
@@ -445,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightNavigation();
 
     // Console branding
-    console.log('%c🔒 ZEROVECTOR LIMITED', 'font-size: 24px; font-weight: bold; color: #00d4ff; text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);');
+    console.log('%c🔒 ZEROVECTOR', 'font-size: 24px; font-weight: bold; color: #00d4ff; text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);');
     console.log('%c链上资产，我们守护 | Blockchain Asset Protection', 'font-size: 14px; color: #9ca3af;');
     console.log('%c🌐 zerovector.hk', 'font-size: 12px; color: #6b7280;');
 
