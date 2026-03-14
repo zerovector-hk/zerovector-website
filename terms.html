@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服務條款 - ZEROVECTOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{colors:{'deep-blue':'#0a0f1e','ice-blue':'#00d4ff'},fontFamily:{'space':['"Space Grotesk"','sans-serif'],'inter':['Inter','sans-serif'],'noto':['"Noto Sans SC"','sans-serif']}}}}</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+    (function(){
+        var lang=localStorage.getItem('zv-lang')||(function(){var bl=(navigator.language||'zh-TW').toLowerCase();return bl.startsWith('zh-tw')||bl.startsWith('zh-hk')?'zh-TW':bl.startsWith('zh')?'zh-CN':'en';})();
+        document.documentElement.lang=lang;
+        document.addEventListener('DOMContentLoaded',function(){
+            document.querySelectorAll('[data-zh-tw],[data-zh-cn],[data-en]').forEach(function(el){
+                var val=el.getAttribute('data-'+lang.toLowerCase())||el.getAttribute('data-zh-tw');
+                if(val&&!el.children.length)el.textContent=val;
+            });
+            var lb=document.getElementById('langText');if(lb)lb.textContent={'zh-TW':'簡中','zh-CN':'EN','en':'繁中'}[lang]||'簡中';
+            var yr=document.getElementById('currentYear');if(yr)yr.textContent=new Date().getFullYear();
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){var nx={'zh-TW':'zh-CN','zh-CN':'en','en':'zh-TW'};lang=nx[lang]||'zh-TW';localStorage.setItem('zv-lang',lang);location.reload();});
+        });
+    })();
+    </script>
+</head>
+<body class="font-inter" style="background:#030711;color:#e5e7eb;">
+    <canvas id="particleCanvas" style="display:none"></canvas>
+    <nav class="nav-glass">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="text-2xl font-bold font-space"><span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span></a>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-ice-blue text-sm transition-colors"><i class="fas fa-arrow-left mr-2"></i><span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back">返回主站</span></a>
+                    <button id="langToggle" class="lang-btn"><i class="fas fa-globe mr-2"></i><span id="langText">簡中</span></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 pt-32 pb-24">
+        <h1 class="text-4xl font-bold font-space mb-2 gradient-text" data-zh-tw="服務條款" data-zh-cn="服务条款" data-en="Terms of Service">服務條款</h1>
+        <p class="text-gray-500 text-sm mb-10" data-zh-tw="最後更新：2025年1月" data-zh-cn="最后更新：2025年1月" data-en="Last updated: January 2025">最後更新：2025年1月</p>
+
+        <div class="space-y-10 text-gray-300 font-noto leading-relaxed">
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">01.</span> <span data-zh-tw="接受條款" data-zh-cn="接受条款" data-en="Acceptance of Terms">接受條款</span></h2>
+                <p data-zh-tw="訪問或使用 ZEROVECTOR 網站（zerovector.hk）及相關服務，即表示您確認已閱讀、理解並同意受本服務條款約束。如您不同意，請勿使用本服務。本公司保留隨時修改本條款的權利，修改後繼續使用即視為接受。"
+                   data-zh-cn="访问或使用 ZEROVECTOR 网站（zerovector.hk）及相关服务，即表示您确认已阅读、理解并同意受本服务条款约束。如您不同意，请勿使用本服务。本公司保留随时修改本条款的权利，修改后继续使用即视为接受。"
+                   data-en="By accessing or using the ZEROVECTOR website (zerovector.hk) and related services, you confirm that you have read, understood, and agreed to be bound by these Terms of Service. If you do not agree, please do not use our services. We reserve the right to modify these terms at any time; continued use constitutes acceptance.">訪問或使用 ZEROVECTOR 網站（zerovector.hk）及相關服務，即表示您確認已閱讀、理解並同意受本服務條款約束。如您不同意，請勿使用本服務。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">02.</span> <span data-zh-tw="服務範圍" data-zh-cn="服务范围" data-en="Scope of Services">服務範圍</span></h2>
+                <p class="mb-4" data-zh-tw="ZEROVECTOR 提供以下技術服務（以實際合約為準）：" data-zh-cn="ZEROVECTOR 提供以下技术服务（以实际合约为准）：" data-en="ZEROVECTOR provides the following technical services (subject to individual agreements):">ZEROVECTOR 提供以下技術服務（以實際合約為準）：</p>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-shield-halved text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="加密資產追回技術支持：鏈上追蹤、資金圖譜分析、交易所協作凍結協助" data-zh-cn="加密资产追回技术支持：链上追踪、资金图谱分析、交易所协作冻结协助" data-en="Crypto asset recovery technical support: on-chain tracing, fund flow mapping, exchange cooperation for freezing">加密資產追回技術支持：鏈上追蹤、資金圖譜分析、交易所協作凍結協助</span></li>
+                    <li class="flex gap-3"><i class="fas fa-shield-halved text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="執法機構技術支持：涉案資產溯源、鏈上行為畫像、司法取證報告" data-zh-cn="执法机构技术支持：涉案资产溯源、链上行为画像、司法取证报告" data-en="Law enforcement technical support: asset tracing, on-chain behavioral profiling, forensic reports">執法機構技術支持：涉案資產溯源、鏈上行為畫像、司法取證報告</span></li>
+                    <li class="flex gap-3"><i class="fas fa-shield-halved text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="虛擬貨幣司法取證：電子證據保全、鑑定報告出具、出庭專家支持" data-zh-cn="虚拟货币司法取证：电子证据保全、鉴定报告出具、出庭专家支持" data-en="Crypto forensics: digital evidence preservation, expert reports, court witness support">虛擬貨幣司法取證：電子證據保全、鑑定報告出具、出庭專家支持</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">03.</span> <span data-zh-tw="重要聲明：非法律服務" data-zh-cn="重要声明：非法律服务" data-en="Important Notice: Not Legal Services">重要聲明：非法律服務</span></h2>
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                    <p data-zh-tw="ZEROVECTOR 提供的是技術分析服務，不構成法律建議、法律代理或律師服務。案件評估結果僅供參考，不作為法律依據。資金追回的最終結果取決於多種因素（包括執法機構介入、司法管轄權等），本公司不對追回結果作任何保證。"
+                       data-zh-cn="ZEROVECTOR 提供的是技术分析服务，不构成法律建议、法律代理或律师服务。案件评估结果仅供参考，不作为法律依据。资金追回的最终结果取决于多种因素（包括执法机构介入、司法管辖权等），本公司不对追回结果作任何保证。"
+                       data-en="ZEROVECTOR provides technical analysis services only; this does not constitute legal advice, legal representation, or attorney services. Case assessment results are for reference only and not legal evidence. Final recovery outcomes depend on many factors (including law enforcement involvement, jurisdiction, etc.); we make no guarantees regarding recovery results.">ZEROVECTOR 提供的是技術分析服務，不構成法律建議、法律代理或律師服務。案件評估結果僅供參考，不作為法律依據。資金追回的最終結果取決於多種因素，本公司不對追回結果作任何保證。</p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">04.</span> <span data-zh-tw="用戶義務" data-zh-cn="用户义务" data-en="User Obligations">用戶義務</span></h2>
+                <p class="mb-4" data-zh-tw="使用本服務時，您同意：" data-zh-cn="使用本服务时，您同意：" data-en="By using our services, you agree to:">使用本服務時，您同意：</p>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="提供真實、準確的案件資料，不提交虛假信息" data-zh-cn="提供真实、准确的案件资料，不提交虚假信息" data-en="Provide accurate and truthful case information; do not submit false information">提供真實、準確的案件資料，不提交虛假信息</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="不將本服務用於任何非法目的，包括洗錢或欺詐" data-zh-cn="不将本服务用于任何非法目的，包括洗钱或欺诈" data-en="Not use our services for any illegal purpose, including money laundering or fraud">不將本服務用於任何非法目的，包括洗錢或欺詐</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="不嘗試入侵、干擾或破壞本網站的正常運行" data-zh-cn="不尝试入侵、干扰或破坏本网站的正常运行" data-en="Not attempt to breach, disrupt, or damage the normal operation of this website">不嘗試入侵、干擾或破壞本網站的正常運行</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="遵守您所在地區的所有適用法律法規" data-zh-cn="遵守您所在地区的所有适用法律法规" data-en="Comply with all applicable laws and regulations in your jurisdiction">遵守您所在地區的所有適用法律法規</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">05.</span> <span data-zh-tw="費用與付款" data-zh-cn="费用与付款" data-en="Fees and Payment">費用與付款</span></h2>
+                <p data-zh-tw="初步案件評估為免費服務。深度介入服務（包括全面鏈上分析、司法協作、取證報告）為付費服務，具體費用以個案協議為準。所有費用報價均以書面形式確認，不接受口頭承諾。"
+                   data-zh-cn="初步案件评估为免费服务。深度介入服务（包括全面链上分析、司法协作、取证报告）为付费服务，具体费用以个案协议为准。所有费用报价均以书面形式确认，不接受口头承诺。"
+                   data-en="Initial case assessments are provided free of charge. In-depth investigation services (including comprehensive on-chain analysis, judicial cooperation, and forensic reports) are paid services with fees determined on a case-by-case basis. All fee quotations are confirmed in writing; verbal commitments are not accepted.">初步案件評估為免費服務。深度介入服務為付費服務，具體費用以個案協議為準。所有費用報價均以書面形式確認。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">06.</span> <span data-zh-tw="知識產權" data-zh-cn="知识产权" data-en="Intellectual Property">知識產權</span></h2>
+                <p data-zh-tw="本網站所有內容（包括文字、圖像、設計、軟件、報告格式及分析方法論）均為 ZEROVECTOR 的專有財產，受版權法及其他知識產權法保護。未經書面授權，不得以任何形式複製、分發或商業使用。"
+                   data-zh-cn="本网站所有内容（包括文字、图像、设计、软件、报告格式及分析方法论）均为 ZEROVECTOR 的专有财产，受版权法及其他知识产权法保护。未经书面授权，不得以任何形式复制、分发或商业使用。"
+                   data-en="All content on this website (including text, images, design, software, report formats, and analytical methodologies) is the proprietary property of ZEROVECTOR, protected by copyright and other intellectual property laws. No reproduction, distribution, or commercial use is permitted without written authorization.">本網站所有內容均為 ZEROVECTOR 的專有財產，受版權法及知識產權法保護。未經書面授權，不得複製或商業使用。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">07.</span> <span data-zh-tw="準據法與爭議解決" data-zh-cn="准据法与争议解决" data-en="Governing Law and Dispute Resolution">準據法與爭議解決</span></h2>
+                <p data-zh-tw="本服務條款受香港特別行政區法律管轄。因本條款或本服務產生的任何爭議，雙方應首先嘗試友好協商解決。協商不成，提交香港法院訴訟解決，雙方同意接受香港法院的專屬管轄。"
+                   data-zh-cn="本服务条款受香港特别行政区法律管辖。因本条款或本服务产生的任何争议，双方应首先尝试友好协商解决。协商不成，提交香港法院诉讼解决，双方同意接受香港法院的专属管辖。"
+                   data-en="These Terms of Service are governed by the laws of the Hong Kong Special Administrative Region. Any disputes arising from these terms or our services shall first be resolved through amicable negotiation. If negotiation fails, disputes shall be submitted to Hong Kong courts, and both parties agree to the exclusive jurisdiction of Hong Kong courts.">本服務條款受香港特別行政區法律管轄。爭議應先嘗試協商，協商不成提交香港法院解決。</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer-section border-t border-gray-800 mt-8">
+        <div class="max-w-3xl mx-auto px-6 py-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> ZEROVECTOR. <span data-zh-tw="版權所有" data-zh-cn="版权所有" data-en="All Rights Reserved">版權所有</span>.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隱私政策 - ZEROVECTOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { 'deep-blue': '#0a0f1e', 'ice-blue': '#00d4ff' }, fontFamily: { 'space': ['"Space Grotesk"', 'sans-serif'], 'inter': ['Inter', 'sans-serif'], 'noto': ['"Noto Sans SC"', 'sans-serif'] } } }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+    (function(){
+        var lang=localStorage.getItem('zv-lang')||(function(){var bl=(navigator.language||'zh-TW').toLowerCase();return bl.startsWith('zh-tw')||bl.startsWith('zh-hk')?'zh-TW':bl.startsWith('zh')?'zh-CN':'en';})();
+        document.documentElement.lang=lang;
+        document.addEventListener('DOMContentLoaded',function(){
+            document.querySelectorAll('[data-zh-tw],[data-zh-cn],[data-en]').forEach(function(el){
+                var val=el.getAttribute('data-'+lang.toLowerCase())||el.getAttribute('data-zh-tw');
+                if(val&&!el.children.length)el.textContent=val;
+            });
+            var lb=document.getElementById('langText');
+            if(lb)lb.textContent={'zh-TW':'簡中','zh-CN':'EN','en':'繁中'}[lang]||'簡中';
+            var yr=document.getElementById('currentYear');if(yr)yr.textContent=new Date().getFullYear();
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){
+                var nx={'zh-TW':'zh-CN','zh-CN':'en','en':'zh-TW'};
+                lang=nx[lang]||'zh-TW';localStorage.setItem('zv-lang',lang);location.reload();
+            });
+        });
+    })();
+    </script>
+</head>
+<body class="font-inter" style="background:#030711;color:#e5e7eb;">
+    <canvas id="particleCanvas" style="display:none"></canvas>
+    <nav class="nav-glass">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="text-2xl font-bold font-space"><span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span></a>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-ice-blue text-sm transition-colors"><i class="fas fa-arrow-left mr-2"></i><span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back">返回主站</span></a>
+                    <button id="langToggle" class="lang-btn"><i class="fas fa-globe mr-2"></i><span id="langText">簡中</span></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 pt-32 pb-24">
+        <h1 class="text-4xl font-bold font-space mb-2 gradient-text" data-zh-tw="隱私政策" data-zh-cn="隐私政策" data-en="Privacy Policy">隱私政策</h1>
+        <p class="text-gray-500 text-sm mb-10" data-zh-tw="最後更新：2025年1月" data-zh-cn="最后更新：2025年1月" data-en="Last updated: January 2025">最後更新：2025年1月</p>
+
+        <div class="space-y-10 text-gray-300 font-noto leading-relaxed">
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">01.</span> <span data-zh-tw="概述" data-zh-cn="概述" data-en="Overview">概述</span></h2>
+                <p data-zh-tw="ZEROVECTOR（以下簡稱「本公司」）高度重視您的隱私保護。本隱私政策說明我們在您使用本網站（zerovector.hk）及相關服務時，如何收集、使用、儲存及保護您的個人資料。使用本網站即表示您同意本政策。"
+                   data-zh-cn="ZEROVECTOR（以下简称「本公司」）高度重视您的隐私保护。本隐私政策说明我们在您使用本网站（zerovector.hk）及相关服务时，如何收集、使用、存储及保护您的个人资料。使用本网站即表示您同意本政策。"
+                   data-en="ZEROVECTOR (hereinafter 'the Company') takes your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your personal data when you use our website (zerovector.hk) and related services. By using this website, you agree to this policy.">ZEROVECTOR（以下簡稱「本公司」）高度重視您的隱私保護。本隱私政策說明我們在您使用本網站（zerovector.hk）及相關服務時，如何收集、使用、儲存及保護您的個人資料。使用本網站即表示您同意本政策。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">02.</span> <span data-zh-tw="我們收集的資料" data-zh-cn="我们收集的资料" data-en="Data We Collect">我們收集的資料</span></h2>
+                <ul class="space-y-3 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-circle text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="**案件提交資料**：姓名、電子郵件、聯絡電話、案件描述、涉案地址及交易哈希——僅用於案件處理。" data-zh-cn="**案件提交资料**：姓名、电子邮件、联络电话、案件描述、涉案地址及交易哈希——仅用于案件处理。" data-en="**Case Submission Data**: Name, email, phone number, incident description, involved addresses and transaction hashes — used solely for case handling."><strong class="text-white">案件提交資料</strong>：姓名、電子郵件、聯絡電話、案件描述、涉案地址及交易哈希——僅用於案件處理。</span></li>
+                    <li class="flex gap-3"><i class="fas fa-circle text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="**技術資料**：IP 地址、瀏覽器類型、訪問時間——用於網站安全及運營分析。" data-zh-cn="**技术资料**：IP 地址、浏览器类型、访问时间——用于网站安全及运营分析。" data-en="**Technical Data**: IP address, browser type, access timestamps — used for website security and operational analysis."><strong class="text-white">技術資料</strong>：IP 地址、瀏覽器類型、訪問時間——用於網站安全及運營分析。</span></li>
+                    <li class="flex gap-3"><i class="fas fa-circle text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="**Cookie**：僅使用必要的功能性 Cookie，不追蹤用戶行為或投放廣告。" data-zh-cn="**Cookie**：仅使用必要的功能性 Cookie，不追踪用户行为或投放广告。" data-en="**Cookies**: We only use essential functional cookies and do not track user behavior or serve advertisements."><strong class="text-white">Cookie</strong>：僅使用必要的功能性 Cookie，不追蹤用戶行為或投放廣告。</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">03.</span> <span data-zh-tw="資料使用目的" data-zh-cn="资料使用目的" data-en="Purpose of Data Use">資料使用目的</span></h2>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="處理案件申請及提供技術支持服務" data-zh-cn="处理案件申请及提供技术支持服务" data-en="Processing case submissions and providing technical support services">處理案件申請及提供技術支持服務</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="配合執法機構或司法程序的合法要求" data-zh-cn="配合执法机构或司法程序的合法要求" data-en="Complying with lawful requests from law enforcement agencies or judicial proceedings">配合執法機構或司法程序的合法要求</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="改善網站功能與用戶體驗" data-zh-cn="改善网站功能与用户体验" data-en="Improving website functionality and user experience">改善網站功能與用戶體驗</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="防範欺詐及保障網路安全" data-zh-cn="防范欺诈及保障网络安全" data-en="Preventing fraud and ensuring cybersecurity">防範欺詐及保障網路安全</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">04.</span> <span data-zh-tw="資料共享與披露" data-zh-cn="资料共享与披露" data-en="Data Sharing and Disclosure">資料共享與披露</span></h2>
+                <p class="mb-4" data-zh-tw="本公司不會出售、出租或以商業目的向第三方共享您的個人資料。以下情況除外：" data-zh-cn="本公司不会出售、出租或以商业目的向第三方共享您的个人资料。以下情况除外：" data-en="We do not sell, rent, or commercially share your personal data with third parties, except in the following circumstances:">本公司不會出售、出租或以商業目的向第三方共享您的個人資料。以下情況除外：</p>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="獲得您的明確同意" data-zh-cn="获得您的明确同意" data-en="With your explicit consent">獲得您的明確同意</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="依法律要求或法院命令" data-zh-cn="依法律要求或法院命令" data-en="As required by law or court order">依法律要求或法院命令</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="配合執法機構調查加密資產犯罪的合法請求" data-zh-cn="配合执法机构调查加密资产犯罪的合法请求" data-en="Supporting lawful law enforcement investigations into crypto asset crimes">配合執法機構調查加密資產犯罪的合法請求</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="與案件處理直接相關的技術合作夥伴（受同等保密義務約束）" data-zh-cn="与案件处理直接相关的技术合作伙伴（受同等保密义务约束）" data-en="Technical partners directly involved in case handling (bound by equivalent confidentiality obligations)">與案件處理直接相關的技術合作夥伴（受同等保密義務約束）</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">05.</span> <span data-zh-tw="資料安全" data-zh-cn="资料安全" data-en="Data Security">資料安全</span></h2>
+                <p data-zh-tw="我們採用業界標準的加密技術、訪問控制及安全審計機制保護您的資料。所有案件資料均加密存儲，僅授權人員可訪問。但任何互聯網傳輸均無法保證絕對安全，我們建議您在提交敏感信息時使用受信任的網絡環境。"
+                   data-zh-cn="我们采用业界标准的加密技术、访问控制及安全审计机制保护您的资料。所有案件资料均加密存储，仅授权人员可访问。但任何互联网传输均无法保证绝对安全，我们建议您在提交敏感信息时使用受信任的网络环境。"
+                   data-en="We employ industry-standard encryption, access controls, and security audit mechanisms to protect your data. All case data is encrypted at rest and accessible only to authorized personnel. However, no internet transmission can be guaranteed absolutely secure; we recommend using a trusted network when submitting sensitive information.">我們採用業界標準的加密技術、訪問控制及安全審計機制保護您的資料。所有案件資料均加密存儲，僅授權人員可訪問。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">06.</span> <span data-zh-tw="您的權利" data-zh-cn="您的权利" data-en="Your Rights">您的權利</span></h2>
+                <p class="mb-4" data-zh-tw="根據香港《個人資料（私隱）條例》（Cap. 486），您有權：" data-zh-cn="根据香港《个人资料（私隐）条例》（Cap. 486），您有权：" data-en="Under the Hong Kong Personal Data (Privacy) Ordinance (Cap. 486), you have the right to:">根據香港《個人資料（私隱）條例》（Cap. 486），您有權：</p>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="查閱本公司持有的您的個人資料" data-zh-cn="查阅本公司持有的您的个人资料" data-en="Access personal data we hold about you">查閱本公司持有的您的個人資料</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="要求更正不準確的個人資料" data-zh-cn="要求更正不准确的个人资料" data-en="Request correction of inaccurate personal data">要求更正不準確的個人資料</span></li>
+                    <li class="flex gap-3"><i class="fas fa-check text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="提出異議或要求刪除（法律義務保留者除外）" data-zh-cn="提出异议或要求删除（法律义务保留者除外）" data-en="Object to processing or request deletion (except where retention is legally required)">提出異議或要求刪除（法律義務保留者除外）</span></li>
+                </ul>
+                <p class="mt-4" data-zh-tw="如需行使上述權利，請聯絡：support@zerovector.hk" data-zh-cn="如需行使上述权利，请联络：support@zerovector.hk" data-en="To exercise these rights, please contact: support@zerovector.hk">如需行使上述權利，請聯絡：<a href="mailto:support@zerovector.hk" class="text-ice-blue hover:underline">support@zerovector.hk</a></p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">07.</span> <span data-zh-tw="政策更新" data-zh-cn="政策更新" data-en="Policy Updates">政策更新</span></h2>
+                <p data-zh-tw="本公司保留隨時修訂本政策的權利。重大變更將在網站上公告，繼續使用本服務即視為接受更新後的政策。" data-zh-cn="本公司保留随时修订本政策的权利。重大变更将在网站上公告，继续使用本服务即视为接受更新后的政策。" data-en="We reserve the right to update this policy at any time. Material changes will be announced on the website. Continued use of our services constitutes acceptance of the updated policy.">本公司保留隨時修訂本政策的權利。重大變更將在網站上公告，繼續使用本服務即視為接受更新後的政策。</p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer-section border-t border-gray-800 mt-8">
+        <div class="max-w-3xl mx-auto px-6 py-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> ZEROVECTOR. <span data-zh-tw="版權所有" data-zh-cn="版权所有" data-en="All Rights Reserved">版權所有</span>.</p>
+        </div>
+    </footer>
+</body>
+</html>

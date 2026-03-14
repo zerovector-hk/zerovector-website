@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>法律聲明 - ZEROVECTOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config={theme:{extend:{colors:{'deep-blue':'#0a0f1e','ice-blue':'#00d4ff'},fontFamily:{'space':['"Space Grotesk"','sans-serif'],'inter':['Inter','sans-serif'],'noto':['"Noto Sans SC"','sans-serif']}}}}</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+    (function(){
+        var lang=localStorage.getItem('zv-lang')||(function(){var bl=(navigator.language||'zh-TW').toLowerCase();return bl.startsWith('zh-tw')||bl.startsWith('zh-hk')?'zh-TW':bl.startsWith('zh')?'zh-CN':'en';})();
+        document.documentElement.lang=lang;
+        document.addEventListener('DOMContentLoaded',function(){
+            document.querySelectorAll('[data-zh-tw],[data-zh-cn],[data-en]').forEach(function(el){
+                var val=el.getAttribute('data-'+lang.toLowerCase())||el.getAttribute('data-zh-tw');
+                if(val&&!el.children.length)el.textContent=val;
+            });
+            var lb=document.getElementById('langText');if(lb)lb.textContent={'zh-TW':'簡中','zh-CN':'EN','en':'繁中'}[lang]||'簡中';
+            var yr=document.getElementById('currentYear');if(yr)yr.textContent=new Date().getFullYear();
+            var btn=document.getElementById('langToggle');
+            if(btn)btn.addEventListener('click',function(){var nx={'zh-TW':'zh-CN','zh-CN':'en','en':'zh-TW'};lang=nx[lang]||'zh-TW';localStorage.setItem('zv-lang',lang);location.reload();});
+        });
+    })();
+    </script>
+</head>
+<body class="font-inter" style="background:#030711;color:#e5e7eb;">
+    <canvas id="particleCanvas" style="display:none"></canvas>
+    <nav class="nav-glass">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="index.html" class="text-2xl font-bold font-space"><span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span></a>
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-ice-blue text-sm transition-colors"><i class="fas fa-arrow-left mr-2"></i><span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back">返回主站</span></a>
+                    <button id="langToggle" class="lang-btn"><i class="fas fa-globe mr-2"></i><span id="langText">簡中</span></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 pt-32 pb-24">
+        <h1 class="text-4xl font-bold font-space mb-2 gradient-text" data-zh-tw="法律聲明" data-zh-cn="法律声明" data-en="Legal Notice">法律聲明</h1>
+        <p class="text-gray-500 text-sm mb-10" data-zh-tw="最後更新：2025年1月" data-zh-cn="最后更新：2025年1月" data-en="Last updated: January 2025">最後更新：2025年1月</p>
+
+        <div class="space-y-10 text-gray-300 font-noto leading-relaxed">
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">01.</span> <span data-zh-tw="網站所有者" data-zh-cn="网站所有者" data-en="Website Owner">網站所有者</span></h2>
+                <p data-zh-tw="本網站（zerovector.hk）由 ZEROVECTOR LIMITED 擁有及運營，在香港特別行政區依法註冊成立，主要從事區塊鏈安全技術服務。聯絡電郵：support@zerovector.hk"
+                   data-zh-cn="本网站（zerovector.hk）由 ZEROVECTOR LIMITED 拥有及运营，在香港特别行政区依法注册成立，主要从事区块链安全技术服务。联络邮箱：support@zerovector.hk"
+                   data-en="This website (zerovector.hk) is owned and operated by ZEROVECTOR LIMITED, duly incorporated in the Hong Kong Special Administrative Region, primarily engaged in blockchain security technology services. Contact: support@zerovector.hk">本網站（zerovector.hk）由 ZEROVECTOR LIMITED 擁有及運營，在香港特別行政區依法註冊成立，主要從事區塊鏈安全技術服務。聯絡電郵：<a href="mailto:support@zerovector.hk" class="text-ice-blue hover:underline">support@zerovector.hk</a></p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">02.</span> <span data-zh-tw="責任限制" data-zh-cn="责任限制" data-en="Limitation of Liability">責任限制</span></h2>
+                <p class="mb-4" data-zh-tw="在法律允許的最大範圍內，ZEROVECTOR 對以下情況不承擔任何責任：" data-zh-cn="在法律允许的最大范围内，ZEROVECTOR 对以下情况不承担任何责任：" data-en="To the maximum extent permitted by law, ZEROVECTOR accepts no liability for:">在法律允許的最大範圍內，ZEROVECTOR 對以下情況不承擔任何責任：</p>
+                <ul class="space-y-2 pl-4">
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="使用本網站或相關服務所造成的任何直接或間接損失" data-zh-cn="使用本网站或相关服务所造成的任何直接或间接损失" data-en="Any direct or indirect losses arising from the use of this website or related services">使用本網站或相關服務所造成的任何直接或間接損失</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="加密資產無法追回或部分追回的損失（追回結果受多種客觀因素影響）" data-zh-cn="加密资产无法追回或部分追回的损失（追回结果受多种客观因素影响）" data-en="Losses from failure to recover or partial recovery of crypto assets (outcomes are subject to multiple objective factors)">加密資產無法追回或部分追回的損失（追回結果受多種客觀因素影響）</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="因不可抗力、第三方行為或技術故障導致服務中斷" data-zh-cn="因不可抗力、第三方行为或技术故障导致服务中断" data-en="Service interruptions caused by force majeure, third-party actions, or technical failures">因不可抗力、第三方行為或技術故障導致服務中斷</span></li>
+                    <li class="flex gap-3"><i class="fas fa-chevron-right text-ice-blue text-xs mt-2 flex-shrink-0"></i><span data-zh-tw="本網站上第三方鏈接內容的準確性或合法性" data-zh-cn="本网站上第三方链接内容的准确性或合法性" data-en="The accuracy or legality of third-party linked content on this website">本網站上第三方鏈接內容的準確性或合法性</span></li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">03.</span> <span data-zh-tw="免責聲明" data-zh-cn="免责声明" data-en="Disclaimer">免責聲明</span></h2>
+                <div class="space-y-4">
+                    <div class="bg-deep-blue/50 border border-ice-blue/20 rounded-lg p-4">
+                        <p class="font-bold text-white mb-2" data-zh-tw="技術服務性質" data-zh-cn="技术服务性质" data-en="Nature of Technical Services">技術服務性質</p>
+                        <p data-zh-tw="ZEROVECTOR 的所有服務均為技術分析性質，不構成任何形式的法律、財務或投資建議。案件評估報告僅為技術意見，不作為司法裁決的依據，最終法律判斷由有管轄權的司法機關作出。"
+                           data-zh-cn="ZEROVECTOR 的所有服务均为技术分析性质，不构成任何形式的法律、财务或投资建议。案件评估报告仅为技术意见，不作为司法裁决的依据，最终法律判断由有管辖权的司法机关作出。"
+                           data-en="All ZEROVECTOR services are technical in nature and do not constitute legal, financial, or investment advice. Case assessment reports are technical opinions only and do not serve as the basis for judicial decisions; final legal determinations are made by courts of competent jurisdiction.">ZEROVECTOR 的所有服務均為技術分析性質，不構成任何形式的法律、財務或投資建議。</p>
+                    </div>
+                    <div class="bg-deep-blue/50 border border-ice-blue/20 rounded-lg p-4">
+                        <p class="font-bold text-white mb-2" data-zh-tw="結果不保證" data-zh-cn="结果不保证" data-en="No Guarantee of Results">結果不保證</p>
+                        <p data-zh-tw="加密資產追回受多種因素影響，包括但不限於：嫌疑人所在司法管轄區、執法機構的配合程度、資產是否已被混幣/跨鏈、交易所的配合意願等。本公司不對任何追回金額或追回比例作出保證或承諾。"
+                           data-zh-cn="加密资产追回受多种因素影响，包括但不限于：嫌疑人所在司法管辖区、执法机构的配合程度、资产是否已被混币/跨链、交易所的配合意愿等。本公司不对任何追回金额或追回比例作出保证或承诺。"
+                           data-en="Crypto asset recovery is subject to many factors including, but not limited to: the jurisdiction of suspects, the level of cooperation from law enforcement, whether assets have been mixed or bridged, and the willingness of exchanges to cooperate. We make no guarantees or commitments regarding the amount or percentage of assets recovered.">加密資產追回受多種因素影響，本公司不對任何追回金額或追回比例作出保證或承諾。</p>
+                    </div>
+                    <div class="bg-deep-blue/50 border border-ice-blue/20 rounded-lg p-4">
+                        <p class="font-bold text-white mb-2" data-zh-tw="信息準確性" data-zh-cn="信息准确性" data-en="Information Accuracy">信息準確性</p>
+                        <p data-zh-tw="本網站的信息僅供一般參考用途。儘管我們盡力保持信息的準確性和時效性，但不對信息的完整性、準確性或適用性作出任何明示或暗示的保證。"
+                           data-zh-cn="本网站的信息仅供一般参考用途。尽管我们尽力保持信息的准确性和时效性，但不对信息的完整性、准确性或适用性作出任何明示或暗示的保证。"
+                           data-en="Information on this website is for general reference purposes only. While we strive to maintain accuracy and timeliness, we make no express or implied warranties regarding the completeness, accuracy, or applicability of the information.">本網站信息僅供一般參考，不對信息的完整性或準確性作任何保證。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">04.</span> <span data-zh-tw="反洗錢合規聲明" data-zh-cn="反洗钱合规声明" data-en="AML Compliance Statement">反洗錢合規聲明</span></h2>
+                <p data-zh-tw="ZEROVECTOR 嚴格遵守香港及國際反洗錢（AML）和反恐融資（CTF）法規。我們有義務對可疑活動進行報告，並配合相關監管機構的調查。本公司保留對涉嫌用於非法目的的服務請求拒絕受理的權利，並可向相關部門舉報。"
+                   data-zh-cn="ZEROVECTOR 严格遵守香港及国际反洗钱（AML）和反恐融资（CTF）法规。我们有义务对可疑活动进行报告，并配合相关监管机构的调查。本公司保留对涉嫌用于非法目的的服务请求拒绝受理的权利，并可向相关部门举报。"
+                   data-en="ZEROVECTOR strictly complies with Hong Kong and international Anti-Money Laundering (AML) and Counter-Terrorist Financing (CTF) regulations. We are obligated to report suspicious activities and cooperate with relevant regulatory investigations. We reserve the right to refuse service requests suspected of being used for illegal purposes and may report them to relevant authorities.">ZEROVECTOR 嚴格遵守香港及國際反洗錢（AML）和反恐融資（CTF）法規，對可疑活動有報告義務。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">05.</span> <span data-zh-tw="適用法律" data-zh-cn="适用法律" data-en="Applicable Law">適用法律</span></h2>
+                <p data-zh-tw="本法律聲明及本網站的所有相關事宜均受香港特別行政區法律管轄，並依香港法律解釋。任何爭議應提交香港法院解決。如本聲明的任何條款被認定為無效，其餘條款仍然有效。"
+                   data-zh-cn="本法律声明及本网站的所有相关事宜均受香港特别行政区法律管辖，并依香港法律解释。任何争议应提交香港法院解决。如本声明的任何条款被认定为无效，其余条款仍然有效。"
+                   data-en="This Legal Notice and all matters relating to this website are governed by and construed in accordance with the laws of the Hong Kong Special Administrative Region. Any disputes shall be submitted to Hong Kong courts. If any provision of this notice is found invalid, the remaining provisions remain in effect.">本法律聲明受香港特別行政區法律管轄。爭議提交香港法院解決。如任何條款被認定無效，其餘條款仍然有效。</p>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-white font-space mb-4 flex items-center gap-2"><span class="text-ice-blue">06.</span> <span data-zh-tw="聯絡我們" data-zh-cn="联络我们" data-en="Contact Us">聯絡我們</span></h2>
+                <p data-zh-tw="如對本法律聲明有任何疑問，請透過以下方式聯絡我們：" data-zh-cn="如对本法律声明有任何疑问，请通过以下方式联络我们：" data-en="If you have any questions about this Legal Notice, please contact us at:">如對本法律聲明有任何疑問，請透過以下方式聯絡：</p>
+                <p class="mt-3"><a href="mailto:support@zerovector.hk" class="text-ice-blue hover:underline font-space">support@zerovector.hk</a></p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer-section border-t border-gray-800 mt-8">
+        <div class="max-w-3xl mx-auto px-6 py-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; <span id="currentYear"></span> ZEROVECTOR. <span data-zh-tw="版權所有" data-zh-cn="版权所有" data-en="All Rights Reserved">版權所有</span>.</p>
+        </div>
+    </footer>
+</body>
+</html>
