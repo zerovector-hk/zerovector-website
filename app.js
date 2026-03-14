@@ -2,7 +2,7 @@
 
 // ===== Canvas Particle Network Animation =====
 const canvas = document.getElementById('particleCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null;
 
 let particles = [];
 const particleCount = 30;
@@ -11,6 +11,7 @@ const mouse = { x: null, y: null, radius: 150 };
 
 // Resize canvas
 function resizeCanvas() {
+    if (!canvas) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
@@ -98,6 +99,7 @@ function drawConnections() {
 
 // Animation loop
 function animate() {
+    if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(particle => {
@@ -352,7 +354,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-scrollTopBtn.addEventListener('click', () => {
+scrollTopBtn && scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
