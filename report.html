@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ZEROVECTOR - 案件提交 | 专业区块链资产追回服务">
-    <title>案件提交 - ZEROVECTOR</title>
+    <title data-zh-tw="案件提交 - ZEROVECTOR" data-zh-cn="案件提交 - ZEROVECTOR" data-en="Case Submission - ZEROVECTOR">案件提交 - ZEROVECTOR</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,16 +44,20 @@
             els.forEach(function(el) {
                 var key = 'data-' + lang.toLowerCase();
                 var val = el.getAttribute(key);
-                if (!val && lang === 'zh-CN') val = el.getAttribute('data-zh-cn');
                 if (!val) val = el.getAttribute('data-zh-tw');
                 if (val) {
-                    if (el.tagName === 'OPTION' || el.tagName === 'SPAN' || el.tagName === 'P' ||
-                        el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' ||
-                        el.tagName === 'H4' || el.tagName === 'A' || el.tagName === 'BUTTON' ||
-                        el.tagName === 'STRONG' || el.tagName === 'LI') {
-                        el.textContent = val;
-                    } else {
-                        el.textContent = val;
+                    // Only set textContent on leaf elements (no child elements other than icons)
+                    var children = el.children;
+                    var hasNonIconChild = false;
+                    for (var ci = 0; ci < children.length; ci++) {
+                        if (children[ci].tagName !== 'I') { hasNonIconChild = true; break; }
+                    }
+                    if (!hasNonIconChild) {
+                        if (el.tagName === 'TITLE') {
+                            document.title = val;
+                        } else {
+                            el.textContent = val;
+                        }
                     }
                 }
                 // Handle placeholder
@@ -364,13 +368,14 @@
                             <i class="fas fa-paperclip mr-2 text-ice-blue"></i>
                             <span data-zh-tw="案件材料附件說明" data-zh-cn="案件材料附件说明" data-en="Attachment Instructions">案件材料附件說明</span>
                         </h4>
-                        <p class="text-sm text-gray-400 leading-relaxed"
-                           data-zh-tw="如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至 support@zerovector.hk，並在郵件主旨註明您的案件編號。"
-                           data-zh-cn="如需提交相关证据材料（截图、聊天记录、钱包记录等），请在提交表单后通过邮件发送至 support@zerovector.hk，并在邮件主旨注明您的案件编号。"
-                           data-en="To submit supporting evidence (screenshots, chat logs, wallet records, etc.), please email them to support@zerovector.hk after submitting the form, and include your case ID in the subject line.">
-                            如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            <span data-zh-tw="如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至"
+                                  data-zh-cn="如需提交相关证据材料（截图、聊天记录、钱包记录等），请在提交表单后通过邮件发送至"
+                                  data-en="To submit supporting evidence (screenshots, chat logs, wallet records, etc.), please email them to">如需提交相關證據材料（截圖、聊天記錄、錢包記錄等），請在提交表單後通過郵件發送至</span>
                             <a href="mailto:support@zerovector.hk" class="text-ice-blue hover:underline">support@zerovector.hk</a>，
-                            並在郵件主旨註明您的案件編號。
+                            <span data-zh-tw="並在郵件主旨註明您的案件編號。"
+                                  data-zh-cn="并在邮件主旨注明您的案件编号。"
+                                  data-en="after submitting the form. Include your Case ID in the subject line.">並在郵件主旨註明您的案件編號。</span>
                         </p>
                     </div>
 
@@ -415,9 +420,9 @@
                         <span data-zh-tw="請留意您的郵箱" data-zh-cn="请留意您的邮箱" data-en="Please check your email">請留意您的郵箱</span>
                         <span class="text-ice-blue" id="submittedEmail"></span>
                     </p>
-                    <a href="index.html" class="cta-secondary inline-flex"
-                       data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Home">
-                        <i class="fas fa-home mr-2"></i>返回主站
+                    <a href="index.html" class="cta-secondary inline-flex">
+                        <i class="fas fa-home mr-2"></i>
+                        <span data-zh-tw="返回主站" data-zh-cn="返回主站" data-en="Back to Home">返回主站</span>
                     </a>
                 </div>
             </div>
