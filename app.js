@@ -263,6 +263,7 @@ function toggleLanguage() {
     }
 
     document.getElementById('langText').textContent = translations[currentLang].langText;
+    localStorage.setItem('zv-lang', currentLang);
 
     // Update all translatable elements
     const elements = document.querySelectorAll('[data-zh-tw], [data-zh-cn], [data-zh], [data-en]');
