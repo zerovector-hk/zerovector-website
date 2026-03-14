@@ -723,117 +723,211 @@
     <!-- Structured Data: Schema.org JSON-LD (SEO + AEO) -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
+    "@context": "https://schema.org",
+    "@graph": [
         {
-          "@type": "Organization",
-          "@id": "https://zerovector.hk/#organization",
-          "name": "ZEROVECTOR",
-          "legalName": "ZEROVECTOR LIMITED",
-          "url": "https://zerovector.hk",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://zerovector.hk/images/logo.svg"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "support@zerovector.hk",
-            "contactType": "customer support",
-            "availableLanguage": ["Chinese", "English"]
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "addressRegion": "Hong Kong",
-            "addressCountry": "HK"
-          },
-          "sameAs": [
-            "https://x.com/ZEROVECTORhk"
-          ],
-          "description": "Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, law enforcement technical support, and virtual currency judicial forensics."
+            "@type": [
+                "Organization",
+                "LocalBusiness"
+            ],
+            "@id": "https://zerovector.hk/#organization",
+            "name": "ZEROVECTOR",
+            "legalName": "ZEROVECTOR LIMITED",
+            "url": "https://zerovector.hk",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://zerovector.hk/images/logo.svg"
+            },
+            "image": "https://zerovector.hk/images/logo.svg",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Room 704, 7/F., Tower A, New Mandarin Plaza, 14 Science Museum Road, TST East",
+                "addressLocality": "Kowloon",
+                "addressRegion": "Hong Kong",
+                "addressCountry": "HK"
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "support@zerovector.hk",
+                "contactType": "customer support",
+                "availableLanguage": [
+                    "Chinese",
+                    "English"
+                ]
+            },
+            "sameAs": [
+                "https://x.com/ZEROVECTORhk",
+                "https://discord.gg/zerovector.hk"
+            ],
+            "description": "Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, law enforcement technical support, and virtual currency judicial forensics.",
+            "knowsAbout": [
+                "Cryptocurrency Recovery",
+                "Blockchain Forensics",
+                "On-chain Tracing",
+                "APT Hacker Group Attribution",
+                "AML Compliance",
+                "Digital Evidence Preservation"
+            ],
+            "areaServed": "Worldwide",
+            "priceRange": "$$"
         },
         {
-          "@type": "WebSite",
-          "@id": "https://zerovector.hk/#website",
-          "url": "https://zerovector.hk",
-          "name": "ZEROVECTOR",
-          "publisher": {"@id": "https://zerovector.hk/#organization"},
-          "inLanguage": ["zh-TW", "zh-CN", "en"]
-        },
-        {
-          "@type": "ItemList",
-          "name": "ZEROVECTOR Services",
-          "itemListElement": [
-            {
-              "@type": "Service",
-              "position": 1,
-              "name": "Crypto Asset Recovery",
-              "alternateName": "加密資產追回",
-              "provider": {"@id": "https://zerovector.hk/#organization"},
-              "description": "Professional on-chain tracing, fund flow mapping, and exchange cooperation to recover stolen cryptocurrency. Successfully identified multiple APT-level hacker groups, with cumulative recovery exceeding $1B.",
-              "serviceType": "Blockchain Forensics",
-              "areaServed": "Worldwide"
+            "@type": "WebSite",
+            "@id": "https://zerovector.hk/#website",
+            "url": "https://zerovector.hk",
+            "name": "ZEROVECTOR",
+            "publisher": {
+                "@id": "https://zerovector.hk/#organization"
             },
-            {
-              "@type": "Service",
-              "position": 2,
-              "name": "Law Enforcement Technical Support",
-              "alternateName": "執法機構技術支援",
-              "provider": {"@id": "https://zerovector.hk/#organization"},
-              "description": "On-chain behavioral profiling, asset attribution, transaction graph analysis, and investigative support for police and judicial bodies.",
-              "serviceType": "Blockchain Intelligence",
-              "areaServed": "Worldwide"
-            },
-            {
-              "@type": "Service",
-              "position": 3,
-              "name": "Virtual Currency Judicial Forensics",
-              "alternateName": "虛擬貨幣司法取證",
-              "provider": {"@id": "https://zerovector.hk/#organization"},
-              "description": "Digital evidence preservation, expert forensic reports, and court witness testimony for cryptocurrency-related legal proceedings.",
-              "serviceType": "Digital Forensics",
-              "areaServed": "Worldwide"
+            "inLanguage": [
+                "zh-TW",
+                "zh-CN",
+                "en"
+            ],
+            "speakable": {
+                "@type": "SpeakableSpecification",
+                "cssSelector": [
+                    "#about h2",
+                    "#about p",
+                    ".service-card h3"
+                ]
             }
-          ]
         },
         {
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "What is ZEROVECTOR?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "ZEROVECTOR is a Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, and law enforcement technical support. We have successfully identified multiple APT-level professional hacker groups and assisted in recovering over $1 billion in stolen digital assets."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can ZEROVECTOR help recover stolen cryptocurrency?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. ZEROVECTOR provides professional on-chain tracing and crypto asset recovery services. We use advanced blockchain analytics to trace funds, identify perpetrators, and coordinate with exchanges and law enforcement to freeze and recover stolen assets. Submit your case at zerovector.hk/report.html."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does ZEROVECTOR work with law enforcement?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. ZEROVECTOR provides technical support to law enforcement agencies including on-chain behavioral profiling, asset tracing, transaction graph analysis, and judicial forensic reports. We support investigations across multiple jurisdictions."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Is the initial case assessment free?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, the initial case assessment is free. Submit your case at zerovector.hk/report.html and our team will review and respond. In-depth investigation services are paid on a case-by-case basis."
-              }
-            }
-          ]
+            "@type": "ItemList",
+            "name": "ZEROVECTOR Services",
+            "itemListElement": [
+                {
+                    "@type": "Service",
+                    "position": 1,
+                    "name": "Crypto Asset Recovery",
+                    "alternateName": "加密資產追回",
+                    "provider": {
+                        "@id": "https://zerovector.hk/#organization"
+                    },
+                    "description": "Professional on-chain tracing, fund flow mapping, and exchange cooperation to recover stolen cryptocurrency. Successfully identified multiple APT-level hacker groups, with cumulative recovery exceeding $1B.",
+                    "serviceType": "Blockchain Forensics",
+                    "areaServed": "Worldwide"
+                },
+                {
+                    "@type": "Service",
+                    "position": 2,
+                    "name": "Law Enforcement Technical Support",
+                    "alternateName": "執法機構技術支援",
+                    "provider": {
+                        "@id": "https://zerovector.hk/#organization"
+                    },
+                    "description": "On-chain behavioral profiling, asset attribution, transaction graph analysis, and investigative support for police and judicial bodies.",
+                    "serviceType": "Blockchain Intelligence",
+                    "areaServed": "Worldwide"
+                },
+                {
+                    "@type": "Service",
+                    "position": 3,
+                    "name": "Virtual Currency Judicial Forensics",
+                    "alternateName": "虛擬貨幣司法取證",
+                    "provider": {
+                        "@id": "https://zerovector.hk/#organization"
+                    },
+                    "description": "Digital evidence preservation, expert forensic reports, and court witness testimony for cryptocurrency-related legal proceedings.",
+                    "serviceType": "Digital Forensics",
+                    "areaServed": "Worldwide"
+                }
+            ]
+        },
+        {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is ZEROVECTOR?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "ZEROVECTOR is a Hong Kong-based blockchain security company specializing in crypto asset recovery, on-chain forensics, and law enforcement technical support. We have successfully identified multiple APT-level professional hacker groups and assisted in recovering over $1 billion in stolen digital assets."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Can ZEROVECTOR help recover stolen cryptocurrency?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. ZEROVECTOR provides professional on-chain tracing and crypto asset recovery services. We use advanced blockchain analytics to trace funds, identify perpetrators, and coordinate with exchanges and law enforcement to freeze and recover stolen assets. Submit your case at zerovector.hk/report.html."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "How does the case submission process work?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Step 1: Submit your case at zerovector.hk/report.html with incident details and relevant blockchain addresses. Step 2: Our analysts perform an initial assessment (free of charge). Step 3: We provide a detailed report and recommended action plan. Step 4: Upon agreement, we execute on-chain tracing, coordinate with exchanges for asset freezing, and support law enforcement. Step 5: Final case report delivery."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Does ZEROVECTOR work with law enforcement?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes. ZEROVECTOR provides technical support to law enforcement agencies including on-chain behavioral profiling, asset tracing, transaction graph analysis, and judicial forensic reports. We support investigations across multiple jurisdictions worldwide."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Is the initial case assessment free?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Yes, the initial case assessment is free. Submit your case at zerovector.hk/report.html and our team will review and respond. In-depth investigation services are paid on a case-by-case basis."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What regions does ZEROVECTOR serve?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Based in Hong Kong, ZEROVECTOR serves clients worldwide with a strong focus on the Asia-Pacific region. Our strategic location in an international financial center enables effective cross-border cooperation with exchanges and law enforcement agencies globally."
+                    }
+                }
+            ]
+        },
+        {
+            "@type": "HowTo",
+            "name": "How to Submit a Crypto Theft Case to ZEROVECTOR",
+            "description": "Step-by-step guide to submitting a cryptocurrency theft or fraud case for professional investigation.",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "position": 1,
+                    "name": "Visit Case Submission Page",
+                    "text": "Go to zerovector.hk/report.html",
+                    "url": "https://zerovector.hk/report.html"
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 2,
+                    "name": "Fill in Contact Information",
+                    "text": "Provide your name, email, and phone number for follow-up communication."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 3,
+                    "name": "Describe the Incident",
+                    "text": "Detail when and how the theft or fraud occurred, including estimated loss amount and relevant transaction hashes."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 4,
+                    "name": "Provide Blockchain Addresses",
+                    "text": "Include the involved wallet addresses, transaction hashes, and blockchain networks (e.g. Ethereum, Bitcoin, TRON)."
+                },
+                {
+                    "@type": "HowToStep",
+                    "position": 5,
+                    "name": "Submit and Await Assessment",
+                    "text": "Submit the form. Our analysts will perform a free initial assessment and contact you with findings and recommended next steps."
+                }
+            ]
         }
-      ]
-    }
+    ]
+}
     </script>
 
 </body>
