@@ -651,55 +651,74 @@
     <div id="contact"></div>
 
     <!-- Partners Section (bottom) -->
-    <section id="partners" class="py-16 border-t border-gray-800/60" style="background:rgba(6,10,20,0.9)">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center gap-4 mb-10">
-                <div class="h-px flex-1 bg-gray-800"></div>
-                <h2 class="text-sm font-space tracking-widest text-gray-400 uppercase"
+    <section id="partners" class="py-20 border-t border-gray-800/50" style="background:linear-gradient(180deg,rgba(8,13,26,0) 0%,rgba(6,10,18,0.95) 100%)">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section header -->
+            <div class="text-center mb-14">
+                <p class="text-xs font-space tracking-[0.3em] text-blue-400/70 uppercase mb-3"
+                   data-zh-tw="受信任的合作夥伴" data-zh-cn="受信任的合作伙伴" data-en="Trusted Partners">受信任的合作夥伴</p>
+                <h2 class="text-2xl md:text-3xl font-bold font-space text-white mb-3"
                     data-zh-tw="合作夥伴" data-zh-cn="合作伙伴" data-en="Partners">合作夥伴</h2>
-                <div class="h-px flex-1 bg-gray-800"></div>
+                <div class="w-12 h-0.5 bg-blue-500/50 mx-auto"></div>
             </div>
 
-            <div class="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 items-center justify-items-center">
+            <!-- Logo grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
 
-                <!-- HashKey — real logo -->
+                <!-- HashKey -->
                 <a href="https://www.hashkey.com" target="_blank" rel="noopener" aria-label="HashKey Group"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
+                   class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300">
                     <img src="images/partners/hashkey.png" alt="HashKey Group"
-                         class="max-h-8 w-auto opacity-40 group-hover:opacity-90 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                         class="h-10 md:h-12 w-auto max-w-[140px] object-contain opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                    <span class="text-xs text-gray-600 group-hover:text-gray-400 transition-colors font-space tracking-wide"
+                          data-zh-tw="持牌虛擬資產交易所" data-zh-cn="持牌虚拟资产交易所" data-en="Licensed VA Exchange">持牌虛擬資產交易所</span>
                 </a>
 
-                <!-- imToken — real logo -->
+                <!-- imToken -->
                 <a href="https://token.im" target="_blank" rel="noopener" aria-label="imToken"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
+                   class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300">
                     <img src="images/partners/imtoken.png" alt="imToken"
-                         class="max-h-8 w-auto opacity-40 group-hover:opacity-90 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                         class="h-10 md:h-12 w-auto max-w-[140px] object-contain opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                    <span class="text-xs text-gray-600 group-hover:text-gray-400 transition-colors font-space tracking-wide"
+                          data-zh-tw="去中心化錢包" data-zh-cn="去中心化钱包" data-en="Decentralized Wallet">去中心化錢包</span>
                 </a>
 
-                <!-- Alibaba Cloud — real logo -->
+                <!-- Alibaba Cloud -->
                 <a href="https://www.alibabacloud.com" target="_blank" rel="noopener" aria-label="Alibaba Cloud"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
+                   class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300">
                     <img src="images/partners/alicloud.png" alt="Alibaba Cloud"
-                         class="max-h-8 w-auto opacity-40 group-hover:opacity-90 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                         class="h-10 md:h-12 w-auto max-w-[140px] object-contain opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy">
+                    <span class="text-xs text-gray-600 group-hover:text-gray-400 transition-colors font-space tracking-wide"
+                          data-zh-tw="雲端運算服務" data-zh-cn="云端计算服务" data-en="Cloud Infrastructure">雲端運算服務</span>
                 </a>
 
                 <!-- 北京甄真司法鉴定 -->
-                <a href="#" aria-label="北京甄真司法鑑定"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
-                    <span class="font-noto text-xs font-bold text-gray-500 group-hover:text-gray-200 transition-colors whitespace-nowrap">北京甄真<br><span class="font-normal text-xs">司法鑑定</span></span>
-                </a>
+                <div class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300 cursor-default">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-sm md:text-base font-bold text-gray-400 group-hover:text-white transition-colors font-noto tracking-wide">北京甄真</span>
+                        <span class="text-xs text-gray-600 group-hover:text-gray-400 transition-colors font-noto">司法鑑定中心</span>
+                    </div>
+                    <span class="text-xs text-gray-700 group-hover:text-gray-500 transition-colors font-space tracking-wide"
+                          data-zh-tw="司法鑑定機構" data-zh-cn="司法鉴定机构" data-en="Judicial Forensics">司法鑑定機構</span>
+                </div>
 
                 <!-- 埃文科技 -->
-                <a href="#" aria-label="埃文科技"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
-                    <span class="font-noto text-xs font-bold text-gray-500 group-hover:text-gray-200 transition-colors whitespace-nowrap">埃文科技</span>
-                </a>
+                <div class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300 cursor-default">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-sm md:text-base font-bold text-gray-400 group-hover:text-white transition-colors font-noto tracking-wide">埃文科技</span>
+                    </div>
+                    <span class="text-xs text-gray-700 group-hover:text-gray-500 transition-colors font-space tracking-wide"
+                          data-zh-tw="網絡安全技術" data-zh-cn="网络安全技术" data-en="Cybersecurity Tech">網絡安全技術</span>
+                </div>
 
                 <!-- 零号线科技 -->
-                <a href="#" aria-label="零號線科技"
-                   class="partner-logo group flex items-center justify-center p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
-                    <span class="font-noto text-xs font-bold text-gray-500 group-hover:text-gray-200 transition-colors whitespace-nowrap">零號線科技</span>
-                </a>
+                <div class="partner-card group flex flex-col items-center justify-center gap-3 p-6 rounded-xl border border-gray-800/60 hover:border-blue-500/30 bg-gray-900/30 hover:bg-gray-800/40 transition-all duration-300 cursor-default">
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-sm md:text-base font-bold text-gray-400 group-hover:text-white transition-colors font-noto tracking-wide">零號線科技</span>
+                    </div>
+                    <span class="text-xs text-gray-700 group-hover:text-gray-500 transition-colors font-space tracking-wide"
+                          data-zh-tw="區塊鏈安全" data-zh-cn="区块链安全" data-en="Blockchain Security">區塊鏈安全</span>
+                </div>
 
             </div>
         </div>
