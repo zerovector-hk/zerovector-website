@@ -1,7 +1,8 @@
 // ===== ZEROVECTOR Web3 Professional JavaScript =====
 
 // ===== Blockchain Tracing Network Animation =====
-// Visual: Wallet nodes + transaction edges + tracing particles moving along paths
+// Wallet nodes with hex addresses + transaction edges with directional arrows
+// + tracing highlight paths (ice-blue → red warning)
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas ? canvas.getContext('2d') : null;
 
@@ -11,84 +12,151 @@ function resizeCanvas() {
     canvas.height = window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener('resize', () => { resizeCanvas(); initNetwork(); });
 
-// ── Node: represents a wallet address ──
+// ── Hex address generator ──
+function randHex(n) {
+    const h = '0123456789abcdef';
+    let s = '';
+    for (let i = 0; i < n; i++) s += h[Math.floor(Math.random() * 16)];
+    return s;
+}
+
+// ── Node: wallet address ──
+const NODE_COUNT = window.innerWidth < 768 ? 14 : 20;
+const EDGE_DIST = window.innerWidth < 768 ? 180 : 240;
+let nodes = [], edges = [], tracers = [], alertPaths = [];
+
 class WalletNode {
-    constructor() { this.reset(); }
-    reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.18;
-        this.vy = (Math.random() - 0.5) * 0.18;
-        // node type: 0=normal wallet, 1=hub(exchange), 2=flagged
-        this.type = Math.random() < 0.12 ? 1 : Math.random() < 0.08 ? 2 : 0;
-        this.r = this.type === 1 ? 4.5 : this.type === 2 ? 3.5 : 2.5;
-        this.pulse = Math.random() * Math.PI * 2; // pulse phase
-        this.pulseSpeed = 0.025 + Math.random() * 0.02;
+    constructor(idx) {
+        this.idx = idx;
+        this.x = 60 + Math.random() * (canvas.width - 120);
+        this.y = 60 + Math.random() * (canvas.height - 120);
+        this.vx = (Math.random() - 0.5) * 0.12;
+        this.vy = (Math.random() - 0.5) * 0.12;
+        // type: 0=wallet, 1=exchange(hub), 2=flagged
+        this.type = idx < 2 ? 1 : Math.random() < 0.1 ? 2 : 0;
+        this.r = this.type === 1 ? 6 : this.type === 2 ? 5 : 3.5;
+        this.addr = '0x' + randHex(4) + '…' + randHex(4);
+        this.pulse = Math.random() * Math.PI * 2;
+        this.showLabel = this.type !== 0; // only hubs/flagged show labels always
+        this.labelAlpha = this.showLabel ? 0.6 : 0;
     }
     update() {
         this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        this.pulse += this.pulseSpeed;
+        if (this.x < 40 || this.x > canvas.width - 40)  this.vx *= -1;
+        if (this.y < 40 || this.y > canvas.height - 40) this.vy *= -1;
+        this.pulse += 0.025;
+        // Occasionally flash label on normal nodes
+        if (!this.showLabel && Math.random() < 0.0008) {
+            this.labelAlpha = 0.5;
+        }
+        if (this.labelAlpha > 0 && !this.showLabel) {
+            this.labelAlpha -= 0.003;
+        }
     }
     draw() {
         const glow = 0.7 + 0.3 * Math.sin(this.pulse);
-        const color = this.type === 2 ? [255, 100, 80] : [0, 212, 255];
-        const [r,g,b] = color;
+        const isAlert = this.type === 2;
+        const color = isAlert ? '255,80,68' : '0,212,255';
 
-        // Outer glow ring (hub nodes)
+        // Glow ring for hub/flagged
         if (this.type !== 0) {
-            const pulsedR = this.r + 3 * Math.sin(this.pulse);
             ctx.beginPath();
-            ctx.arc(this.x, this.y, pulsedR, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(${r},${g},${b},${0.15 * glow})`;
-            ctx.lineWidth = 1;
+            ctx.arc(this.x, this.y, this.r + 4 + 2 * Math.sin(this.pulse), 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(' + color + ',' + (0.12 * glow) + ')';
+            ctx.lineWidth = 1.2;
             ctx.stroke();
         }
 
-        // Node core
+        // Core
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${b},${0.75 * glow})`;
+        ctx.fillStyle = 'rgba(' + color + ',' + (0.7 * glow) + ')';
         ctx.fill();
 
-        // Inner bright dot
+        // Inner bright
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.r * 0.45, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${0.6 * glow})`;
+        ctx.arc(this.x, this.y, this.r * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.55 * glow) + ')';
         ctx.fill();
+
+        // Address label
+        if (this.labelAlpha > 0.01) {
+            ctx.font = '9px "JetBrains Mono", monospace';
+            ctx.fillStyle = 'rgba(0,212,255,' + this.labelAlpha + ')';
+            ctx.textAlign = 'center';
+            ctx.fillText(this.addr, this.x, this.y - this.r - 6);
+        }
     }
 }
 
-// ── Tracer: moves along an edge (simulates investigation tracing a transaction) ──
+// ── Edge drawing with arrow ──
+function drawEdge(ax, ay, bx, by, alpha, color) {
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.strokeStyle = 'rgba(' + color + ',' + alpha + ')';
+    ctx.lineWidth = 0.7;
+    ctx.stroke();
+
+    // Small directional arrow at 70% of edge
+    if (alpha > 0.04) {
+        const mx = ax + (bx - ax) * 0.7;
+        const my = ay + (by - ay) * 0.7;
+        const angle = Math.atan2(by - ay, bx - ax);
+        const aLen = 5;
+        ctx.beginPath();
+        ctx.moveTo(mx, my);
+        ctx.lineTo(mx - aLen * Math.cos(angle - 0.4), my - aLen * Math.sin(angle - 0.4));
+        ctx.moveTo(mx, my);
+        ctx.lineTo(mx - aLen * Math.cos(angle + 0.4), my - aLen * Math.sin(angle + 0.4));
+        ctx.strokeStyle = 'rgba(' + color + ',' + (alpha * 1.5) + ')';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+    }
+}
+
+// ── Tracer: light pulse traveling along a path ──
 class Tracer {
-    constructor(from, to) {
-        this.from = from; this.to = to;
-        this.t = 0;
-        this.speed = 0.003 + Math.random() * 0.004;
+    constructor(path, isAlert) {
+        this.path = path; // array of node indices
+        this.isAlert = isAlert;
+        this.seg = 0;     // current segment index
+        this.t = 0;       // progress within segment [0,1]
+        this.speed = 0.006 + Math.random() * 0.004;
         this.done = false;
         this.tail = [];
-        this.maxTail = 14;
+        this.maxTail = 18;
     }
     update() {
+        if (this.seg >= this.path.length - 1) { this.done = true; return; }
         this.t += this.speed;
-        if (this.t >= 1) { this.done = true; return; }
-        const x = this.from.x + (this.to.x - this.from.x) * this.t;
-        const y = this.from.y + (this.to.y - this.from.y) * this.t;
+        if (this.t >= 1) {
+            this.t = 0;
+            this.seg++;
+            // Flash the reached node's label
+            if (this.seg < this.path.length) {
+                nodes[this.path[this.seg]].labelAlpha = 0.8;
+            }
+            if (this.seg >= this.path.length - 1) { this.done = true; return; }
+        }
+        const a = nodes[this.path[this.seg]];
+        const b = nodes[this.path[this.seg + 1]];
+        const x = a.x + (b.x - a.x) * this.t;
+        const y = a.y + (b.y - a.y) * this.t;
         this.tail.push({x, y});
         if (this.tail.length > this.maxTail) this.tail.shift();
     }
     draw() {
         if (this.tail.length < 2) return;
+        const color = this.isAlert ? '255,80,68' : '0,212,255';
         for (let i = 1; i < this.tail.length; i++) {
-            const alpha = (i / this.tail.length) * 0.85;
-            const width = (i / this.tail.length) * 2.5;
+            const alpha = (i / this.tail.length) * 0.9;
+            const width = (i / this.tail.length) * 2.8;
             ctx.beginPath();
             ctx.moveTo(this.tail[i-1].x, this.tail[i-1].y);
             ctx.lineTo(this.tail[i].x, this.tail[i].y);
-            ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+            ctx.strokeStyle = 'rgba(' + color + ',' + alpha + ')';
             ctx.lineWidth = width;
             ctx.lineCap = 'round';
             ctx.stroke();
@@ -96,21 +164,24 @@ class Tracer {
         // Bright head
         const head = this.tail[this.tail.length - 1];
         ctx.beginPath();
-        ctx.arc(head.x, head.y, 2.2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.arc(head.x, head.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = this.isAlert ? 'rgba(255,120,100,0.95)' : 'rgba(255,255,255,0.95)';
         ctx.fill();
+
+        // Highlight the path edges behind the tracer
+        for (let s = 0; s <= this.seg && s < this.path.length - 1; s++) {
+            const a = nodes[this.path[s]];
+            const b = nodes[this.path[s + 1]];
+            const fade = s < this.seg ? 0.15 : 0.3;
+            drawEdge(a.x, a.y, b.x, b.y, fade, color);
+        }
     }
 }
 
-// ── Network state ──
-const NODE_COUNT = window.innerWidth < 768 ? 22 : 38;
-let nodes = [], edges = [], tracers = [];
-const EDGE_DIST = 200;
-
+// ── Init network ──
 function initNetwork() {
-    nodes = Array.from({length: NODE_COUNT}, () => new WalletNode());
+    nodes = Array.from({length: NODE_COUNT}, (_, i) => new WalletNode(i));
     edges = [];
-    // Build edges: connect nodes within distance at init
     for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
             const dx = nodes[i].x - nodes[j].x;
@@ -122,52 +193,71 @@ function initNetwork() {
     }
 }
 initNetwork();
+window.addEventListener('resize', () => { resizeCanvas(); initNetwork(); });
 
-// Spawn tracers periodically
-let tracerTimer = 0;
-function spawnTracer() {
-    if (nodes.length < 2) return;
-    const a = Math.floor(Math.random() * nodes.length);
-    let b = Math.floor(Math.random() * nodes.length);
-    while (b === a) b = Math.floor(Math.random() * nodes.length);
-    tracers.push(new Tracer(nodes[a], nodes[b]));
-    if (tracers.length > 25) tracers.shift();
+// ── Random path finder (BFS-like, 3-6 hops) ──
+function findRandomPath() {
+    const start = Math.floor(Math.random() * nodes.length);
+    const visited = new Set([start]);
+    const path = [start];
+    const hops = 3 + Math.floor(Math.random() * 4); // 3-6 hops
+    for (let h = 0; h < hops; h++) {
+        const curr = path[path.length - 1];
+        const neighbors = [];
+        for (const [a, b] of edges) {
+            if (a === curr && !visited.has(b)) neighbors.push(b);
+            if (b === curr && !visited.has(a)) neighbors.push(a);
+        }
+        if (neighbors.length === 0) break;
+        const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+        visited.add(next);
+        path.push(next);
+    }
+    return path.length >= 3 ? path : null;
 }
 
-function drawEdges() {
+// ── Spawn tracers every 3-5 seconds ──
+let spawnTimer = 0;
+const SPAWN_INTERVAL = 180; // ~3 sec at 60fps
+
+function spawnTracer() {
+    const path = findRandomPath();
+    if (!path) return;
+    const isAlert = Math.random() < 0.25; // 25% chance of red alert trace
+    tracers.push(new Tracer(path, isAlert));
+    // Flash start node
+    nodes[path[0]].labelAlpha = 0.9;
+    if (tracers.length > 15) tracers.shift();
+}
+
+// ── Draw all static edges ──
+function drawAllEdges() {
     for (const [i, j] of edges) {
         const dx = nodes[i].x - nodes[j].x;
         const dy = nodes[i].y - nodes[j].y;
         const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist > EDGE_DIST * 1.8) continue; // skip if nodes drifted too far
-        const opacity = Math.max(0, (1 - dist / (EDGE_DIST * 1.6)) * 0.12);
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x, nodes[i].y);
-        ctx.lineTo(nodes[j].x, nodes[j].y);
-        ctx.strokeStyle = `rgba(26,108,246,${opacity})`;
-        ctx.lineWidth = 0.6;
-        ctx.stroke();
+        if (dist > EDGE_DIST * 2) continue;
+        const alpha = Math.max(0, (1 - dist / (EDGE_DIST * 1.8)) * 0.08);
+        drawEdge(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y, alpha, '26,108,246');
     }
 }
 
-// ── Main animation loop ──
+// ── Main loop ──
 function animate() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Update & draw edges
-    drawEdges();
-
-    // Update nodes
+    drawAllEdges();
     nodes.forEach(n => { n.update(); n.draw(); });
 
-    // Update tracers
     tracers = tracers.filter(t => !t.done);
     tracers.forEach(t => { t.update(); t.draw(); });
 
-    // Spawn new tracer
-    tracerTimer++;
-    if (tracerTimer > 55) { spawnTracer(); tracerTimer = 0; }
+    spawnTimer++;
+    if (spawnTimer >= SPAWN_INTERVAL) {
+        spawnTracer();
+        spawnTimer = Math.floor(Math.random() * 60); // slight randomness
+    }
 
     requestAnimationFrame(animate);
 }
