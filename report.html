@@ -227,6 +227,9 @@
             <!-- Form -->
             <div class="glass-card fade-in-up" style="animation-delay: 0.2s">
                 <form id="reportForm" action="#" method="POST" class="space-y-6">
+                    <input type="hidden" name="access_key" value="5a2ae0b0-4204-483d-97f4-14df3623604a">
+                    <input type="hidden" name="subject" value="[ZeroVector] 新案件提交">
+                    <input type="hidden" name="from_name" value="ZeroVector 官網">
 
                     <!-- Name -->
                     <div>
@@ -455,53 +458,48 @@
     </footer>
 
     <script>
-        // Form submission handling (mailto)
+        // Form submission via Web3Forms (AJAX, no mail client needed)
         var form = document.getElementById('reportForm');
         var successMessage = document.getElementById('successMessage');
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var submitSpan = submitBtn ? submitBtn.querySelector('span[data-zh-tw]') : null;
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            var data = new FormData(form);
-            var name = data.get('name') || '';
-            var email = data.get('email') || '';
-            var phone = data.get('phone') || '未提供';
-            var caseType = data.get('case_type') || '';
-            var amount = data.get('amount') || '';
-            var chains = data.getAll('chains[]').join(', ') || '未選擇';
-            var description = data.get('description') || '';
-            var transaction = data.get('transaction') || '無';
-            var police = data.get('police_report') || '';
+            // Show loading
+            if (submitBtn) submitBtn.disabled = true;
+            if (submitSpan) submitSpan.textContent = '提交中...';
 
+            var formData = new FormData(form);
+
+            // Append case ID
             var caseId = 'ZV' + Date.now().toString().slice(-8);
-            var subject = encodeURIComponent('[ZeroVector] ' + caseId + ' - ' + name);
-            var body = encodeURIComponent(
-                '案件編號：' + caseId + '\n\n' +
-                '═══════ 基本資料 ═══════\n' +
-                '姓名：' + name + '\n' +
-                '聯絡郵箱：' + email + '\n' +
-                '聯絡電話：' + phone + '\n\n' +
-                '═══════ 案件資料 ═══════\n' +
-                '受害類型：' + caseType + '\n' +
-                '涉案金額：' + amount + ' USD\n' +
-                '涉案鏈：' + chains + '\n' +
-                '是否報警：' + police + '\n\n' +
-                '═══════ 事件經過 ═══════\n' +
-                description + '\n\n' +
-                '═══════ 涉案地址/交易Hash ═══════\n' +
-                transaction
-            );
+            formData.append('case_id', caseId);
 
-            window.location.href = 'mailto:support@zerovector.hk?subject=' + subject + '&body=' + body;
+            try {
+                var res = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                var result = await res.json();
 
-            setTimeout(function() {
-                document.getElementById('caseNumber').textContent = caseId;
-                var emailInput = form.querySelector('[name="email"]');
-                if (emailInput) document.getElementById('submittedEmail').textContent = emailInput.value;
-                form.closest('.glass-card').style.display = 'none';
-                successMessage.classList.remove('hidden');
-                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 1000);
+                if (result.success) {
+                    // Show success
+                    var emailInput = form.querySelector('[name="email"]');
+                    document.getElementById('caseNumber').textContent = caseId;
+                    if (emailInput) document.getElementById('submittedEmail').textContent = emailInput.value;
+                    form.closest('.glass-card').style.display = 'none';
+                    successMessage.classList.remove('hidden');
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    throw new Error(result.message || '提交失敗');
+                }
+            } catch (err) {
+                alert('提交失敗，請直接發送郵件至 support@zerovector.hk');
+                if (submitBtn) submitBtn.disabled = false;
+                if (submitSpan) submitSpan.textContent = '提交案件';
+            }
         });
     </script>
 </body>
