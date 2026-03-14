@@ -1,4 +1,117 @@
-// Language Toggle
+// ===== ZEROVECTOR Web3 Professional JavaScript =====
+
+// ===== Canvas Particle Network Animation =====
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const particleCount = 80;
+const connectionDistance = 120;
+const mouse = { x: null, y: null, radius: 150 };
+
+// Resize canvas
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Track mouse movement
+window.addEventListener('mousemove', (e) => {
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+// Particle class
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2 + 1;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        // Mouse interaction
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            this.vx -= Math.cos(angle) * force * 0.2;
+            this.vy -= Math.sin(angle) * force * 0.2;
+        }
+
+        // Limit velocity
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        if (speed > 2) {
+            this.vx = (this.vx / speed) * 2;
+            this.vy = (this.vy / speed) * 2;
+        }
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 212, 255, 0.6)';
+        ctx.fill();
+    }
+}
+
+// Initialize particles
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+// Draw connections
+function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < connectionDistance) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                const opacity = (1 - distance / connectionDistance) * 0.3;
+                ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+
+    drawConnections();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// ===== Language Toggle =====
 let currentLang = 'zh';
 
 const translations = {
@@ -14,19 +127,21 @@ const translations = {
 
 function toggleLanguage() {
     currentLang = currentLang === 'zh' ? 'en' : 'zh';
-
-    // Update language button text
     document.getElementById('langText').textContent = translations[currentLang].langText;
 
     // Update all translatable elements
     const elements = document.querySelectorAll('[data-zh][data-en]');
     elements.forEach(element => {
+        const value = element.getAttribute(`data-${currentLang}`);
+
         if (element.tagName === 'OPTION') {
-            element.textContent = element.getAttribute(`data-${currentLang}`);
+            element.textContent = value;
+        } else if (element.tagName === 'TEXTAREA' && element.hasAttribute(`data-${currentLang}-placeholder`)) {
+            element.setAttribute('placeholder', element.getAttribute(`data-${currentLang}-placeholder`));
         } else if (element.hasAttribute('placeholder')) {
-            element.setAttribute('placeholder', element.getAttribute(`data-${currentLang}`));
+            element.setAttribute('placeholder', value);
         } else {
-            element.textContent = element.getAttribute(`data-${currentLang}`);
+            element.textContent = value;
         }
     });
 
@@ -34,14 +149,12 @@ function toggleLanguage() {
     document.getElementById('addressZh').classList.toggle('hidden');
     document.getElementById('addressEn').classList.toggle('hidden');
 
-    // Update HTML lang attribute
     document.documentElement.lang = currentLang === 'zh' ? 'zh-HK' : 'en';
 }
 
-// Language Toggle Button Event
 document.getElementById('langToggle').addEventListener('click', toggleLanguage);
 
-// Mobile Menu Toggle
+// ===== Mobile Menu Toggle =====
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 
@@ -62,13 +175,13 @@ document.querySelectorAll('#mobileMenu a').forEach(link => {
     });
 });
 
-// Smooth Scroll for Navigation Links
+// ===== Smooth Scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 80; // Height of fixed navbar
+            const offset = 80;
             const targetPosition = target.offsetTop - offset;
             window.scrollTo({
                 top: targetPosition,
@@ -78,26 +191,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for Fade-in Animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
-
-// Observe all fade-in elements
-document.querySelectorAll('.fade-in').forEach(element => {
-    observer.observe(element);
-});
-
-// Scroll to Top Button
+// ===== Scroll to Top Button =====
 const scrollTopBtn = document.getElementById('scrollTop');
 
 window.addEventListener('scroll', () => {
@@ -115,63 +209,84 @@ scrollTopBtn.addEventListener('click', () => {
     });
 });
 
-// Navbar Background on Scroll
-const navbar = document.querySelector('nav');
+// ===== Number Counter Animation =====
+function animateCounter(element, target, duration = 2000, decimals = 0) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    const startTime = Date.now();
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 50) {
-        navbar.style.background = 'rgba(17, 24, 39, 0.98)';
-        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
-    } else {
-        navbar.style.background = 'rgba(17, 24, 39, 0.95)';
-        navbar.style.boxShadow = 'none';
+    function update() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function for smooth animation
+        const easeOutQuad = progress * (2 - progress);
+        const current = target * easeOutQuad;
+
+        if (decimals > 0) {
+            element.textContent = current.toFixed(decimals);
+        } else {
+            element.textContent = Math.floor(current);
+        }
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            if (decimals > 0) {
+                element.textContent = target.toFixed(decimals);
+            } else {
+                element.textContent = target;
+            }
+        }
     }
+
+    update();
+}
+
+// Trigger counter animation when stats are visible
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+            entry.target.classList.add('counted');
+
+            // Animate each stat number
+            const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+            statNumbers.forEach((numberEl, index) => {
+                const target = parseFloat(numberEl.getAttribute('data-target'));
+                const hasDecimal = target % 1 !== 0;
+
+                setTimeout(() => {
+                    animateCounter(numberEl, target, 2000, hasDecimal ? 1 : 0);
+                }, index * 100);
+            });
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observe the stats container
+const statsContainer = document.querySelector('#home .grid');
+if (statsContainer) {
+    statsObserver.observe(statsContainer);
+}
+
+// ===== Scroll-triggered Fade-in Animations =====
+const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('aos-animate');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 });
 
-// Contact Form Handling
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // Get form data
-    const formData = new FormData(contactForm);
-
-    // Show success message
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    const originalContent = submitBtn.innerHTML;
-
-    submitBtn.innerHTML = currentLang === 'zh'
-        ? '<i class="fas fa-check mr-2"></i>发送成功！'
-        : '<i class="fas fa-check mr-2"></i>Sent Successfully!';
-    submitBtn.classList.add('bg-green-500');
-    submitBtn.disabled = true;
-
-    // Reset form after 2 seconds
-    setTimeout(() => {
-        contactForm.reset();
-        submitBtn.innerHTML = originalContent;
-        submitBtn.classList.remove('bg-green-500');
-        submitBtn.disabled = false;
-    }, 2000);
-
-    // In production, you would send this to your backend
-    console.log('Form submitted:', Object.fromEntries(formData));
+// Observe all fade-in-up elements
+document.querySelectorAll('.fade-in-up').forEach(element => {
+    fadeObserver.observe(element);
 });
 
-// Set Current Year in Footer
-document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-// Parallax Effect for Hero Section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('#home');
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
-
-// Active Navigation Link Highlighting
+// ===== Active Navigation Highlighting =====
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -185,9 +300,9 @@ function highlightNavigation() {
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
             navLinks.forEach(link => {
-                link.classList.remove('text-cyan-400');
+                link.style.color = '';
                 if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('text-cyan-400');
+                    link.style.color = '#00d4ff';
                 }
             });
         }
@@ -196,169 +311,80 @@ function highlightNavigation() {
 
 window.addEventListener('scroll', highlightNavigation);
 
-// Counter Animation for Stats
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
+// ===== Contact Form Handling =====
+const contactForm = document.getElementById('contactForm');
 
-    const timer = setInterval(() => {
-        start += increment;
-        if (start >= target) {
-            element.textContent = target;
-            clearInterval(timer);
-        } else {
-            element.textContent = Math.floor(start);
-        }
-    }, 16);
-}
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-// Trigger counter animation when stats are visible
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-            entry.target.classList.add('counted');
-            const statCards = entry.target.querySelectorAll('.stat-card');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalContent = submitBtn.innerHTML;
 
-            setTimeout(() => {
-                statCards.forEach((card, index) => {
-                    const number = card.querySelector('.text-4xl');
-                    if (number) {
-                        const text = number.textContent;
-                        if (text.includes('B+')) {
-                            animateCounter(number, 10);
-                            setTimeout(() => {
-                                number.textContent = '10B+';
-                            }, 2000);
-                        } else if (text.includes('50+')) {
-                            animateCounter(number, 50);
-                            setTimeout(() => {
-                                number.textContent = '50+';
-                            }, 2000);
-                        } else if (text.includes('24/7')) {
-                            number.textContent = '24/7';
-                        } else if (text.includes('98%')) {
-                            animateCounter(number, 98);
-                            setTimeout(() => {
-                                number.textContent = '98%';
-                            }, 2000);
-                        }
-                    }
-                });
-            }, 300);
-        }
-    });
-}, { threshold: 0.5 });
+    submitBtn.innerHTML = currentLang === 'zh'
+        ? '<i class="fas fa-check mr-2"></i>提交成功！'
+        : '<i class="fas fa-check mr-2"></i>Submitted Successfully!';
+    submitBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+    submitBtn.disabled = true;
 
-const statsContainer = document.querySelector('#home .grid');
-if (statsContainer) {
-    statsObserver.observe(statsContainer);
-}
+    setTimeout(() => {
+        contactForm.reset();
+        submitBtn.innerHTML = originalContent;
+        submitBtn.style.background = '';
+        submitBtn.disabled = false;
+    }, 3000);
 
-// Typing Effect for Hero Title (Optional Enhancement)
-function typeEffect(element, text, speed = 100) {
-    let i = 0;
-    element.textContent = '';
+    console.log('Form submitted - Data would be sent to server');
+});
 
-    function type() {
-        if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
+// ===== Set Current Year in Footer =====
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+// ===== Navbar Scroll Effect =====
+const navbar = document.querySelector('nav');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 100) {
+        navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.6)';
+    } else {
+        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
     }
 
-    type();
-}
-
-// Prevent form submission on Enter key in text inputs (except textarea)
-document.querySelectorAll('.form-input:not(textarea)').forEach(input => {
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && input.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-        }
-    });
+    lastScroll = currentScroll;
 });
 
-// Add loading state to buttons
-document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
-    button.addEventListener('click', function(e) {
-        if (this.getAttribute('href') && this.getAttribute('href').startsWith('#')) {
-            // Don't add loading state for anchor links
-            return;
-        }
+// ===== Initialize =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Trigger initial navigation highlight
+    highlightNavigation();
 
-        const original = this.innerHTML;
-        this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>' +
-                        (currentLang === 'zh' ? '加载中...' : 'Loading...');
-        this.style.pointerEvents = 'none';
+    // Console branding
+    console.log('%c🔒 ZEROVECTOR LIMITED', 'font-size: 24px; font-weight: bold; color: #00d4ff; text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);');
+    console.log('%c链上资产，我们守护 | Blockchain Asset Protection', 'font-size: 14px; color: #9ca3af;');
+    console.log('%c🌐 zerovector.hk', 'font-size: 12px; color: #6b7280;');
 
-        setTimeout(() => {
-            this.innerHTML = original;
-            this.style.pointerEvents = 'auto';
-        }, 1500);
-    });
-});
-
-// Easter egg: Konami code for fun effect
-let konamiCode = [];
-const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-
-document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
-    konamiCode = konamiCode.slice(-10);
-
-    if (konamiCode.join('') === konamiSequence.join('')) {
-        document.body.style.animation = 'rainbow 2s linear infinite';
-        setTimeout(() => {
-            document.body.style.animation = '';
-        }, 5000);
-    }
-});
-
-// Prefetch images on hover
-document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('mouseenter', function() {
-        const href = this.getAttribute('href');
-        if (href && !href.startsWith('#') && !href.startsWith('mailto:')) {
-            const prefetch = document.createElement('link');
-            prefetch.rel = 'prefetch';
-            prefetch.href = href;
-            document.head.appendChild(prefetch);
-        }
-    });
-});
-
-// Console message for developers
-console.log('%c🔒 ZEROVECTOR LIMITED', 'font-size: 20px; font-weight: bold; color: #22d3ee;');
-console.log('%c专业区块链安全技术服务', 'font-size: 14px; color: #9ca3af;');
-console.log('%cWebsite: zerovector.hk', 'font-size: 12px; color: #6b7280;');
-
-// Service Worker Registration (for PWA - optional)
-if ('serviceWorker' in navigator) {
-    // Uncomment when you have a service worker file
-    // navigator.serviceWorker.register('/sw.js').then(reg => {
-    //     console.log('Service Worker registered:', reg);
-    // }).catch(err => {
-    //     console.log('Service Worker registration failed:', err);
-    // });
-}
-
-// Performance monitoring
-window.addEventListener('load', () => {
+    // Performance monitoring
     if (window.performance) {
         const perfData = window.performance.timing;
         const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-        console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
+        if (pageLoadTime > 0) {
+            console.log(`⚡ Page loaded in ${pageLoadTime}ms`);
+        }
     }
 });
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    // Add initial fade-in to hero elements
-    setTimeout(() => {
-        document.querySelector('#home .animate-fade-in')?.classList.add('visible');
-    }, 100);
+// ===== Prevent context menu on production (optional security) =====
+// Uncomment if needed for production
+// document.addEventListener('contextmenu', (e) => {
+//     e.preventDefault();
+// });
 
-    // Trigger initial navigation highlight
-    highlightNavigation();
-});
+// ===== Service Worker for PWA (optional) =====
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    // Uncomment when service worker is ready
+    // navigator.serviceWorker.register('/sw.js').catch(err => {
+    //     console.log('Service Worker registration failed:', err);
+    // });
+}

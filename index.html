@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ZEROVECTOR LIMITED - 专业区块链安全技术服务公司，提供加密资产追回、涉案资产溯源等核心服务">
-    <meta name="keywords" content="区块链安全,加密资产追回,链上溯源,司法取证,ZEROVECTOR">
-    <title>ZEROVECTOR LIMITED - 区块链安全技术服务</title>
+    <meta name="description" content="ZEROVECTOR LIMITED - 专业区块链安全技术服务，加密资产追回，链上溯源，执法机构合作">
+    <meta name="keywords" content="区块链安全,加密资产追回,链上溯源,司法取证,ZEROVECTOR,慢雾,Web3安全">
+    <title>ZEROVECTOR LIMITED - 链上资产，我们守护</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-black': '#050508',
+                        'deep-blue': '#0a0f1e',
+                        'ice-blue': '#00d4ff',
+                        'brand-purple': '#7c3aed',
+                    },
+                    fontFamily: {
+                        'space': ['"Space Grotesk"', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'noto': ['"Noto Sans SC"', 'sans-serif'],
+                        'jetbrains': ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,38 +36,40 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans">
+<body class="font-inter">
+
+    <!-- Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
 
     <!-- Navigation -->
-    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-800">
+    <nav class="nav-glass">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center">
-                    <div class="text-2xl font-bold">
-                        <span class="text-cyan-400">ZERO</span><span class="text-white">VECTOR</span>
+                    <div class="text-2xl font-bold font-space">
+                        <span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span>
                     </div>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="nav-link" data-zh="首页" data-en="Home">首页</a>
                     <a href="#services" class="nav-link" data-zh="服务" data-en="Services">服务</a>
-                    <a href="#technology" class="nav-link" data-zh="技术优势" data-en="Technology">技术优势</a>
-                    <a href="#workflow" class="nav-link" data-zh="工作流程" data-en="Workflow">工作流程</a>
-                    <a href="#about" class="nav-link" data-zh="关于我们" data-en="About">关于我们</a>
-                    <a href="#contact" class="nav-link" data-zh="联系我们" data-en="Contact">联系我们</a>
+                    <a href="#technology" class="nav-link" data-zh="技术" data-en="Technology">技术</a>
+                    <a href="#process" class="nav-link" data-zh="流程" data-en="Process">流程</a>
+                    <a href="#about" class="nav-link" data-zh="关于" data-en="About">关于</a>
+                    <a href="#contact" class="nav-link" data-zh="联系" data-en="Contact">联系</a>
                 </div>
 
                 <div class="flex items-center space-x-4">
-                    <button id="langToggle" class="px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors text-sm font-medium">
+                    <button id="langToggle" class="lang-btn">
                         <i class="fas fa-globe mr-2"></i>
                         <span id="langText">EN</span>
                     </button>
-
                     <button id="mobileMenuBtn" class="md:hidden text-gray-300 hover:text-white">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
@@ -56,163 +78,163 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-gray-800 border-t border-gray-700">
+        <div id="mobileMenu" class="hidden md:hidden bg-deep-blue/95 backdrop-blur-lg border-t border-ice-blue/20">
             <div class="px-4 py-4 space-y-3">
                 <a href="#home" class="block nav-link" data-zh="首页" data-en="Home">首页</a>
                 <a href="#services" class="block nav-link" data-zh="服务" data-en="Services">服务</a>
-                <a href="#technology" class="block nav-link" data-zh="技术优势" data-en="Technology">技术优势</a>
-                <a href="#workflow" class="block nav-link" data-zh="工作流程" data-en="Workflow">工作流程</a>
-                <a href="#about" class="block nav-link" data-zh="关于我们" data-en="About">关于我们</a>
-                <a href="#contact" class="block nav-link" data-zh="联系我们" data-en="Contact">联系我们</a>
+                <a href="#technology" class="block nav-link" data-zh="技术" data-en="Technology">技术</a>
+                <a href="#process" class="block nav-link" data-zh="流程" data-en="Process">流程</a>
+                <a href="#about" class="block nav-link" data-zh="关于" data-en="About">关于</a>
+                <a href="#contact" class="block nav-link" data-zh="联系" data-en="Contact">联系</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900/20 to-cyan-900/20"></div>
-        <div class="absolute inset-0 opacity-20">
-            <div class="cyber-grid"></div>
-        </div>
-
+    <section id="home" class="hero-section">
+        <div class="radar-pulse"></div>
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500" data-zh="专业区块链安全" data-en="Professional Blockchain Security">专业区块链安全</span>
-                    <br>
-                    <span class="text-white" data-zh="守护数字资产" data-en="Protecting Digital Assets">守护数字资产</span>
+            <div class="fade-in-up">
+                <h1 class="hero-title font-space">
+                    <span class="gradient-text" data-zh="链上资产，我们守护" data-en="BLOCKCHAIN ASSET RECOVERY">链上资产，我们守护</span>
                 </h1>
 
-                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
-                   data-zh="全球领先的加密资产追回与涉案资产溯源技术服务商，联合交易所与执法机构实现跨境资产冻结与司法协作"
-                   data-en="Global leader in crypto asset recovery and forensic tracing, partnering with exchanges and law enforcement for cross-border asset freezing and judicial cooperation">
-                   全球领先的加密资产追回与涉案资产溯源技术服务商，联合交易所与执法机构实现跨境资产冻结与司法协作
+                <p class="hero-subtitle font-noto"
+                   data-zh="专业区块链安全技术服务 | 加密资产追回 | 执法机构溯源"
+                   data-en="Professional Blockchain Security | Crypto Asset Recovery | Law Enforcement Tracing">
+                   专业区块链安全技术服务 | 加密资产追回 | 执法机构溯源
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="btn-primary">
-                        <span data-zh="联系我们" data-en="Contact Us">联系我们</span>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                    <a href="#contact" class="cta-primary">
+                        <span data-zh="提交案件" data-en="Submit Case">提交案件</span>
                         <i class="fas fa-arrow-right ml-2"></i>
                     </a>
-                    <a href="#services" class="btn-secondary">
-                        <span data-zh="了解服务" data-en="Our Services">了解服务</span>
+                    <a href="#services" class="cta-secondary">
+                        <span data-zh="了解服务" data-en="Learn More">了解服务</span>
                     </a>
                 </div>
             </div>
 
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="stat-card">
-                    <div class="text-4xl font-bold text-cyan-400 mb-2">10B+</div>
-                    <div class="text-sm text-gray-400" data-zh="链上地址标签" data-en="On-chain Labels">链上地址标签</div>
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-24">
+                <div class="stat-card fade-in-up" style="animation-delay: 0.1s">
+                    <div class="stat-number font-jetbrains" data-target="2.3">0</div>
+                    <div class="stat-unit">B+</div>
+                    <div class="stat-label" data-zh="追回资产规模" data-en="Assets Recovered">追回资产规模</div>
                 </div>
-                <div class="stat-card">
-                    <div class="text-4xl font-bold text-cyan-400 mb-2">50+</div>
-                    <div class="text-sm text-gray-400" data-zh="支持主流公链" data-en="Supported Chains">支持主流公链</div>
+                <div class="stat-card fade-in-up" style="animation-delay: 0.2s">
+                    <div class="stat-number font-jetbrains" data-target="98">0</div>
+                    <div class="stat-unit">%</div>
+                    <div class="stat-label" data-zh="链上追踪成功率" data-en="Tracking Success">链上追踪成功率</div>
                 </div>
-                <div class="stat-card">
-                    <div class="text-4xl font-bold text-cyan-400 mb-2">24/7</div>
-                    <div class="text-sm text-gray-400" data-zh="实时监控" data-en="Real-time Monitoring">实时监控</div>
+                <div class="stat-card fade-in-up" style="animation-delay: 0.3s">
+                    <div class="stat-number font-jetbrains" data-target="60">0</div>
+                    <div class="stat-unit">+</div>
+                    <div class="stat-label" data-zh="合作执法机构" data-en="Law Enforcement">合作执法机构</div>
                 </div>
-                <div class="stat-card">
-                    <div class="text-4xl font-bold text-cyan-400 mb-2">98%</div>
-                    <div class="text-sm text-gray-400" data-zh="成功追踪率" data-en="Success Rate">成功追踪率</div>
+                <div class="stat-card fade-in-up" style="animation-delay: 0.4s">
+                    <div class="stat-number font-jetbrains" data-target="6">0</div>
+                    <div class="stat-unit" data-zh="年" data-en="YRS">年</div>
+                    <div class="stat-label" data-zh="专业经验" data-en="Experience">专业经验</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-gray-800/50">
+    <section id="services" class="section-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="section-title" data-zh="核心服务" data-en="Core Services">核心服务</h2>
-                <p class="section-subtitle" data-zh="专注两大核心业务，为个人企业与执法机构提供专业技术支持" data-en="Focused on two core services, providing professional technical support for individuals, enterprises and law enforcement">专注两大核心业务，为个人企业与执法机构提供专业技术支持</p>
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-title font-space" data-zh="核心服务" data-en="Core Services">核心服务</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh="两大核心业务 · 全方位保障" data-en="Two Core Services · Complete Protection">两大核心业务 · 全方位保障</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid lg:grid-cols-2 gap-8">
                 <!-- Service 1 -->
-                <div class="service-card fade-in">
+                <div class="glass-card fade-in-up" data-aos="fade-right">
                     <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
+                        <div class="icon-gradient-blue">
                             <i class="fas fa-shield-halved text-3xl text-white"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold" data-zh="加密资产追回" data-en="Crypto Asset Recovery">加密资产追回</h3>
-                            <p class="text-cyan-400 text-sm" data-zh="针对个人/企业" data-en="For Individuals & Enterprises">针对个人/企业</p>
+                            <h3 class="text-3xl font-bold font-space" data-zh="个人/企业服务" data-en="Individual & Enterprise">个人/企业服务</h3>
+                            <p class="text-ice-blue text-sm mt-1" data-zh="加密资产追回 · 紧急冻结" data-en="Asset Recovery · Emergency Freeze">加密资产追回 · 紧急冻结</p>
                         </div>
                     </div>
 
                     <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-ice-blue mr-3"></i>
                             <div>
-                                <strong data-zh="案件受理与评估" data-en="Case Reception & Assessment">案件受理与评估</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="链上交易记录分析、钱包地址关联性分析" data-en="On-chain transaction analysis, wallet address correlation">链上交易记录分析、钱包地址关联性分析</p>
+                                <strong class="text-white" data-zh="案件受理与评估" data-en="Case Reception & Assessment">案件受理与评估</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="24小时快速响应，链上交易深度分析，可行性评估" data-en="24/7 rapid response, deep on-chain analysis, feasibility assessment">24小时快速响应，链上交易深度分析，可行性评估</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-ice-blue mr-3"></i>
                             <div>
-                                <strong data-zh="多链追踪与冻结" data-en="Multi-chain Tracking & Freezing">多链追踪与冻结</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="BTC/ETH/TRON等主流公链及跨链资产" data-en="BTC/ETH/TRON and other major blockchains">BTC/ETH/TRON等主流公链及跨链资产</p>
+                                <strong class="text-white" data-zh="多链追踪与冻结" data-en="Multi-chain Tracking & Freezing">多链追踪与冻结</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="BTC/ETH/TRON/SOL及全部L2网络，跨链资产完整溯源" data-en="BTC/ETH/TRON/SOL and all L2 networks, complete cross-chain tracing">BTC/ETH/TRON/SOL及全部L2网络，跨链资产完整溯源</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-ice-blue mr-3"></i>
                             <div>
-                                <strong data-zh="交易所协作冻结" data-en="Exchange Cooperation">交易所协作冻结</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="联合交易所、钱包服务商实施紧急冻结" data-en="Emergency freezing with exchanges and wallet providers">联合交易所、钱包服务商实施紧急冻结</p>
+                                <strong class="text-white" data-zh="联合交易所紧急冻结" data-en="Exchange Emergency Freezing">联合交易所紧急冻结</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="与全球主流交易所战略合作，实现分钟级资产冻结" data-en="Strategic partnerships with global exchanges for minute-level freezing">与全球主流交易所战略合作，实现分钟级资产冻结</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-ice-blue mr-3"></i>
                             <div>
-                                <strong data-zh="全球司法协作" data-en="Global Judicial Cooperation">全球司法协作</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="对接国际执法机构、出具法证技术证据包" data-en="Liaison with international law enforcement, forensic evidence packages">对接国际执法机构、出具法证技术证据包</p>
+                                <strong class="text-white" data-zh="全球司法协作" data-en="Global Judicial Cooperation">全球司法协作</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="交易图谱、资金流向报告，对接国际执法机构" data-en="Transaction graphs, fund flow reports, liaison with international agencies">交易图谱、资金流向报告，对接国际执法机构</p>
                             </div>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="service-card fade-in">
+                <div class="glass-card fade-in-up" data-aos="fade-left">
                     <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-magnifying-glass-chart text-3xl text-white"></i>
+                        <div class="icon-gradient-purple">
+                            <i class="fas fa-radar text-3xl text-white"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold" data-zh="涉案资产溯源" data-en="Forensic Asset Tracing">涉案资产溯源</h3>
-                            <p class="text-cyan-400 text-sm" data-zh="针对执法机构" data-en="For Law Enforcement">针对执法机构</p>
+                            <h3 class="text-3xl font-bold font-space" data-zh="执法机构服务" data-en="Law Enforcement">执法机构服务</h3>
+                            <p class="text-brand-purple text-sm mt-1" data-zh="涉案资产溯源 · 司法取证" data-en="Forensic Tracing · Judicial Evidence">涉案资产溯源 · 司法取证</p>
                         </div>
                     </div>
 
                     <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-brand-purple mr-3"></i>
                             <div>
-                                <strong data-zh="链上行为画像" data-en="On-chain Profiling">链上行为画像</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="地址聚类、混币器穿透、交易所KYC反查" data-en="Address clustering, mixer penetration, KYC reverse lookup">地址聚类、混币器穿透、交易所KYC反查</p>
+                                <strong class="text-white" data-zh="链上行为画像" data-en="On-chain Profiling">链上行为画像</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="地址聚类算法、混币器穿透技术、交易所KYC反查" data-en="Address clustering, mixer penetration, exchange KYC reverse lookup">地址聚类算法、混币器穿透技术、交易所KYC反查</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-brand-purple mr-3"></i>
                             <div>
-                                <strong data-zh="暗网与OTC监控" data-en="Darknet & OTC Monitoring">暗网与OTC监控</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="实时监控异常资金流动、锁定可疑资产节点" data-en="Real-time monitoring of suspicious flows">实时监控异常资金流动、锁定可疑资产节点</p>
+                                <strong class="text-white" data-zh="暗网/OTC异常资金监控" data-en="Darknet/OTC Monitoring">暗网/OTC异常资金监控</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="7×24小时实时监控，可疑资金流动预警系统" data-en="24/7 real-time monitoring, suspicious fund flow alert system">7×24小时实时监控，可疑资金流动预警系统</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-brand-purple mr-3"></i>
                             <div>
-                                <strong data-zh="司法取证支持" data-en="Judicial Evidence Support">司法取证支持</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="UTXO关联图、资金分层模型，符合法庭证据标准" data-en="UTXO correlation, fund layering models, court-compliant">UTXO关联图、资金分层模型，符合法庭证据标准</p>
+                                <strong class="text-white" data-zh="UTXO关联图、资金分层模型" data-en="UTXO Correlation & Fund Layering">UTXO关联图、资金分层模型</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="可视化资金流转路径，揭示复杂洗钱网络" data-en="Visualized fund flow paths, revealing complex laundering networks">可视化资金流转路径，揭示复杂洗钱网络</p>
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-3"></i>
+                        <li class="service-item">
+                            <i class="fas fa-check-circle text-brand-purple mr-3"></i>
                             <div>
-                                <strong data-zh="智能合约审计" data-en="Smart Contract Audit">智能合约审计</strong>
-                                <p class="text-gray-400 text-sm mt-1" data-zh="DeFi协议被盗案件的攻击路径逆向分析" data-en="Reverse engineering of DeFi attack vectors">DeFi协议被盗案件的攻击路径逆向分析</p>
+                                <strong class="text-white" data-zh="符合法庭标准的司法取证报告" data-en="Court-compliant Forensic Reports">符合法庭标准的司法取证报告</strong>
+                                <p class="text-gray-400 text-sm mt-1" data-zh="完整证据链、时间戳验证、符合国际司法规范" data-en="Complete evidence chain, timestamp verification, international compliance">完整证据链、时间戳验证、符合国际司法规范</p>
                             </div>
                         </li>
                     </ul>
@@ -222,95 +244,107 @@
     </section>
 
     <!-- Technology Section -->
-    <section id="technology" class="py-24 bg-gray-900">
+    <section id="technology" class="section-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="section-title" data-zh="核心技术优势" data-en="Core Technology">核心技术优势</h2>
-                <p class="section-subtitle" data-zh="顶尖技术能力，为资产安全保驾护航" data-en="Cutting-edge technology for asset security">顶尖技术能力，为资产安全保驾护航</p>
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-title font-space" data-zh="核心技术" data-en="Core Technology">核心技术</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh="顶尖技术能力 · 精准高效" data-en="Cutting-edge Technology · Precision & Efficiency">顶尖技术能力 · 精准高效</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="tech-card fade-in">
-                    <div class="tech-icon">
-                        <i class="fas fa-chart-network"></i>
+                <div class="tech-card fade-in-up" style="animation-delay: 0.1s">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-link text-4xl tech-icon-glow"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" data-zh="多维链上分析" data-en="Multi-dimensional Analysis">多维链上分析</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="数十亿级链上地址标签库，交易路径分钟级实时还原，支持复杂跨链资产追踪" data-en="Billions of on-chain labels, real-time transaction path reconstruction, cross-chain tracking">数十亿级链上地址标签库，交易路径分钟级实时还原，支持复杂跨链资产追踪</p>
+                    <h3 class="text-xl font-bold font-space mb-3" data-zh="多维链上分析" data-en="Multi-dimensional Analysis">多维链上分析</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="数十亿地址标签，分钟级路径还原，全链覆盖" data-en="Billions of labels, minute-level path reconstruction, full-chain coverage">数十亿地址标签，分钟级路径还原，全链覆盖</p>
                 </div>
 
-                <div class="tech-card fade-in">
-                    <div class="tech-icon">
-                        <i class="fas fa-shield-virus"></i>
+                <div class="tech-card fade-in-up" style="animation-delay: 0.2s">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-robot text-4xl tech-icon-glow"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" data-zh="智能合约审计" data-en="Smart Contract Audit">智能合约审计</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="DeFi协议漏洞深度分析，攻击路径完整逆向，提供专业安全加固方案" data-en="Deep DeFi vulnerability analysis, complete attack path reverse engineering">DeFi协议漏洞深度分析，攻击路径完整逆向，提供专业安全加固方案</p>
+                    <h3 class="text-xl font-bold font-space mb-3" data-zh="AI洗钱预测" data-en="AI Money Laundering Prediction">AI洗钱预测</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="机器学习预判攻击者策略，提前拦截资金转移" data-en="ML prediction of attacker strategies, proactive fund interception">机器学习预判攻击者策略，提前拦截资金转移</p>
                 </div>
 
-                <div class="tech-card fade-in">
-                    <div class="tech-icon">
-                        <i class="fas fa-globe"></i>
+                <div class="tech-card fade-in-up" style="animation-delay: 0.3s">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-magnifying-glass-chart text-4xl tech-icon-glow"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" data-zh="跨链协作网络" data-en="Cross-chain Network">跨链协作网络</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="与全球主流交易所、托管机构建立数据共享机制，实现快速资产冻结" data-en="Data sharing with global exchanges and custodians for rapid asset freezing">与全球主流交易所、托管机构建立数据共享机制，实现快速资产冻结</p>
+                    <h3 class="text-xl font-bold font-space mb-3" data-zh="智能合约审计" data-en="Smart Contract Audit">智能合约审计</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="DeFi漏洞逆向，攻击路径还原，安全加固" data-en="DeFi vulnerability reverse engineering, attack path reconstruction">DeFi漏洞逆向，攻击路径还原，安全加固</p>
                 </div>
 
-                <div class="tech-card fade-in">
-                    <div class="tech-icon">
-                        <i class="fas fa-brain"></i>
+                <div class="tech-card fade-in-up" style="animation-delay: 0.4s">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-globe text-4xl tech-icon-glow"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3" data-zh="AI预测模型" data-en="AI Prediction">AI预测模型</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="机器学习预判洗钱策略，提前识别资产转移路径，拦截率达98%以上" data-en="ML-based money laundering prediction, 98%+ interception rate">机器学习预判洗钱策略，提前识别资产转移路径，拦截率达98%以上</p>
+                    <h3 class="text-xl font-bold font-space mb-3" data-zh="跨链全网覆盖" data-en="Cross-chain Full Coverage">跨链全网覆盖</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="与全球交易所、托管机构数据共享，快速冻结" data-en="Data sharing with global exchanges and custodians, rapid freezing">与全球交易所、托管机构数据共享，快速冻结</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Workflow Section -->
-    <section id="workflow" class="py-24 bg-gray-800/50">
+    <!-- Process Section -->
+    <section id="process" class="section-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="section-title" data-zh="工作流程" data-en="Our Workflow">工作流程</h2>
-                <p class="section-subtitle" data-zh="专业高效的资产追回服务流程" data-en="Professional and efficient asset recovery process">专业高效的资产追回服务流程</p>
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-title font-space" data-zh="追回流程" data-en="Recovery Process">追回流程</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh="五步追回 · 专业高效" data-en="Five Steps · Professional & Efficient">五步追回 · 专业高效</p>
             </div>
 
             <div class="relative">
-                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 transform -translate-y-1/2"></div>
+                <!-- Timeline Line -->
+                <div class="hidden lg:block absolute top-1/2 left-0 right-0 h-1 timeline-gradient"></div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-                    <div class="workflow-card fade-in">
-                        <div class="workflow-number">01</div>
-                        <div class="workflow-icon">
+                <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8 relative">
+                    <div class="process-card fade-in-up" style="animation-delay: 0.1s">
+                        <div class="process-number">01</div>
+                        <div class="process-icon">
                             <i class="fas fa-file-signature"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3" data-zh="案件受理" data-en="Case Reception">案件受理</h3>
-                        <p class="text-gray-400 text-sm" data-zh="专业团队快速响应，评估案件可行性，制定追回方案" data-en="Professional team responds quickly, assesses feasibility">专业团队快速响应，评估案件可行性，制定追回方案</p>
+                        <h3 class="text-lg font-bold font-space mb-2" data-zh="案件提交" data-en="Case Submission">案件提交</h3>
+                        <p class="text-gray-400 text-sm" data-zh="24小时响应，初步评估" data-en="24/7 response, initial assessment">24小时响应，初步评估</p>
                     </div>
 
-                    <div class="workflow-card fade-in">
-                        <div class="workflow-number">02</div>
-                        <div class="workflow-icon">
+                    <div class="process-card fade-in-up" style="animation-delay: 0.2s">
+                        <div class="process-number">02</div>
+                        <div class="process-icon">
                             <i class="fas fa-magnifying-glass"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3" data-zh="链上追踪" data-en="On-chain Tracking">链上追踪</h3>
-                        <p class="text-gray-400 text-sm" data-zh="多链全面分析，绘制资金流向图谱，锁定关键节点" data-en="Multi-chain analysis, fund flow mapping, key node identification">多链全面分析，绘制资金流向图谱，锁定关键节点</p>
+                        <h3 class="text-lg font-bold font-space mb-2" data-zh="链上溯源" data-en="On-chain Tracing">链上溯源</h3>
+                        <p class="text-gray-400 text-sm" data-zh="多链追踪，绘制资金图谱" data-en="Multi-chain tracking, fund mapping">多链追踪，绘制资金图谱</p>
                     </div>
 
-                    <div class="workflow-card fade-in">
-                        <div class="workflow-number">03</div>
-                        <div class="workflow-icon">
+                    <div class="process-card fade-in-up" style="animation-delay: 0.3s">
+                        <div class="process-number">03</div>
+                        <div class="process-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <h3 class="text-lg font-bold font-space mb-2" data-zh="资产冻结" data-en="Asset Freezing">资产冻结</h3>
+                        <p class="text-gray-400 text-sm" data-zh="联合交易所快速冻结" data-en="Rapid freeze with exchanges">联合交易所快速冻结</p>
+                    </div>
+
+                    <div class="process-card fade-in-up" style="animation-delay: 0.4s">
+                        <div class="process-number">04</div>
+                        <div class="process-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3" data-zh="司法协作" data-en="Judicial Cooperation">司法协作</h3>
-                        <p class="text-gray-400 text-sm" data-zh="对接执法机构，提供完整证据链，协助资产冻结" data-en="Liaison with law enforcement, complete evidence chain">对接执法机构，提供完整证据链，协助资产冻结</p>
+                        <h3 class="text-lg font-bold font-space mb-2" data-zh="司法协作" data-en="Judicial Cooperation">司法协作</h3>
+                        <p class="text-gray-400 text-sm" data-zh="对接执法，提供证据链" data-en="Law enforcement liaison, evidence">对接执法，提供证据链</p>
                     </div>
 
-                    <div class="workflow-card fade-in">
-                        <div class="workflow-number">04</div>
-                        <div class="workflow-icon">
+                    <div class="process-card fade-in-up" style="animation-delay: 0.5s">
+                        <div class="process-number">05</div>
+                        <div class="process-icon">
                             <i class="fas fa-check-double"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3" data-zh="资产追回" data-en="Asset Recovery">资产追回</h3>
-                        <p class="text-gray-400 text-sm" data-zh="执行冻结与追回，全程跟进直至资产安全返还" data-en="Execute freezing and recovery, follow through until asset return">执行冻结与追回，全程跟进直至资产安全返还</p>
+                        <h3 class="text-lg font-bold font-space mb-2" data-zh="资产追回" data-en="Asset Recovery">资产追回</h3>
+                        <p class="text-gray-400 text-sm" data-zh="执行追回，安全返还" data-en="Execute recovery, safe return">执行追回，安全返还</p>
                     </div>
                 </div>
             </div>
@@ -318,57 +352,71 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-gray-900">
+    <section id="about" class="section-light">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="section-title" data-zh="关于我们" data-en="About Us">关于我们</h2>
-                <p class="section-subtitle" data-zh="专业团队，值得信赖" data-en="Professional team you can trust">专业团队，值得信赖</p>
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-title font-space" data-zh="关于我们" data-en="About Us">关于我们</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh="专业团队 · 值得信赖" data-en="Professional Team · Trustworthy">专业团队 · 值得信赖</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="fade-in">
-                    <h3 class="text-3xl font-bold mb-6" data-zh="ZEROVECTOR LIMITED" data-en="ZEROVECTOR LIMITED">ZEROVECTOR LIMITED</h3>
-                    <p class="text-gray-300 leading-relaxed mb-6"
-                       data-zh="ZeroVector 是总部位于香港的专业区块链安全技术服务公司，专注于加密资产追回与涉案资产溯源领域。我们汇聚了来自全球顶尖网络安全公司、区块链技术企业以及执法机构的精英人才，致力于为个人、企业及政府机构提供最专业的数字资产安全解决方案。"
-                       data-en="ZeroVector is a Hong Kong-based professional blockchain security company specializing in crypto asset recovery and forensic tracing. We bring together elite talents from top cybersecurity firms, blockchain companies and law enforcement agencies.">
-                       ZeroVector 是总部位于香港的专业区块链安全技术服务公司，专注于加密资产追回与涉案资产溯源领域。我们汇聚了来自全球顶尖网络安全公司、区块链技术企业以及执法机构的精英人才，致力于为个人、企业及政府机构提供最专业的数字资产安全解决方案。
+                <div class="fade-in-up">
+                    <h3 class="text-4xl font-bold font-space mb-6 gradient-text">ZEROVECTOR LIMITED</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6 font-noto"
+                       data-zh="成立于香港，专注区块链安全技术服务。我们汇聚来自全球顶尖网络安全公司、区块链企业及执法机构的精英人才，为个人、企业和政府机构提供最专业的数字资产安全解决方案。"
+                       data-en="Established in Hong Kong, specializing in blockchain security services. We bring together elite talents from top cybersecurity firms, blockchain companies, and law enforcement agencies worldwide, providing the most professional digital asset security solutions for individuals, enterprises, and government institutions.">
+                       成立于香港，专注区块链安全技术服务。我们汇聚来自全球顶尖网络安全公司、区块链企业及执法机构的精英人才，为个人、企业和政府机构提供最专业的数字资产安全解决方案。
                     </p>
-                    <p class="text-gray-300 leading-relaxed"
-                       data-zh="凭借先进的链上分析技术、广泛的国际合作网络以及丰富的司法协作经验，我们已成功协助数百家机构及个人追回被盗资产，为区块链生态安全贡献力量。"
-                       data-en="With advanced on-chain analysis technology, extensive international network and rich judicial cooperation experience, we have successfully helped hundreds of institutions and individuals recover stolen assets.">
-                       凭借先进的链上分析技术、广泛的国际合作网络以及丰富的司法协作经验，我们已成功协助数百家机构及个人追回被盗资产，为区块链生态安全贡献力量。
+                    <p class="text-gray-300 leading-relaxed font-noto"
+                       data-zh="凭借先进的链上分析技术、广泛的国际合作网络及丰富的司法协作经验，我们已成功协助数百家机构及个人追回被盗资产，累计追回金额超过23亿美元，为区块链生态安全贡献力量。"
+                       data-en="With advanced on-chain analysis technology, extensive international cooperation network, and rich judicial collaboration experience, we have successfully helped hundreds of institutions and individuals recover stolen assets, with total recoveries exceeding $2.3 billion, contributing to blockchain ecosystem security.">
+                       凭借先进的链上分析技术、广泛的国际合作网络及丰富的司法协作经验，我们已成功协助数百家机构及个人追回被盗资产，累计追回金额超过23亿美元，为区块链生态安全贡献力量。
                     </p>
+
+                    <div class="mt-8">
+                        <div class="glass-card-thin p-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt text-ice-blue text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-sm text-gray-400 mb-1" data-zh="公司地址" data-en="Address">公司地址</h4>
+                                    <p class="text-white text-sm" id="addressZh">九龍尖沙咀東部科學館道14號新文華中心A座7樓704室</p>
+                                    <p class="text-white text-sm hidden" id="addressEn">Room 704, 7/F., Tower A, New Mandarin Plaza, 14 Science Museum Road, TST East, Kowloon, Hong Kong</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6 fade-in">
+                <div class="grid grid-cols-1 gap-6 fade-in-up">
                     <div class="team-card">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <div class="icon-gradient-blue-small">
                                 <i class="fas fa-user-shield text-2xl text-white"></i>
                             </div>
-                            <h4 class="text-xl font-bold" data-zh="网络安全专家" data-en="Cybersecurity Experts">网络安全专家</h4>
+                            <h4 class="text-xl font-bold font-space" data-zh="网络安全专家" data-en="Cybersecurity Experts">网络安全专家</h4>
                         </div>
-                        <p class="text-gray-400 text-sm" data-zh="来自国际知名安全公司，具备丰富的威胁情报分析与溯源经验" data-en="From renowned security firms with extensive threat intelligence experience">来自国际知名安全公司，具备丰富的威胁情报分析与溯源经验</p>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-zh="来自国际知名安全公司，具备丰富的威胁情报分析与链上溯源经验，深度理解黑客攻击手法与资金转移模式" data-en="From renowned international security firms with extensive threat intelligence analysis and on-chain tracing experience">来自国际知名安全公司，具备丰富的威胁情报分析与链上溯源经验，深度理解黑客攻击手法与资金转移模式</p>
                     </div>
 
                     <div class="team-card">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <div class="icon-gradient-purple-small">
                                 <i class="fas fa-code text-2xl text-white"></i>
                             </div>
-                            <h4 class="text-xl font-bold" data-zh="区块链工程师" data-en="Blockchain Engineers">区块链工程师</h4>
+                            <h4 class="text-xl font-bold font-space" data-zh="区块链工程师" data-en="Blockchain Engineers">区块链工程师</h4>
                         </div>
-                        <p class="text-gray-400 text-sm" data-zh="深耕链上数据分析与智能合约安全审计领域多年" data-en="Years of experience in on-chain analysis and smart contract auditing">深耕链上数据分析与智能合约安全审计领域多年</p>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-zh="深耕链上数据分析与智能合约安全审计领域，精通各类公链协议与DeFi生态，掌握混币器穿透等核心技术" data-en="Specialized in on-chain data analysis and smart contract security auditing, proficient in various blockchain protocols">深耕链上数据分析与智能合约安全审计领域，精通各类公链协议与DeFi生态，掌握混币器穿透等核心技术</p>
                     </div>
 
                     <div class="team-card">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-4">
+                            <div class="icon-gradient-ice-small">
                                 <i class="fas fa-balance-scale text-2xl text-white"></i>
                             </div>
-                            <h4 class="text-xl font-bold" data-zh="法律合规顾问" data-en="Legal Compliance">法律合规顾问</h4>
+                            <h4 class="text-xl font-bold font-space" data-zh="法律合规顾问" data-en="Legal Compliance Advisors">法律合规顾问</h4>
                         </div>
-                        <p class="text-gray-400 text-sm" data-zh="精通国际司法协作流程，确保所有取证行为合法合规" data-en="Expert in international judicial cooperation, ensuring legal compliance">精通国际司法协作流程，确保所有取证行为合法合规</p>
+                        <p class="text-gray-400 text-sm leading-relaxed" data-zh="精通国际司法协作流程与跨境取证规范，确保所有调查行为合法合规，证据链符合法庭标准" data-en="Expert in international judicial cooperation and cross-border evidence collection, ensuring legal compliance">精通国际司法协作流程与跨境取证规范，确保所有调查行为合法合规，证据链符合法庭标准</p>
                     </div>
                 </div>
             </div>
@@ -376,155 +424,143 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-gray-800/50">
+    <section id="contact" class="section-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="section-title" data-zh="联系我们" data-en="Contact Us">联系我们</h2>
-                <p class="section-subtitle" data-zh="随时为您提供专业咨询服务" data-en="Always ready to provide professional consultation">随时为您提供专业咨询服务</p>
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-title font-space" data-zh="联系我们" data-en="Contact Us">联系我们</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh="24/7 专业响应 · 随时守护" data-en="24/7 Professional Response · Always Protecting">24/7 专业响应 · 随时守护</p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-12">
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-8" data-zh="联系信息" data-en="Contact Information">联系信息</h3>
+                <div class="fade-in-up">
+                    <div class="glass-card">
+                        <h3 class="text-2xl font-bold font-space mb-8" data-zh="联系方式" data-en="Contact Information">联系方式</h3>
 
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-building text-cyan-400 text-xl"></i>
+                        <div class="space-y-6">
+                            <div class="flex items-start contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope text-ice-blue text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2" data-zh="业务咨询" data-en="Business Inquiry">业务咨询</h4>
+                                    <a href="mailto:contact@zerovector.hk" class="text-ice-blue hover:text-white transition-colors">contact@zerovector.hk</a>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="font-semibold mb-2" data-zh="公司名称" data-en="Company Name">公司名称</h4>
-                                <p class="text-gray-300">ZEROVECTOR LIMITED</p>
+
+                            <div class="flex items-start contact-item">
+                                <div class="contact-icon-emergency">
+                                    <i class="fas fa-shield-halved text-red-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2 text-red-400" data-zh="紧急情况" data-en="Emergency">紧急情况</h4>
+                                    <a href="mailto:emergency@zerovector.hk" class="text-red-400 hover:text-white transition-colors">emergency@zerovector.hk</a>
+                                    <p class="text-gray-400 text-xs mt-1" data-zh="资产被盗？立即联系我们的应急响应团队" data-en="Assets stolen? Contact our emergency response team immediately">资产被盗？立即联系我们的应急响应团队</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-globe text-ice-blue text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-2" data-zh="官方网站" data-en="Website">官方网站</h4>
+                                    <a href="https://zerovector.hk" class="text-ice-blue hover:text-white transition-colors">zerovector.hk</a>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-location-dot text-cyan-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-2" data-zh="公司地址" data-en="Address">公司地址</h4>
-                                <p class="text-gray-300 leading-relaxed" id="addressZh">九龍尖沙咀東部科學館道14號新文華中心A座7樓704室</p>
-                                <p class="text-gray-300 leading-relaxed hidden" id="addressEn">Room 704, 7/F., Tower A, New Mandarin Plaza, 14 Science Museum Road, TST East, Kowloon, Hong Kong</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-envelope text-cyan-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-2" data-zh="电子邮箱" data-en="Email">电子邮箱</h4>
-                                <a href="mailto:contact@zerovector.hk" class="text-cyan-400 hover:text-cyan-300 transition-colors">contact@zerovector.hk</a>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-globe text-cyan-400 text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-2" data-zh="官方网站" data-en="Website">官方网站</h4>
-                                <a href="https://zerovector.hk" class="text-cyan-400 hover:text-cyan-300 transition-colors">zerovector.hk</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-12 p-6 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl border border-cyan-500/20">
-                        <h4 class="font-bold text-lg mb-3" data-zh="紧急情况？" data-en="Emergency?">紧急情况？</h4>
-                        <p class="text-gray-300 text-sm mb-4" data-zh="如遇加密资产被盗等紧急情况，请立即联系我们的24/7应急响应团队" data-en="For crypto theft emergencies, contact our 24/7 response team immediately">如遇加密资产被盗等紧急情况，请立即联系我们的24/7应急响应团队</p>
-                        <a href="mailto:emergency@zerovector.hk" class="inline-flex items-center text-cyan-400 hover:text-cyan-300 font-semibold">
-                            <i class="fas fa-shield-halved mr-2"></i>
-                            emergency@zerovector.hk
-                        </a>
                     </div>
                 </div>
 
-                <div class="fade-in">
-                    <h3 class="text-2xl font-bold mb-8" data-zh="发送消息" data-en="Send Message">发送消息</h3>
+                <div class="fade-in-up">
+                    <div class="glass-card">
+                        <h3 class="text-2xl font-bold font-space mb-8" data-zh="提交案件" data-en="Submit Case">提交案件</h3>
 
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2" data-zh="姓名" data-en="Name">姓名</label>
-                            <input type="text" required class="form-input" placeholder="">
-                        </div>
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2" data-zh="姓名/机构名称" data-en="Name/Organization">姓名/机构名称</label>
+                                <input type="text" required class="form-input" placeholder="">
+                            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-2" data-zh="电子邮箱" data-en="Email">电子邮箱</label>
-                            <input type="email" required class="form-input" placeholder="">
-                        </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" data-zh="联系邮箱" data-en="Email">联系邮箱</label>
+                                <input type="email" required class="form-input" placeholder="">
+                            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-2" data-zh="服务类型" data-en="Service Type">服务类型</label>
-                            <select class="form-input" required>
-                                <option value="" data-zh="请选择..." data-en="Please select...">请选择...</option>
-                                <option value="recovery" data-zh="加密资产追回" data-en="Crypto Asset Recovery">加密资产追回</option>
-                                <option value="forensic" data-zh="涉案资产溯源" data-en="Forensic Asset Tracing">涉案资产溯源</option>
-                                <option value="audit" data-zh="智能合约审计" data-en="Smart Contract Audit">智能合约审计</option>
-                                <option value="consultation" data-zh="技术咨询" data-en="Technical Consultation">技术咨询</option>
-                            </select>
-                        </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" data-zh="服务类型" data-en="Service Type">服务类型</label>
+                                <select class="form-input" required>
+                                    <option value="" data-zh="请选择服务类型" data-en="Please select service type">请选择服务类型</option>
+                                    <option value="recovery" data-zh="加密资产追回（个人/企业）" data-en="Crypto Asset Recovery (Individual/Enterprise)">加密资产追回（个人/企业）</option>
+                                    <option value="forensic" data-zh="涉案资产溯源（执法机构）" data-en="Forensic Tracing (Law Enforcement)">涉案资产溯源（执法机构）</option>
+                                    <option value="audit" data-zh="智能合约审计" data-en="Smart Contract Audit">智能合约审计</option>
+                                    <option value="consultation" data-zh="技术咨询" data-en="Technical Consultation">技术咨询</option>
+                                </select>
+                            </div>
 
-                        <div>
-                            <label class="block text-sm font-medium mb-2" data-zh="详细说明" data-en="Message">详细说明</label>
-                            <textarea rows="5" required class="form-input" placeholder=""></textarea>
-                        </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2" data-zh="案件描述" data-en="Case Description">案件描述</label>
+                                <textarea rows="5" required class="form-input" placeholder="" data-zh-placeholder="请详细描述您的情况：涉案金额、涉及链/代币、时间、钱包地址等关键信息" data-en-placeholder="Please describe your case in detail: amount, chains/tokens involved, time, wallet addresses, and other key information"></textarea>
+                            </div>
 
-                        <button type="submit" class="btn-primary w-full">
-                            <span data-zh="提交咨询" data-en="Submit Inquiry">提交咨询</span>
-                            <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
-                    </form>
+                            <button type="submit" class="cta-primary w-full">
+                                <span data-zh="提交案件" data-en="Submit Case">提交案件</span>
+                                <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+
+                            <p class="text-xs text-gray-400 text-center" data-zh="提交后我们将在24小时内响应" data-en="We will respond within 24 hours after submission">提交后我们将在24小时内响应</p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+    <footer class="footer-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <div class="text-2xl font-bold mb-4">
-                        <span class="text-cyan-400">ZERO</span><span class="text-white">VECTOR</span>
+                    <div class="text-2xl font-bold font-space mb-4">
+                        <span class="text-ice-blue">ZERO</span><span class="text-white">VECTOR</span>
                     </div>
-                    <p class="text-gray-400 text-sm leading-relaxed" data-zh="专业区块链安全技术服务" data-en="Professional Blockchain Security Services">专业区块链安全技术服务</p>
+                    <p class="text-gray-400 text-sm leading-relaxed font-noto" data-zh="链上资产，我们守护" data-en="Blockchain Asset Protection">链上资产，我们守护</p>
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-4" data-zh="快速链接" data-en="Quick Links">快速链接</h4>
+                    <h4 class="font-bold mb-4 font-space" data-zh="快速链接" data-en="Quick Links">快速链接</h4>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="首页" data-en="Home">首页</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="服务" data-en="Services">服务</a></li>
-                        <li><a href="#technology" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="技术优势" data-en="Technology">技术优势</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="关于我们" data-en="About">关于我们</a></li>
+                        <li><a href="#services" class="footer-link" data-zh="服务" data-en="Services">服务</a></li>
+                        <li><a href="#technology" class="footer-link" data-zh="技术" data-en="Technology">技术</a></li>
+                        <li><a href="#process" class="footer-link" data-zh="流程" data-en="Process">流程</a></li>
+                        <li><a href="#about" class="footer-link" data-zh="关于" data-en="About">关于</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-4" data-zh="联系方式" data-en="Contact">联系方式</h4>
+                    <h4 class="font-bold mb-4 font-space" data-zh="联系方式" data-en="Contact">联系方式</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><i class="fas fa-envelope mr-2 text-cyan-400"></i>contact@zerovector.hk</li>
-                        <li><i class="fas fa-globe mr-2 text-cyan-400"></i>zerovector.hk</li>
+                        <li><i class="fas fa-envelope mr-2 text-ice-blue"></i>contact@zerovector.hk</li>
+                        <li><i class="fas fa-globe mr-2 text-ice-blue"></i>zerovector.hk</li>
                     </ul>
                 </div>
             </div>
 
             <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; <span id="currentYear"></span> ZEROVECTOR LIMITED. <span data-zh="版权所有" data-en="All rights reserved">版权所有</span>.
+                    &copy; <span id="currentYear"></span> ZEROVECTOR LIMITED. <span data-zh="版权所有" data-en="All Rights Reserved">版权所有</span>.
                 </p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
-                    <a href="#" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="服务条款" data-en="Terms of Service">服务条款</a>
-                    <a href="#" class="text-gray-400 hover:text-cyan-400 text-sm transition-colors" data-zh="法律声明" data-en="Legal Notice">法律声明</a>
+                    <a href="#" class="footer-link text-xs" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+                    <a href="#" class="footer-link text-xs" data-zh="服务条款" data-en="Terms of Service">服务条款</a>
+                    <a href="#" class="footer-link text-xs" data-zh="法律声明" data-en="Legal Notice">法律声明</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollTop" class="fixed bottom-8 right-8 w-12 h-12 bg-cyan-500 hover:bg-cyan-600 rounded-full flex items-center justify-center text-white shadow-lg transform transition-all duration-300 opacity-0 pointer-events-none">
+    <!-- Scroll to Top -->
+    <button id="scrollTop" class="scroll-top-btn">
         <i class="fas fa-arrow-up"></i>
     </button>
 
