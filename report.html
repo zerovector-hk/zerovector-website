@@ -52,30 +52,23 @@
             var els = document.querySelectorAll('[data-zh-tw],[data-zh-cn],[data-en]');
             els.forEach(function(el) {
                 var key = 'data-' + lang.toLowerCase();
-                var val = el.getAttribute(key);
-                if (!val) val = el.getAttribute('data-zh-tw');
-                if (val) {
-                    var children = el.children;
-                    var hasNonIconChild = false;
-                    for (var ci = 0; ci < children.length; ci++) {
-                        if (children[ci].tagName !== 'I') { hasNonIconChild = true; break; }
-                    }
-                    if (!hasNonIconChild) {
-                        if (el.tagName === 'TITLE') {
-                            document.title = val;
-                        } else {
-                            el.textContent = val;
-                        }
-                    }
+                var val = el.getAttribute(key) || el.getAttribute('data-zh-tw');
+                if (!val) return;
+                var tag = el.tagName;
+                // INPUT / TEXTAREA → set placeholder
+                if (tag === 'INPUT' || tag === 'TEXTAREA') {
+                    el.setAttribute('placeholder', val);
+                    return;
                 }
-            });
-
-            // Handle placeholder translations (separate query — inputs only have data-ph-*)
-            document.querySelectorAll('[data-ph-zh-tw],[data-ph-zh-cn],[data-ph-en]').forEach(function(el) {
-                var ph = (lang === 'zh-TW' ? el.getAttribute('data-ph-zh-tw') :
-                          lang === 'zh-CN' ? el.getAttribute('data-ph-zh-cn') :
-                          el.getAttribute('data-ph-en')) || el.getAttribute('data-ph-zh-tw');
-                if (ph) el.setAttribute('placeholder', ph);
+                // TITLE → document.title
+                if (tag === 'TITLE') { document.title = val; return; }
+                // Other elements → textContent (only leaf / icon-only)
+                var children = el.children;
+                var hasNonIconChild = false;
+                for (var ci = 0; ci < children.length; ci++) {
+                    if (children[ci].tagName !== 'I') { hasNonIconChild = true; break; }
+                }
+                if (!hasNonIconChild) el.textContent = val;
             });
 
             // Update lang button
@@ -244,9 +237,7 @@
                             <span data-zh-tw="姓名" data-zh-cn="姓名" data-en="Full Name">姓名</span>
                             <span class="text-red-400">*</span>
                         </label>
-                        <input type="text" name="name" required class="form-input"
-                               data-ph-zh-tw="請輸入您的姓名" data-ph-zh-cn="请输入您的姓名" data-ph-en="Enter your name"
-                               placeholder="請輸入您的姓名" data-ph-zh-tw="請輸入您的姓名" data-ph-zh-cn="请输入您的姓名" data-ph-en="Your full name">
+                        <input type="text" name="name" required class="form-input" data-zh-tw="請輸入您的姓名" data-zh-cn="请输入您的姓名" data-en="Enter your full name" placeholder="請輸入您的姓名">
                     </div>
 
                     <!-- Email -->
@@ -256,7 +247,7 @@
                             <span data-zh-tw="聯絡郵箱" data-zh-cn="联络邮箱" data-en="Email">聯絡郵箱</span>
                             <span class="text-red-400">*</span>
                         </label>
-                        <input type="email" name="email" required class="form-input" placeholder="your@email.com" data-ph-zh-tw="your@email.com" data-ph-zh-cn="your@email.com" data-ph-en="your@email.com">
+                        <input type="email" name="email" required class="form-input" data-zh-tw="your@email.com" data-zh-cn="your@email.com" data-en="your@email.com" placeholder="your@email.com">
                     </div>
 
                     <!-- Phone -->
@@ -265,7 +256,7 @@
                             <i class="fas fa-phone mr-2 text-ice-blue"></i>
                             <span data-zh-tw="聯絡電話" data-zh-cn="联络电话" data-en="Phone">聯絡電話</span>
                         </label>
-                        <input type="tel" name="phone" class="form-input" placeholder="+852 1234 5678" data-ph-zh-tw="+852 1234 5678" data-ph-zh-cn="+86 / +852 1234 5678" data-ph-en="+852 / +1 1234 5678">
+                        <input type="tel" name="phone" class="form-input" data-zh-tw="+852 1234 5678" data-zh-cn="+86 / +852 1234 5678" data-en="+852 / +1 1234 5678" placeholder="+852 1234 5678">
                     </div>
 
                     <!-- Case Type -->
@@ -291,7 +282,7 @@
                             <span data-zh-tw="涉案金額（USD）" data-zh-cn="涉案金额（USD）" data-en="Amount Involved (USD)">涉案金額（USD）</span>
                             <span class="text-red-400">*</span>
                         </label>
-                        <input type="number" name="amount" required class="form-input" placeholder="100000" min="0" step="0.01" data-ph-zh-tw="100000" data-ph-zh-cn="100000" data-ph-en="100000">
+                        <input type="number" name="amount" required class="form-input" min="0" step="0.01" data-zh-tw="例：50,000" data-zh-cn="例：50,000" data-en="e.g. 50,000" placeholder="例：50,000">
                     </div>
 
                     <!-- Chains -->
@@ -337,10 +328,10 @@
                             <span class="text-red-400">*</span>
                         </label>
                         <textarea name="description" rows="6" required class="form-input"
-                                  data-ph-zh-tw="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."
-                                  data-ph-zh-cn="请详细描述事件经过、时间线、涉案金额、受害过程等关键信息..."
-                                  data-ph-en="Describe the incident in detail..."
-                                  placeholder="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..." data-ph-zh-tw="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..." data-ph-zh-cn="请详细描述事件经过、时间线、涉案金额、受害过程等关键信息..." data-ph-en="Please describe the incident in detail: timeline, amount lost, how the theft occurred, any relevant context..."></textarea>
+                                  data-zh-tw="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."
+                                  data-zh-cn="请详细描述事件经过、时间线、涉案金额、受害过程等关键信息..."
+                                  data-en="Describe the incident: timeline, amount lost, how it happened..."
+                                  placeholder="請詳細描述事件經過、時間線、涉案金額、受害過程等關鍵信息..."></textarea>
                     </div>
 
                     <!-- Transaction Info -->
@@ -350,10 +341,10 @@
                             <span data-zh-tw="涉案地址或交易 Hash" data-zh-cn="涉案地址或交易Hash" data-en="Address / Tx Hash">涉案地址或交易 Hash</span>
                         </label>
                         <textarea name="transaction" rows="4" class="form-input font-jetbrains text-xs"
-                                  data-ph-zh-tw="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"
-                                  data-ph-zh-cn="0x1234...&#10;TxHash: 0xabcd...&#10;（可填写多个地址或交易哈希）"
-                                  data-ph-en="0x1234...&#10;TxHash: 0xabcd...&#10;(Multiple addresses or hashes accepted)"
-                                  placeholder="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）" data-ph-zh-tw="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）" data-ph-zh-cn="0x1234...&#10;TxHash: 0xabcd...&#10;（可填写多个地址或交易哈希）" data-ph-en="0x1234...&#10;TxHash: 0xabcd...&#10;(Multiple addresses or tx hashes accepted)"></textarea>
+                                  data-zh-tw="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"
+                                  data-zh-cn="0x1234...&#10;TxHash: 0xabcd...&#10;（可填写多个地址或交易哈希）"
+                                  data-en="0x1234...&#10;TxHash: 0xabcd...&#10;(Multiple addresses or tx hashes)"
+                                  placeholder="0x1234...&#10;TxHash: 0xabcd...&#10;（可填寫多個地址或交易哈希）"></textarea>
                     </div>
 
                     <!-- Police Report -->
