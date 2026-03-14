@@ -133,7 +133,7 @@ body {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 700;
     line-height: 1.2;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
 .gradient-text {
@@ -256,14 +256,12 @@ body {
 /* Sections */
 .section-dark {
     position: relative;
-    padding: 6rem 0;
     background: rgba(8, 13, 26, 0.95);
     z-index: 1;
 }
 
 .section-light {
     position: relative;
-    padding: 6rem 0;
     background: rgba(13, 20, 38, 0.5);
     z-index: 1;
 }
@@ -297,7 +295,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-left: 2px solid #1a6cf6;
     border-radius: 0.75rem;
-    padding: 2.5rem;
+    padding: 2rem;
     transition: all 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -318,40 +316,40 @@ body {
 
 /* Icon Gradients */
 .icon-gradient-blue {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background: #1a6cf6;
     border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
     box-shadow: none;
     flex-shrink: 0;
 }
 
 .icon-gradient-purple {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
     box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
     flex-shrink: 0;
 }
 
 .icon-gradient-gold {
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    border-radius: 1rem;
+    border-radius: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 1.5rem;
+    margin-right: 1rem;
     box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
     flex-shrink: 0;
 }
@@ -400,8 +398,9 @@ body {
     display: flex;
     align-items: start;
     transition: all 0.3s ease;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     border-radius: 0.5rem;
+    line-height: 1.6;
 }
 
 .service-item:hover {
@@ -518,7 +517,7 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 0.75rem;
-    padding: 2.5rem;
+    padding: 2rem;
     transition: all 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -730,7 +729,7 @@ body {
 
 /* Contact Section */
 .contact-item {
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: 0.5rem;
     transition: all 0.3s ease;
 }
@@ -898,10 +897,6 @@ body {
         padding: 1.5rem;
     }
 
-    .section-dark,
-    .section-light {
-        padding: 4rem 0;
-    }
 
     .process-card {
         padding: 2.5rem 1.5rem 1.5rem;
