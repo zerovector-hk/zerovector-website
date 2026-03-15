@@ -22,7 +22,7 @@ function randHex(n) {
 }
 
 // ── Node: wallet address ──
-const NODE_COUNT = window.innerWidth < 768 ? 14 : 20;
+const NODE_COUNT = window.innerWidth < 768 ? 10 : 16;
 const EDGE_DIST = window.innerWidth < 768 ? 180 : 240;
 let nodes = [], edges = [], tracers = [], alertPaths = [];
 
@@ -39,7 +39,7 @@ class WalletNode {
         this.addr = '0x' + randHex(4) + '…' + randHex(4);
         this.pulse = Math.random() * Math.PI * 2;
         this.showLabel = this.type !== 0; // only hubs/flagged show labels always
-        this.labelAlpha = this.showLabel ? 0.6 : 0;
+        this.labelAlpha = this.showLabel ? 0.35 : 0;
     }
     update() {
         this.x += this.vx; this.y += this.vy;
@@ -63,7 +63,7 @@ class WalletNode {
         if (this.type !== 0) {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.r + 4 + 2 * Math.sin(this.pulse), 0, Math.PI * 2);
-            ctx.strokeStyle = 'rgba(' + color + ',' + (0.12 * glow) + ')';
+            ctx.strokeStyle = 'rgba(' + color + ',' + (0.06 * glow) + ')';
             ctx.lineWidth = 1.2;
             ctx.stroke();
         }
@@ -71,13 +71,13 @@ class WalletNode {
         // Core
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(' + color + ',' + (0.7 * glow) + ')';
+        ctx.fillStyle = 'rgba(' + color + ',' + (0.35 * glow) + ')';
         ctx.fill();
 
         // Inner bright
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,' + (0.55 * glow) + ')';
+        ctx.fillStyle = 'rgba(255,255,255,' + (0.25 * glow) + ')';
         ctx.fill();
 
         // Address label
@@ -151,7 +151,7 @@ class Tracer {
         if (this.tail.length < 2) return;
         const color = this.isAlert ? '255,80,68' : '0,212,255';
         for (let i = 1; i < this.tail.length; i++) {
-            const alpha = (i / this.tail.length) * 0.9;
+            const alpha = (i / this.tail.length) * 0.5;
             const width = (i / this.tail.length) * 2.8;
             ctx.beginPath();
             ctx.moveTo(this.tail[i-1].x, this.tail[i-1].y);
@@ -165,14 +165,14 @@ class Tracer {
         const head = this.tail[this.tail.length - 1];
         ctx.beginPath();
         ctx.arc(head.x, head.y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = this.isAlert ? 'rgba(255,120,100,0.95)' : 'rgba(255,255,255,0.95)';
+        ctx.fillStyle = this.isAlert ? 'rgba(255,120,100,0.6)' : 'rgba(255,255,255,0.6)';
         ctx.fill();
 
         // Highlight the path edges behind the tracer
         for (let s = 0; s <= this.seg && s < this.path.length - 1; s++) {
             const a = nodes[this.path[s]];
             const b = nodes[this.path[s + 1]];
-            const fade = s < this.seg ? 0.15 : 0.3;
+            const fade = s < this.seg ? 0.06 : 0.12;
             drawEdge(a.x, a.y, b.x, b.y, fade, color);
         }
     }
@@ -218,7 +218,7 @@ function findRandomPath() {
 
 // ── Spawn tracers every 3-5 seconds ──
 let spawnTimer = 0;
-const SPAWN_INTERVAL = 180; // ~3 sec at 60fps
+const SPAWN_INTERVAL = 300; // ~5 sec at 60fps
 
 function spawnTracer() {
     const path = findRandomPath();
@@ -237,7 +237,7 @@ function drawAllEdges() {
         const dy = nodes[i].y - nodes[j].y;
         const dist = Math.sqrt(dx*dx + dy*dy);
         if (dist > EDGE_DIST * 2) continue;
-        const alpha = Math.max(0, (1 - dist / (EDGE_DIST * 1.8)) * 0.08);
+        const alpha = Math.max(0, (1 - dist / (EDGE_DIST * 1.8)) * 0.04);
         drawEdge(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y, alpha, '26,108,246');
     }
 }
