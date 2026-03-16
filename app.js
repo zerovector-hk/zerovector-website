@@ -460,6 +460,23 @@ function toggleLanguage() {
     } else {
         document.documentElement.lang = 'en';
     }
+
+    // Update document title
+    var titleMap = {
+        'zh-TW': 'ZEROVECTOR - 鏈上資產，我們守護',
+        'zh-CN': 'ZEROVECTOR - 链上资产，我们守护',
+        'en': 'ZEROVECTOR - We Guard Your On-Chain Assets'
+    };
+    document.title = titleMap[currentLang] || titleMap['zh-TW'];
+
+    // Update meta description
+    var descMap = {
+        'zh-TW': 'ZEROVECTOR - 虛擬資產監管科技（RegTech）企業，專業區塊鏈溯源、反洗錢合規、電子取證、加密資產追回',
+        'zh-CN': 'ZEROVECTOR - 虚拟资产监管科技（RegTech）企业，专业区块链溯源、反洗钱合规、电子取证、加密资产追回',
+        'en': 'ZEROVECTOR - RegTech company specializing in blockchain forensics, AML compliance, digital evidence, and crypto asset recovery'
+    };
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', descMap[currentLang] || descMap['zh-TW']);
 }
 
 const _langToggleEl = document.getElementById('langToggle'); if (_langToggleEl) _langToggleEl.addEventListener('click', toggleLanguage);
@@ -678,6 +695,21 @@ window.addEventListener('scroll', () => {
 // ===== Initialize =====
 document.addEventListener('DOMContentLoaded', () => {
     // Apply saved language on page load (shared via localStorage across all pages)
+    // Apply title + meta on load
+    var titleMapLoad = {
+        'zh-TW': 'ZEROVECTOR - 鏈上資產，我們守護',
+        'zh-CN': 'ZEROVECTOR - 链上资产，我们守护',
+        'en': 'ZEROVECTOR - We Guard Your On-Chain Assets'
+    };
+    if (currentLang !== 'zh-TW') {
+        document.title = titleMapLoad[currentLang] || titleMapLoad['zh-TW'];
+        var descMapLoad = {
+            'zh-CN': 'ZEROVECTOR - 虚拟资产监管科技（RegTech）企业，专业区块链溯源、反洗钱合规、电子取证、加密资产追回',
+            'en': 'ZEROVECTOR - RegTech company specializing in blockchain forensics, AML compliance, digital evidence, and crypto asset recovery'
+        };
+        var metaDescLoad = document.querySelector('meta[name="description"]');
+        if (metaDescLoad && descMapLoad[currentLang]) metaDescLoad.setAttribute('content', descMapLoad[currentLang]);
+    }
     if (currentLang !== 'zh-TW') {
         const elements = document.querySelectorAll('[data-zh-tw], [data-zh-cn], [data-zh], [data-en]');
         elements.forEach(element => {
