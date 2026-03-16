@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" fill="none">
+  <rect width="1280" height="640" fill="#0A0A0F"/>
+  <!-- Icon centered -->
+  <g transform="translate(440, 280) scale(0.45)">
+    <circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+    <circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/>
+    <line x1="-180" y1="0" x2="143" y2="0" stroke="#0A84FF" stroke-width="12" stroke-linecap="round"/>
+    <path d="M180 0 L140 -12 L140 12 Z" fill="#0A84FF"/>
+    <line x1="0" y1="-55" x2="0" y2="-30" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="0" y1="30" x2="0" y2="55" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="-45" y1="-48" x2="-45" y2="-18" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="-45" y1="18" x2="-45" y2="48" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="-25" x2="45" y2="-12" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="12" x2="45" y2="25" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <circle cx="0" cy="0" r="5" fill="#0A84FF"/>
+  </g>
+  <!-- Text -->
+  <text x="520" y="290" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="72" letter-spacing="6" fill="#FFFFFF">ZERO<tspan fill="#0A84FF">VECTOR</tspan></text>
+  <text x="522" y="340" font-family="Inter, -apple-system, sans-serif" font-weight="400" font-size="18" letter-spacing="6" fill="#555570">BLOCKCHAIN FORENSICS</text>
+</svg>
