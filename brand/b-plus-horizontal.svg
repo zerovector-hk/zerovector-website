@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 200" fill="none">
+  <!-- ZeroVector Logo B+ — Horizontal (Optimized Vector Through Zero + Text) -->
+  
+  <!-- Icon -->
+  <g transform="translate(72, 100) scale(0.30)">
+    <!-- Double ring -->
+    <circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+    <circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/>
+    
+    <!-- Arrow shaft -->
+    <line x1="-180" y1="0" x2="143" y2="0" stroke="#0A84FF" stroke-width="12" stroke-linecap="round"/>
+    <path d="M180 0 L140 -12 L140 12 Z" fill="#0A84FF"/>
+    
+    <!-- Crosshair -->
+    <line x1="0" y1="-55" x2="0" y2="-30" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="0" y1="30" x2="0" y2="55" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="-45" y1="-48" x2="-45" y2="-18" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="-45" y1="18" x2="-45" y2="48" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="-25" x2="45" y2="-12" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="12" x2="45" y2="25" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <circle cx="0" cy="0" r="5" fill="#0A84FF"/>
+  </g>
+  
+  <!-- Text: ZEROVECTOR -->
+  <text x="155" y="108" 
+        font-family="Inter, -apple-system, sans-serif" 
+        font-weight="700" font-size="48" letter-spacing="5" 
+        fill="#FFFFFF">ZERO<tspan fill="#0A84FF">VECTOR</tspan></text>
+  
+  <!-- Tagline -->
+  <text x="157" y="140" 
+        font-family="Inter, -apple-system, sans-serif" 
+        font-weight="400" font-size="13" letter-spacing="5" 
+        fill="#555555">BLOCKCHAIN FORENSICS</text>
+</svg>
