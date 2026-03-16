@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- ZeroVector Logo B+ — White Version (for dark backgrounds) -->
+  <g transform="translate(256, 256)">
+    <circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+    <circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/>
+    <line x1="-180" y1="0" x2="143" y2="0" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+    <path d="M180 0 L140 -12 L140 12 Z" fill="#FFFFFF"/>
+    <line x1="0" y1="-55" x2="0" y2="-30" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="0" y1="30" x2="0" y2="55" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+    <line x1="-45" y1="-48" x2="-45" y2="-18" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="-45" y1="18" x2="-45" y2="48" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="-25" x2="45" y2="-12" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="12" x2="45" y2="25" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <circle cx="0" cy="0" r="5" fill="#FFFFFF"/>
+  </g>
+</svg>
