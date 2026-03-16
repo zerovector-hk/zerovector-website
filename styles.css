@@ -712,6 +712,18 @@ body {
     box-shadow: none;
 }
 
+.product-btn-ctis {
+    background: #E63946;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+.product-btn-ctis:hover {
+    transform: translateY(-2px);
+    background: rgba(230, 57, 70, 0.9);
+    box-shadow: 0 4px 20px rgba(230, 57, 70, 0.3);
+}
+
 /* Team Cards */
 .team-card {
     background: rgba(255, 255, 255, 0.03);
