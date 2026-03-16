@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- ZeroVector Logo B+ — Vector Through Zero (Optimized) -->
+  <!-- Horizontal arrow, double ring, asymmetric crosshair -->
+  
+  <g transform="translate(256, 256)">
+    
+    <!-- Double ring: outer thin + inner thicker -->
+    <circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/>
+    <circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/>
+    
+    <!-- Horizontal arrow shaft: pierces through the circle left to right -->
+    <line x1="-180" y1="0" x2="143" y2="0" 
+          stroke="#0A84FF" stroke-width="12" stroke-linecap="round"/>
+    
+    <!-- Arrowhead pointing right -->
+    <path d="M180 0 L140 -12 L140 12 Z" fill="#0A84FF"/>
+    
+    <!-- Asymmetric crosshair (冷蓝) -->
+    <!-- Left horizontal: long, but "cut" by the arrow — shown as segments above/below the shaft -->
+    <!-- (The arrow shaft itself serves as the horizontal, so left tick is implied as broken) -->
+    
+    <!-- Top tick: symmetric, short -->
+    <line x1="0" y1="-55" x2="0" y2="-30" 
+          stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Bottom tick: symmetric, short -->
+    <line x1="0" y1="30" x2="0" y2="55" 
+          stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Left vertical ticks (asymmetric long): above and below the arrow shaft -->
+    <!-- These are offset left, representing the "cut" entry point -->
+    <line x1="-45" y1="-48" x2="-45" y2="-18" 
+          stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="-45" y1="18" x2="-45" y2="48" 
+          stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    
+    <!-- Right short ticks: small notches at exit point -->
+    <line x1="45" y1="-25" x2="45" y2="-12" 
+          stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    <line x1="45" y1="12" x2="45" y2="25" 
+          stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/>
+    
+    <!-- Center impact dot: where vector meets zero -->
+    <circle cx="0" cy="0" r="5" fill="#0A84FF"/>
+    
+  </g>
+</svg>
