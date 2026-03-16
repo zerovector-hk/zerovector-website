@@ -307,16 +307,16 @@ const translations = {
                 tags: ['企業級', '執法專用']
             },
             threat: {
-                name: 'CryptoThreat Intelligence',
-                tagline: '鏈上威脅情報社群',
-                description: 'AI驅動的虛擬貨幣威脅分析與情報共享社群平台',
+                name: 'ThreatLedger',
+                tagline: '威脅帳本',
+                description: '專注區塊鏈的威脅情報社群平台——惡意地址、攻擊合約、黑客畫像，鏈上每一筆威脅，永久存檔',
                 features: [
-                    '實時鏈上監控',
-                    '智能合約安全掃描',
-                    '黑客畫像系統',
-                    '攻擊圖譜分析'
+                    '惡意地址黑名單資料庫',
+                    '智能合約漏洞特徵庫',
+                    '社群情報共享與評級',
+                    '跨鏈威脅 API 接入'
                 ],
-                tags: ['社群', '情報共享']
+                tags: ['情報社群', '區塊鏈安全']
             }
         }
     },
@@ -352,16 +352,16 @@ const translations = {
                 tags: ['企业级', '执法专用']
             },
             threat: {
-                name: 'CryptoThreat Intelligence',
-                tagline: '链上威胁情报社区',
-                description: 'AI驱动的虚拟货币威胁分析与情报共享社区平台',
+                name: 'ThreatLedger',
+                tagline: '威胁账本',
+                description: '专注区块链的威胁情报社区平台——恶意地址、攻击合约、黑客画像，链上每一笔威胁，永久存档',
                 features: [
-                    '实时链上监控',
-                    '智能合约安全扫描',
-                    '黑客画像系统',
-                    '攻击图谱分析'
+                    '恶意地址黑名单数据库',
+                    '智能合约漏洞特征库',
+                    '社区情报共享与评级',
+                    '跨链威胁 API 接入'
                 ],
-                tags: ['社区', '情报共享']
+                tags: ['情报社区', '区块链安全']
             }
         }
     },
@@ -397,16 +397,16 @@ const translations = {
                 tags: ['Enterprise', 'Law Enforcement']
             },
             threat: {
-                name: 'CryptoThreat Intelligence',
-                tagline: 'On-chain Threat Intel Community',
-                description: 'AI-driven crypto threat analysis and intelligence sharing community platform',
+                name: 'ThreatLedger',
+                tagline: 'On-chain Threat Intelligence',
+                description: 'Blockchain-native threat intelligence community — malicious addresses, exploit contracts, hacker profiles. Every on-chain threat, permanently on record.',
                 features: [
-                    'Real-time Chain Monitor',
-                    'Smart Contract Scanner',
-                    'Hacker Profiles',
-                    'Attack Atlas Analysis'
+                    'Malicious Address Blacklist DB',
+                    'Smart Contract Exploit Signatures',
+                    'Community Intel Sharing & Rating',
+                    'Cross-chain Threat API'
                 ],
-                tags: ['Community', 'Intel Sharing']
+                tags: ['Intel Community', 'Chain Security']
             }
         }
     }
