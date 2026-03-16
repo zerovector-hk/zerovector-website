@@ -1,50 +1,53 @@
-<svg viewBox="0 0 500 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ThreatLedger">
+<svg viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="spineRed" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ef4444"/>
-      <stop offset="100%" stop-color="#991b1b"/>
+    <linearGradient id="g2a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
     </linearGradient>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1c1c2e"/>
-      <stop offset="100%" stop-color="#0f0f1a"/>
+    <linearGradient id="g2b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
     </linearGradient>
   </defs>
 
-  <!-- Ledger book icon -->
-  <!-- Book body -->
-  <rect x="8" y="8" width="74" height="94" rx="6" fill="url(#pageBg)" stroke="#2d2d4e" stroke-width="1"/>
-  <!-- Red spine (threat indicator) -->
-  <rect x="8" y="8" width="13" height="94" rx="5" fill="url(#spineRed)"/>
+  <!-- Icon: Open book / ledger -->
+  <rect x="6" y="6" width="108" height="108" rx="20" fill="url(#g2b)"/>
 
-  <!-- Chain links on spine -->
-  <ellipse cx="14.5" cy="38" rx="4" ry="3" fill="none" stroke="#fca5a5" stroke-width="1.2" opacity="0.7"/>
-  <ellipse cx="14.5" cy="52" rx="4" ry="3" fill="none" stroke="#fca5a5" stroke-width="1.2" opacity="0.7"/>
-  <ellipse cx="14.5" cy="66" rx="4" ry="3" fill="none" stroke="#fca5a5" stroke-width="1.2" opacity="0.7"/>
-  <!-- Connecting dots between chain links -->
-  <line x1="14.5" y1="41" x2="14.5" y2="49" stroke="#fca5a5" stroke-width="1" opacity="0.5"/>
-  <line x1="14.5" y1="55" x2="14.5" y2="63" stroke="#fca5a5" stroke-width="1" opacity="0.5"/>
+  <!-- Book left page -->
+  <path d="M28 28 Q28 24 32 24 L57 24 L57 88 Q44 85 32 88 Q28 88 28 84 Z" 
+        fill="#1e1e2e" stroke="#374151" stroke-width="1.2"/>
+  <!-- Book right page -->  
+  <path d="M57 24 L82 24 Q86 24 86 28 L86 84 Q86 88 82 88 Q70 85 57 88 Z"
+        fill="#1e1e2e" stroke="#374151" stroke-width="1.2"/>
+  <!-- Spine -->
+  <line x1="57" y1="24" x2="57" y2="88" stroke="url(#g2a)" stroke-width="3"/>
 
-  <!-- Ledger rows (amber/gold) -->
-  <rect x="27" y="27" width="48" height="2" rx="1" fill="#fbbf24" opacity="0.9"/>
-  <rect x="27" y="43" width="48" height="1.5" rx="1" fill="#fbbf24" opacity="0.5"/>
-  <rect x="27" y="58" width="48" height="2" rx="1" fill="#fbbf24" opacity="0.9"/>
-  <rect x="27" y="73" width="48" height="1.5" rx="1" fill="#fbbf24" opacity="0.5"/>
-  <rect x="27" y="88" width="28" height="1.5" rx="1" fill="#fbbf24" opacity="0.3"/>
+  <!-- Lines on left page (ledger rows) -->
+  <line x1="34" y1="38" x2="54" y2="38" stroke="#374151" stroke-width="1.2"/>
+  <line x1="34" y1="47" x2="54" y2="47" stroke="#374151" stroke-width="1.2"/>
+  <line x1="34" y1="56" x2="54" y2="56" stroke="#ef4444" stroke-width="1.5"/>
+  <line x1="34" y1="65" x2="54" y2="65" stroke="#374151" stroke-width="1.2"/>
+  <line x1="34" y1="74" x2="54" y2="74" stroke="#374151" stroke-width="1.2"/>
 
-  <!-- Threat alert dots (red) -->
-  <circle cx="69" cy="28" r="6" fill="#ef4444"/>
-  <circle cx="69" cy="59" r="6" fill="#ef4444"/>
-  <text x="69" y="32" fill="white" font-size="8" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">!</text>
-  <text x="69" y="63" fill="white" font-size="8" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">!</text>
+  <!-- Warning icon on right page -->
+  <path d="M71 40 L82 62 L60 62 Z" fill="none" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/>
+  <text x="71" y="58.5" fill="#ef4444" font-size="10" font-weight="900" text-anchor="middle" font-family="Arial">!</text>
+  <!-- Chain dots below -->
+  <circle cx="62" cy="72" r="3" fill="#f97316" opacity="0.8"/>
+  <circle cx="71" cy="72" r="3" fill="#ef4444" opacity="0.9"/>
+  <circle cx="80" cy="72" r="3" fill="#f97316" opacity="0.8"/>
+  <line x1="65" y1="72" x2="68" y2="72" stroke="#f97316" stroke-width="1.5" opacity="0.6"/>
+  <line x1="74" y1="72" x2="77" y2="72" stroke="#ef4444" stroke-width="1.5" opacity="0.6"/>
 
-  <!-- Wordmark -->
-  <text x="97" y="62"
-        font-family="'Space Grotesk', 'Inter', 'Helvetica Neue', Arial, sans-serif"
-        font-size="42" font-weight="800" letter-spacing="-1"
-        fill="#f9fafb">Threat<tspan fill="#ef4444">Ledger</tspan></text>
-
-  <!-- Chinese subtitle -->
-  <text x="99" y="84"
-        font-family="'PingFang TC', 'Microsoft JhengHei', Arial, sans-serif"
-        font-size="12" fill="#6b7280" letter-spacing="5">威 脅 帳 本</text>
+  <!-- ThreatLedger wordmark — stacked style -->
+  <text x="128" y="52"
+        font-family="'Space Grotesk', 'Inter', Arial, sans-serif"
+        font-size="42" font-weight="800" letter-spacing="-2"
+        fill="url(#g2a)">THREAT</text>
+  <text x="128" y="90"
+        font-family="'Space Grotesk', 'Inter', Arial, sans-serif"
+        font-size="42" font-weight="300" letter-spacing="8"
+        fill="#e2e8f0">LEDGER</text>
+  <!-- Divider line -->
+  <rect x="128" y="96" width="260" height="1.5" rx="1" fill="#ef4444" opacity="0.4"/>
 </svg>
