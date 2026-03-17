@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZEROVECTOR - 加密資產追回服務 | 鏈上溯源 · 資產凍結 · 全程陪同直至追回">
+    <meta name="keywords" content="加密資產追回,虛擬貨幣追回,詐騙追回,區塊鏈溯源,ZEROVECTOR">
+    <title>ZEROVECTOR - 加密資產追回服務</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-black': '#080d1a',
+                        'deep-blue': '#0d1426',
+                        'ice-blue': '#1a6cf6',
+                        'ice-white': '#e8edf5',
+                        'brand-purple': '#7c3aed',
+                    },
+                    fontFamily: {
+                        'space': ['"Space Grotesk"', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'noto': ['"Noto Sans SC"', 'sans-serif'],
+                        'jetbrains': ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-inter">
+
+    <!-- Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="nav-glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" class="w-12 h-12"><g transform="translate(256,256)"><circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/><circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/><line x1="-180" y1="0" x2="143" y2="0" stroke="#0A84FF" stroke-width="12" stroke-linecap="round"/><path d="M180 0 L140 -12 L140 12 Z" fill="#0A84FF"/><line x1="0" y1="-55" x2="0" y2="-30" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/><line x1="0" y1="30" x2="0" y2="55" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/><line x1="-45" y1="-48" x2="-45" y2="-18" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="-45" y1="18" x2="-45" y2="48" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="45" y1="-25" x2="45" y2="-12" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="45" y1="12" x2="45" y2="25" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><circle cx="0" cy="0" r="5" fill="#0A84FF"/></g></svg>
+                        <div class="hidden sm:block text-2xl font-bold font-space">
+                            <span class="text-white">ZERO</span><span class="text-ice-blue">VECTOR</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-4 xl:space-x-8">
+                    <a href="index.html#home" class="nav-link text-sm whitespace-nowrap" data-zh-tw="首頁" data-zh-cn="首页" data-en="Home">首頁</a>
+                    <a href="index.html#services" class="nav-link text-sm whitespace-nowrap" data-zh-tw="服務" data-zh-cn="服务" data-en="Services">服務</a>
+                    <a href="recovery.html" class="nav-link text-sm whitespace-nowrap" style="color: #00d4ff; font-weight: 600;" data-zh-tw="資產追回" data-zh-cn="资产追回" data-en="Recovery">資產追回</a>
+                    <a href="index.html#products" class="nav-link text-sm whitespace-nowrap" data-zh-tw="產品" data-zh-cn="产品" data-en="Products">產品</a>
+                    <a href="index.html#technology" class="nav-link text-sm whitespace-nowrap" data-zh-tw="技術" data-zh-cn="技术" data-en="Tech">技術</a>
+                    <a href="index.html#process" class="nav-link text-sm whitespace-nowrap" data-zh-tw="流程" data-zh-cn="流程" data-en="Process">流程</a>
+                    <a href="index.html#about" class="nav-link text-sm whitespace-nowrap" data-zh-tw="關於" data-zh-cn="关于" data-en="About">關於</a>
+                    <a href="index.html#contact" class="nav-link text-sm whitespace-nowrap" data-zh-tw="聯絡" data-zh-cn="联系" data-en="Contact">聯絡</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <button id="langToggle" class="lang-btn" aria-label="Switch language">
+                        <i class="fas fa-globe mr-2"></i>
+                        <span id="langText">簡中</span>
+                    </button>
+                    <button id="mobileMenuBtn" class="lg:hidden text-gray-300 hover:text-white" aria-label="Menu">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-deep-blue/95 backdrop-blur-lg border-t border-ice-blue/20">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#home" class="block nav-link" data-zh-tw="首頁" data-zh-cn="首页" data-en="Home">首頁</a>
+                <a href="index.html#services" class="block nav-link" data-zh-tw="服務" data-zh-cn="服务" data-en="Services">服務</a>
+                <a href="recovery.html" class="block nav-link" style="color: #00d4ff; font-weight: 600;" data-zh-tw="資產追回" data-zh-cn="资产追回" data-en="Recovery">資產追回</a>
+                <a href="index.html#products" class="block nav-link" data-zh-tw="產品" data-zh-cn="产品" data-en="Products">產品</a>
+                <a href="index.html#technology" class="block nav-link" data-zh-tw="技術" data-zh-cn="技术" data-en="Technology">技術</a>
+                <a href="index.html#process" class="block nav-link" data-zh-tw="流程" data-zh-cn="流程" data-en="Process">流程</a>
+                <a href="index.html#about" class="block nav-link" data-zh-tw="關於" data-zh-cn="关于" data-en="About">關於</a>
+                <a href="index.html#contact" class="block nav-link" data-zh-tw="聯絡" data-zh-cn="联系" data-en="Contact">聯絡</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center pt-32 pb-20 section-dark">
+        <div class="radar-pulse"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="hero-title font-space text-3xl md:text-5xl lg:text-6xl mb-6">
+                <span class="gradient-text" data-zh-tw="加密資產追回服務" data-zh-cn="加密资产追回服务" data-en="Crypto Asset Recovery Services">加密資產追回服務</span>
+            </h1>
+            <p class="hero-subtitle font-noto text-lg md:text-xl mb-12"
+               data-zh-tw="鏈上溯源 · 資產凍結 · 全程陪同直至追回"
+               data-zh-cn="链上溯源 · 资产冻结 · 全程陪同直至追回"
+               data-en="On-chain Tracing · Asset Freezing · End-to-End Recovery Support">
+               鏈上溯源 · 資產凍結 · 全程陪同直至追回
+            </p>
+            <a href="report.html" class="cta-primary">
+                <span data-zh-tw="立即提交案件" data-zh-cn="立即提交案件" data-en="Submit Your Case">立即提交案件</span>
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 適合人群 Section -->
+    <section class="py-24 section-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title font-space text-3xl md:text-4xl" data-zh-tw="我們能幫到誰" data-zh-cn="我们能帮到谁" data-en="Who We Help">我們能幫到誰</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-gradient-blue">
+                            <i class="fas fa-user text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold font-space" data-zh-tw="個人受害者" data-zh-cn="个人受害者" data-en="Individual Victims">個人受害者</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ice-blue mr-3 mt-1"></i>
+                            <span data-zh-tw="加密貨幣詐騙（殺豬盤、投資詐騙）" data-zh-cn="加密货币诈骗（杀猪盘、投资诈骗）" data-en="Crypto scams (romance scams, investment fraud)">加密貨幣詐騙（殺豬盤、投資詐騙）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ice-blue mr-3 mt-1"></i>
+                            <span data-zh-tw="中心化交易所帳戶被盜" data-zh-cn="中心化交易所账户被盗" data-en="CEX account theft">中心化交易所帳戶被盜</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ice-blue mr-3 mt-1"></i>
+                            <span data-zh-tw="釣魚攻擊、私鑰洩露" data-zh-cn="钓鱼攻击、私钥泄露" data-en="Phishing attacks, private key leaks">釣魚攻擊、私鑰洩露</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-ice-blue mr-3 mt-1"></i>
+                            <span data-zh-tw="浪漫詐騙受害者（虛擬貨幣投資陷阱）" data-zh-cn="浪漫诈骗受害者（虚拟货币投资陷阱）" data-en="Romance scam victims (crypto investment traps)">浪漫詐騙受害者（虛擬貨幣投資陷阱）</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card">
+                    <div class="flex items-center mb-6">
+                        <div class="icon-gradient-purple">
+                            <i class="fas fa-building text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold font-space" data-zh-tw="企業/機構" data-zh-cn="企业/机构" data-en="Enterprise & Institutions">企業/機構</h3>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-purple mr-3 mt-1"></i>
+                            <span data-zh-tw="DeFi 協議遭受攻擊" data-zh-cn="DeFi 协议遭受攻击" data-en="DeFi protocol exploits">DeFi 協議遭受攻擊</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-purple mr-3 mt-1"></i>
+                            <span data-zh-tw="內部員工盜竊公司加密資產" data-zh-cn="内部员工盗窃公司加密资产" data-en="Internal employee theft of crypto assets">內部員工盜竊公司加密資產</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-purple mr-3 mt-1"></i>
+                            <span data-zh-tw="業務錯誤轉賬" data-zh-cn="业务错误转账" data-en="Erroneous business transfers">業務錯誤轉賬</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-purple mr-3 mt-1"></i>
+                            <span data-zh-tw="智能合約漏洞導致資產損失" data-zh-cn="智能合约漏洞导致资产损失" data-en="Smart contract vulnerabilities causing asset loss">智能合約漏洞導致資產損失</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5步追回流程 Section -->
+    <section class="py-24 section-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title font-space text-3xl md:text-4xl" data-zh-tw="追回流程" data-zh-cn="追回流程" data-en="Recovery Process">追回流程</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-zh-tw="五步驟，專業透明" data-zh-cn="五步骤，专业透明" data-en="Five Steps, Professional & Transparent">五步驟，專業透明</p>
+            </div>
+
+            <div class="grid md:grid-cols-5 gap-6">
+                <!-- Step 1 -->
+                <div class="process-card">
+                    <div class="process-number">01</div>
+                    <div class="process-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="案件提交" data-zh-cn="案件提交" data-en="Case Submission">案件提交</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="24小時響應" data-zh-cn="24小时响应" data-en="24-Hour Response">24小時響應</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="process-card">
+                    <div class="process-number">02</div>
+                    <div class="process-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="鏈上溯源" data-zh-cn="链上溯源" data-en="On-chain Tracing">鏈上溯源</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="多鏈追蹤" data-zh-cn="多链追踪" data-en="Multi-chain Tracing">多鏈追蹤</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="process-card">
+                    <div class="process-number">03</div>
+                    <div class="process-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="資產凍結" data-zh-cn="资产冻结" data-en="Asset Freezing">資產凍結</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="聯動交易所" data-zh-cn="联动交易所" data-en="Exchange Coordination">聯動交易所</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="process-card">
+                    <div class="process-number">04</div>
+                    <div class="process-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="證據移交" data-zh-cn="证据移交" data-en="Evidence Handoff">證據移交</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="對接執法" data-zh-cn="对接执法" data-en="Law Enforcement Handoff">對接執法</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="process-card">
+                    <div class="process-number">05</div>
+                    <div class="process-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="資產追回" data-zh-cn="资产追回" data-en="Asset Recovery">資產追回</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="安全返還" data-zh-cn="安全返还" data-en="Secure Return">安全返還</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常見場景 Section -->
+    <section class="py-24 section-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title font-space text-3xl md:text-4xl" data-zh-tw="常見受害場景" data-zh-cn="常见受害场景" data-en="Common Scenarios">常見受害場景</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Scenario 1 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-heart-broken text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="浪漫詐騙(Pig Butchering)" data-zh-cn="浪漫诈骗" data-en="Romance Scam">浪漫詐騙(Pig Butchering)</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="虛假情感+投資陷阱" data-zh-cn="虚假情感+投资陷阱" data-en="Fake relationships + investment traps">虛假情感+投資陷阱</p>
+                </div>
+
+                <!-- Scenario 2 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-user-secret text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="交易所黑客攻擊" data-zh-cn="交易所黑客攻击" data-en="Exchange Hack">交易所黑客攻擊</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="CEX 遭駭，用戶資產被盜" data-zh-cn="CEX 遭骇，用户资产被盗" data-en="CEX compromised, user assets stolen">CEX 遭駭，用戶資產被盜</p>
+                </div>
+
+                <!-- Scenario 3 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-bug text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="DeFi協議漏洞" data-zh-cn="DeFi协议漏洞" data-en="DeFi Protocol Exploit">DeFi協議漏洞</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="智能合約漏洞被利用" data-zh-cn="智能合约漏洞被利用" data-en="Smart contract vulnerabilities exploited">智能合約漏洞被利用</p>
+                </div>
+
+                <!-- Scenario 4 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-key text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="私鑰洩露/被盜" data-zh-cn="私钥泄露/被盗" data-en="Private Key Theft">私鑰洩露/被盜</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="助記詞外洩導致資產轉移" data-zh-cn="助记词外泄导致资产转移" data-en="Seed phrase leak leading to asset transfer">助記詞外洩導致資產轉移</p>
+                </div>
+
+                <!-- Scenario 5 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-user-tie text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="內部人員挪用" data-zh-cn="内部人员挪用" data-en="Insider Theft">內部人員挪用</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="員工盜用公司錢包" data-zh-cn="员工盗用公司钱包" data-en="Employee misappropriation of company wallets">員工盜用公司錢包</p>
+                </div>
+
+                <!-- Scenario 6 -->
+                <div class="tech-card">
+                    <div class="tech-icon-wrapper">
+                        <i class="fas fa-fish text-4xl tech-icon-glow"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-zh-tw="釣魚攻擊" data-zh-cn="钓鱼攻击" data-en="Phishing Attack">釣魚攻擊</h3>
+                    <p class="text-sm text-gray-400" data-zh-tw="假網站、假 dApp 授權盜幣" data-zh-cn="假网站、假 dApp 授权盗币" data-en="Fake websites, malicious dApp authorizations">假網站、假 dApp 授權盜幣</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 為什麼選 ZEROVECTOR Section -->
+    <section class="py-24 section-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title font-space text-3xl md:text-4xl" data-zh-tw="為什麼選擇 ZEROVECTOR" data-zh-cn="为什么选择 ZEROVECTOR" data-en="Why Choose ZEROVECTOR">為什麼選擇 ZEROVECTOR</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Advantage 1 -->
+                <div class="glass-card">
+                    <div class="icon-gradient-blue mb-6">
+                        <i class="fas fa-microchip text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-space" data-zh-tw="技術優勢" data-zh-cn="技术优势" data-en="Tech Edge">技術優勢</h3>
+                    <p class="text-gray-300" data-zh-tw="多鏈溯源 · AI分析 · 1000萬+地址標籤" data-zh-cn="多链溯源 · AI分析 · 1000万+地址标签" data-en="Multi-chain + AI + 10M+ address labels">多鏈溯源 · AI分析 · 1000萬+地址標籤</p>
+                </div>
+
+                <!-- Advantage 2 -->
+                <div class="glass-card">
+                    <div class="icon-gradient-purple mb-6">
+                        <i class="fas fa-network-wired text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-space" data-zh-tw="資源優勢" data-zh-cn="资源优势" data-en="Network">資源優勢</h3>
+                    <p class="text-gray-300" data-zh-tw="30+執法機構 · 全球交易所合作 · 香港國際地位" data-zh-cn="30+执法机构 · 全球交易所合作 · 香港国际地位" data-en="30+ LE Partners · Global Exchange Network · HK Hub">30+執法機構 · 全球交易所合作 · 香港國際地位</p>
+                </div>
+
+                <!-- Advantage 3 -->
+                <div class="glass-card">
+                    <div class="icon-gradient-gold mb-6">
+                        <i class="fas fa-balance-scale text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 font-space" data-zh-tw="法律優勢" data-zh-cn="法律优势" data-en="Legal">法律優勢</h3>
+                    <p class="text-gray-300" data-zh-tw="司法級報告 · 跨境取證 · 法庭出庭支持" data-zh-cn="司法级报告 · 跨境取证 · 法庭出庭支持" data-en="Court-ready Reports · Cross-border Forensics · Expert Witness">司法級報告 · 跨境取證 · 法庭出庭支持</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 收費透明 Section -->
+    <section class="py-24 section-light">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-title font-space text-3xl md:text-4xl" data-zh-tw="收費透明" data-zh-cn="收费透明" data-en="Transparent Pricing">收費透明</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="glass-card text-center max-w-2xl mx-auto">
+                <ul class="space-y-6 text-lg">
+                    <li class="flex items-center justify-center gap-4">
+                        <i class="fas fa-check-circle text-ice-blue text-2xl"></i>
+                        <span data-zh-tw="初步評估免費" data-zh-cn="初步评估免费" data-en="Free Initial Assessment">初步評估免費</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-4">
+                        <i class="fas fa-check-circle text-ice-blue text-2xl"></i>
+                        <span data-zh-tw="按追回金額比例收取" data-zh-cn="按追回金额比例收取" data-en="Percentage of Recovered Amount">按追回金額比例收取</span>
+                    </li>
+                    <li class="flex items-center justify-center gap-4">
+                        <i class="fas fa-check-circle text-ice-blue text-2xl"></i>
+                        <span data-zh-tw="未追回不收費" data-zh-cn="未追回不收费" data-en="No Recovery, No Fee">未追回不收費</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 section-dark">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card text-center py-16" style="background: linear-gradient(135deg, rgba(26, 108, 246, 0.15) 0%, rgba(13, 20, 38, 0.8) 100%); border-left: none;">
+                <h2 class="text-3xl md:text-4xl font-bold font-space mb-6" data-zh-tw="準備好提交您的案件了嗎？立即開始,24小時內獲得回應" data-zh-cn="准备好提交您的案件了吗？立即开始,24小时内获得回应" data-en="Ready to recover your crypto? Get started. 24-hour response guaranteed.">準備好提交您的案件了嗎？立即開始,24小時內獲得回應</h2>
+                <a href="report.html" class="cta-primary inline-flex">
+                    <span data-zh-tw="提交案件" data-zh-cn="提交案件" data-en="Submit Case">提交案件</span>
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" class="w-12 h-12"><g transform="translate(256,256)"><circle cx="0" cy="0" r="120" stroke="#FFFFFF" stroke-width="5" fill="none"/><circle cx="0" cy="0" r="100" stroke="#FFFFFF" stroke-width="14" fill="none"/><line x1="-180" y1="0" x2="143" y2="0" stroke="#0A84FF" stroke-width="12" stroke-linecap="round"/><path d="M180 0 L140 -12 L140 12 Z" fill="#0A84FF"/><line x1="0" y1="-55" x2="0" y2="-30" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/><line x1="0" y1="30" x2="0" y2="55" stroke="#0A84FF" stroke-width="5" stroke-linecap="round"/><line x1="-45" y1="-48" x2="-45" y2="-18" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="-45" y1="18" x2="-45" y2="48" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="45" y1="-25" x2="45" y2="-12" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><line x1="45" y1="12" x2="45" y2="25" stroke="#0A84FF" stroke-width="4" stroke-linecap="round" stroke-opacity="0.7"/><circle cx="0" cy="0" r="5" fill="#0A84FF"/></g></svg>
+                        <div class="text-2xl font-bold font-space">
+                            <span class="text-white">ZERO</span><span class="text-ice-blue">VECTOR</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed font-noto" data-zh-tw="守護您的鏈上資產" data-zh-cn="守护您的链上资产" data-en="Blockchain Asset Protection">守護您的鏈上資產</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 font-space" data-zh-tw="快速連結" data-zh-cn="快速链接" data-en="Quick Links">快速連結</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#services" class="footer-link" data-zh-tw="服務" data-zh-cn="服务" data-en="Services">服務</a></li>
+                        <li><a href="recovery.html" class="footer-link" data-zh-tw="資產追回" data-zh-cn="资产追回" data-en="Recovery">資產追回</a></li>
+                        <li><a href="index.html#products" class="footer-link" data-zh-tw="產品" data-zh-cn="产品" data-en="Products">產品</a></li>
+                        <li><a href="index.html#technology" class="footer-link" data-zh-tw="技術" data-zh-cn="技术" data-en="Technology">技術</a></li>
+                        <li><a href="index.html#about" class="footer-link" data-zh-tw="關於" data-zh-cn="关于" data-en="About">關於</a></li>
+                        <li><a href="report.html" class="footer-link" data-zh-tw="提交案件" data-zh-cn="提交案件" data-en="Submit Case">提交案件</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 font-space" data-zh-tw="聯絡我們" data-zh-cn="联系我们" data-en="Contact Us">聯絡我們</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-ice-blue w-4 flex-shrink-0"></i>
+                            <a href="mailto:support@zerovector.hk" aria-label="Email support@zerovector.hk" class="hover:text-white transition-colors">support@zerovector.hk</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fab fa-discord text-ice-blue w-4 flex-shrink-0"></i>
+                            <a href="#" class="hover:text-white transition-colors discord-link" aria-label="Discord">zerovector.hk</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fab fa-x-twitter text-ice-blue w-4 flex-shrink-0"></i>
+                            <a href="https://x.com/ZEROVECTORhk" target="_blank" rel="noopener" aria-label="X (Twitter) @ZEROVECTORhk" class="hover:text-white transition-colors">@ZEROVECTORhk</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-ice-blue/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; <span id="currentYear"></span> ZEROVECTOR LIMITED. <span data-zh-tw="版權所有" data-zh-cn="版权所有" data-en="All Rights Reserved">版權所有</span>.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="privacy.html" class="footer-link text-xs" data-zh-tw="隱私政策" data-zh-cn="隐私政策" data-en="Privacy Policy">隱私政策</a>
+                    <a href="terms.html" class="footer-link text-xs" data-zh-tw="服務條款" data-zh-cn="服务条款" data-en="Terms of Service">服務條款</a>
+                    <a href="legal.html" class="footer-link text-xs" data-zh-tw="法律聲明" data-zh-cn="法律声明" data-en="Legal Notice">法律聲明</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" aria-label="Scroll to top" class="scroll-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script src="lang.js"></script>
+
+</body>
+</html>
