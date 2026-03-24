@@ -1072,6 +1072,15 @@
 }
     </script>
 
+
+<!-- COOKIE CONSENT (GDPR/PCPD) -->
+<div id="cookieBanner" style="position:fixed;bottom:0;left:0;right:0;background:#1A1A2E;border-top:1px solid #2A2A40;padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:16px;z-index:9999;font-size:0.82rem;color:#8888A0;flex-wrap:wrap;">
+  <span>We use cookies for analytics. <a href="/privacy/" style="color:#0A84FF;">Privacy Policy</a></span>
+  <button onclick="this.parentElement.remove();localStorage.setItem('cookie_consent','1')" style="padding:6px 16px;background:#22C55E;color:#fff;border:none;border-radius:4px;cursor:pointer;font-weight:600;font-size:0.8rem;">Accept</button>
+  <button onclick="this.parentElement.remove();localStorage.setItem('cookie_consent','0')" style="padding:6px 16px;background:transparent;border:1px solid #555;color:#8888A0;border-radius:4px;cursor:pointer;font-size:0.8rem;">Decline</button>
+</div>
+<script>if(localStorage.getItem('cookie_consent'))document.getElementById('cookieBanner')?.remove();</script>
+
 </body>
 </html>
 
