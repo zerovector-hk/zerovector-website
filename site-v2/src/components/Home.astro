@@ -182,11 +182,6 @@ const techIcons = [
       <h2 class="reveal" style="font-size:clamp(26px,3.4vw,34px);font-weight:700;color:var(--navy-900);letter-spacing:-.01em;line-height:1.3">{t.about.title}</h2>
       {t.about.body.map((para) => <p class="reveal">{para}</p>)}
       <p class="about-quote reveal">{t.about.quote}</p>
-      <div class="about-facts reveal" style="margin-top:24px">
-        {t.about.facts.map((f) => (
-          <div class="fact"><b>{f.b}</b><span>{f.s}</span></div>
-        ))}
-      </div>
     </div>
     <div class="contact-card reveal" id="contact" style="--d:.12s">
       <h3>{t.contact.title}</h3>

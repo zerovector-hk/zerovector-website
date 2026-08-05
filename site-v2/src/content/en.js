@@ -101,11 +101,6 @@ export default {
       'From Hong Kong, an international financial centre, we serve the Asia-Pacific region and clients worldwide. A "zero vector" is the origin of a coordinate system — we aim to be the neutral, verifiable reference frame of the virtual asset world.',
     ],
     quote: '"Technology as our eyes, evidence as our measure — rebuilding accountable trust in an anonymous world."',
-    facts: [
-      { b: 'Security Researchers', s: 'Deep threat-intelligence and on-chain tracing experience' },
-      { b: 'Blockchain Engineers', s: 'On-chain data analytics and smart-contract auditing across major protocols and DeFi' },
-      { b: 'Compliance & Forensics Advisors', s: 'Cross-border e-forensics procedure and evidentiary standards — lawful process, court-ready output' },
-    ],
   },
   contact: {
     title: 'Talk to Our Team',
