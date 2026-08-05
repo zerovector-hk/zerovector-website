@@ -48,6 +48,9 @@ const orgJsonLd = JSON.stringify({
     <meta name="twitter:image" content="https://zerovector.hk/og-image.png" />
     <meta name="theme-color" content="#0B1F3A" />
     <script type="application/ld+json" set:html={orgJsonLd} />
+    <link rel="prefetch" href={langHrefs.tw} />
+    <link rel="prefetch" href={langHrefs.cn} />
+    <link rel="prefetch" href={langHrefs.en} />
     <script is:inline>
       if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
     </script>
@@ -158,7 +161,7 @@ const orgJsonLd = JSON.stringify({
       </div>
     </footer>
 
-    <script>
+    <script is:inline>
       function runCount(el) {
         const target = parseInt(el.dataset.n, 10) || 0;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

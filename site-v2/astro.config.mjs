@@ -6,6 +6,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'ignore',
   build: {
-    inlineStylesheets: 'auto',
+    // inline ALL page CSS: kills the render-blocking stylesheet request,
+    // which on slow GitHub Pages routes left the page blank/frozen-looking
+    inlineStylesheets: 'always',
   },
 });
