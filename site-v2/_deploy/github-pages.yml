@@ -1,0 +1,53 @@
+# ZEROVECTOR v2 — GitHub Pages 部署工作流
+# 切换上线时（P3），把本文件移动到仓库根目录 .github/workflows/deploy.yml
+# 并在 GitHub 仓库 Settings → Pages → Source 选择 "GitHub Actions"。
+# CNAME (zerovector.hk) 与 DNS 无需任何变更。
+
+name: Deploy website v2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site-v2/package-lock.json
+      - run: npm ci
+        working-directory: site-v2
+      - run: npm run build
+        working-directory: site-v2
+      # 保留仓库根目录的既有静态页面（legal/privacy/terms 等）直至迁移完成：
+      - run: |
+          cp ../legal.html ../privacy.html ../terms.html dist/ 2>/dev/null || true
+          echo "zerovector.hk" > dist/CNAME
+        working-directory: site-v2
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site-v2/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

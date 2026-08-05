@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- MerkleClaw v3 — Geometric Claw Symbol (Red) -->
+  <!-- Concept: Single lobster claw, side view, extreme geometric abstraction -->
+  <!-- The open claw forms a negative-space arc/C shape -->
+  <!-- Inspired by Chainalysis C-mark: bold, minimal, icon-friendly -->
+  
+  <g transform="translate(256, 256)">
+    
+    <!-- Upper pincer — thick, bold, sweeping arc curving down and inward -->
+    <path d="M-60 -140 
+             C-20 -155, 40 -140, 80 -100 
+             C120 -60, 130 -10, 115 30 
+             C105 55, 80 65, 55 60" 
+          stroke="#E63946" stroke-width="42" stroke-linecap="round" fill="none"/>
+    
+    <!-- Lower pincer — shorter, angled upward to meet, forming the open jaw -->
+    <path d="M-60 -140 
+             C-75 -105, -80 -60, -65 -20 
+             C-50 20, -20 50, 20 60" 
+          stroke="#E63946" stroke-width="38" stroke-linecap="round" fill="none"/>
+    
+    <!-- Joint/knuckle — the hinge where the two pincers connect -->
+    <circle cx="-60" cy="-140" r="28" fill="#E63946"/>
+    
+    <!-- Arm/base segment extending down from the joint -->
+    <path d="M-60 -140 
+             C-85 -100, -110 -40, -115 20 
+             C-118 60, -108 100, -85 130" 
+          stroke="#E63946" stroke-width="36" stroke-linecap="round" fill="none"/>
+    
+    <!-- Subtle segment lines on the arm (carapace texture) -->
+    <path d="M-100 0 C-95 2, -85 5, -80 3" 
+          stroke="#E63946" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+    <path d="M-105 40 C-98 43, -88 45, -82 42" 
+          stroke="#E63946" stroke-width="2" stroke-opacity="0.4" fill="none"/>
+    
+    <!-- Pincer tips — sharp, defined endpoints -->
+    <!-- Upper tip -->
+    <circle cx="55" cy="60" r="8" fill="#E63946"/>
+    <!-- Lower tip -->
+    <circle cx="20" cy="60" r="7" fill="#E63946"/>
+    
+    <!-- Arm base tip -->
+    <circle cx="-85" cy="130" r="10" fill="#E63946"/>
+    
+  </g>
+</svg>

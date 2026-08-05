@@ -1,0 +1,8 @@
+.DS_Store
+_to_delete/
+docs/
+AGENTS.md
+images/og-card.svg
+site-v2/node_modules/
+site-v2/dist/
+site-v2/.astro/
