@@ -3,9 +3,9 @@ export default {
   htmlLang: 'zh-TW',
   path: '/',
   meta: {
-    title: 'ZEROVECTOR — 香港虛擬資產監管科技 | 區塊鏈分析 · 法律諮詢 · 資產安全',
+    title: 'ZEROVECTOR — 香港虛擬資產監管科技 | 區塊鏈分析 · 資產安全 · 數字取證',
     description:
-      'ZEROVECTOR 是總部位於香港的虛擬資產監管科技（RegTech）企業，提供區塊鏈分析與調查、數字資產法律諮詢、錢包與資產安全方案，以及可供司法程序使用的數字取證與專家報告。',
+      'ZEROVECTOR 是總部位於香港的虛擬資產監管科技（RegTech）企業，提供區塊鏈分析與調查、錢包與資產安全方案，以及可供司法程序使用的數字取證與專家報告。',
   },
   nav: {
     services: '服務',
@@ -18,13 +18,13 @@ export default {
   hero: {
     eyebrow: '香港 · 虛擬資產監管科技',
     h1: ['讓虛擬資產，', '經得起審視。'],
-    lead: 'ZEROVECTOR 以區塊鏈分析、法律諮詢與資產安全三大能力，為企業、個人與公共機構提供以證據標準構建的專業技術服務。',
+    lead: 'ZEROVECTOR 以區塊鏈分析、資產安全與數字取證三大能力，為企業、個人與公共機構提供以證據標準構建的專業技術服務。',
     cta1: '預約諮詢評估',
     cta2: '了解我們的服務',
     artCaption: 'tx-graph · attribution path',
   },
   trust: [
-    { num: '100+', label: '公鏈與資產覆蓋 †' },
+    { num: '100+', label: '公鏈與資產覆蓋' },
     { num: '法庭級', label: '取證報告標準' },
     { num: '7×24', label: '安全事件響應' },
     { num: '可複核', label: '分析方法論' },
@@ -32,17 +32,12 @@ export default {
   services: {
     eyebrow: 'Services',
     title: '核心服務',
-    sub: '從鏈上分析、法律諮詢到資產安全與取證，以可複核的專業方法交付。',
+    sub: '從鏈上分析、資產安全到數字取證，以可複核的專業方法交付。',
     items: [
       {
         icon: 'graph',
         title: '鏈上分析與調查',
         desc: '交易圖譜分析、資金流向研判與風險歸因，以可複核的方法論支持盡職調查、事件響應與爭議處理。',
-      },
-      {
-        icon: 'scale',
-        title: '數字資產法律諮詢',
-        desc: '圍繞數字資產的持有、處置與爭議場景提供合規評估與技術支持，並與律師團隊協作，準備法律程序所需的意見與證據材料。',
       },
       {
         icon: 'lock',
@@ -105,7 +100,7 @@ export default {
     eyebrow: 'About',
     title: '關於 ZEROVECTOR',
     body: [
-      'ZEROVECTOR LIMITED 是總部位於香港的虛擬資產監管科技（RegTech）企業，專注區塊鏈分析、數字資產法律諮詢、資產安全與數字取證，將技術創新與法律專業相結合。',
+      'ZEROVECTOR LIMITED 是總部位於香港的虛擬資產監管科技（RegTech）企業，專注區塊鏈分析、資產安全與數字取證，以可複核的方法論與證據標準交付專業服務。',
       '「零向量」是坐標系的原點——一切度量由此出發。我們致力於為虛擬資產世界提供一個中立、可驗證的專業參照系：讓每一筆鏈上活動都能被專業地分析、合規地處理、以證據標準呈現。',
     ],
     facts: [
@@ -124,13 +119,12 @@ export default {
     responseNote: '一般於 1–2 個工作日內回覆',
   },
   footer: {
-    tagline: '總部位於香港的虛擬資產監管科技企業：區塊鏈分析 · 法律諮詢 · 資產安全。',
+    tagline: '總部位於香港的虛擬資產監管科技企業：區塊鏈分析 · 資產安全 · 數字取證。',
     cols: [
       {
         title: '服務',
         links: [
           { text: '鏈上分析與調查', href: '#services' },
-          { text: '數字資產法律諮詢', href: '#services' },
           { text: '錢包與資產安全', href: '#services' },
           { text: '數字取證與專家報告', href: '#services' },
           { text: '公共部門技術支持', href: '#services' },
@@ -152,7 +146,7 @@ export default {
         ],
       },
     ],
-    statsNote: '† 覆蓋範圍等能力數據以正式委託與服務協議載明口徑為準。',
+    complianceNote: '合規提示：本公司不經營虛擬資產交易平台，不提供交易撮合、兌換、代幣發行融資、託管或投資建議等於香港須持牌或於中國內地被法律禁止之服務。本網站內容不構成任何投資建議或投資邀約。',
     legal: [
       { text: '法律聲明', href: '/legal.html' },
       { text: '私隱政策', href: '/privacy.html' },

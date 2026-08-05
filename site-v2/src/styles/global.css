@@ -65,10 +65,11 @@ a{color:var(--blue-700)}
 .nav-links{display:flex;gap:26px;margin-left:auto;align-items:center}
 .nav-links a{font-size:15px;font-weight:500;color:var(--slate-700);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--blue-700)}
-.lang-switch{display:flex;align-items:center;border:1px solid var(--slate-300);border-radius:8px;overflow:hidden}
-.lang-switch a{font-size:12.5px;font-weight:600;color:var(--slate-500);text-decoration:none;padding:5px 10px;border-right:1px solid var(--slate-200)}
+.lang-switch{display:flex;align-items:stretch;border:1px solid var(--slate-300);border-radius:9px;overflow:hidden}
+.lang-switch a{display:flex;align-items:center;font-size:13.5px;font-weight:600;color:var(--slate-500);text-decoration:none;padding:9px 15px;border-right:1px solid var(--slate-200);transition:background .12s,color .12s}
 .lang-switch a:last-child{border-right:none}
 .lang-switch a:hover{background:var(--slate-50);color:var(--navy-900)}
+.lang-switch a:active{background:var(--blue-50);color:var(--blue-800)}
 .lang-switch a[aria-current="true"]{background:var(--navy-900);color:#fff;pointer-events:none}
 /* specificity ≥ .nav-links a / .nav-links a:hover — keeps CTA text white in all states */
 .nav-links a.nav-cta,.nav-cta{font-size:14px;font-weight:700;background:var(--blue-800);color:#fff;text-decoration:none;border-radius:8px;padding:9px 18px;transition:background .15s;box-shadow:0 1px 2px rgba(15,23,42,.18)}
@@ -145,7 +146,7 @@ a{color:var(--blue-700)}
 @media(max-width:920px){.trust-grid{grid-template-columns:1fr 1fr}.trust-grid>div{border-bottom:1px solid var(--slate-100)}}
 
 /* ── services ── */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
 @media(max-width:1080px){.svc-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.svc-grid{grid-template-columns:1fr}}
 .svc-card{background:var(--paper);border:1px solid var(--slate-200);border-top:3px solid var(--blue-700);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow-card);transition:box-shadow .25s,transform .25s;display:flex;flex-direction:column}

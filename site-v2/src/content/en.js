@@ -3,9 +3,9 @@ export default {
   htmlLang: 'en',
   path: '/en/',
   meta: {
-    title: 'ZEROVECTOR — Virtual Asset RegTech, Hong Kong | Blockchain Analytics · Legal Advisory · Asset Security',
+    title: 'ZEROVECTOR — Virtual Asset RegTech, Hong Kong | Blockchain Analytics · Asset Security · Digital Forensics',
     description:
-      'ZEROVECTOR is a Hong Kong–based virtual asset RegTech company providing blockchain analytics and investigations, digital asset legal advisory, wallet and asset security solutions, and digital forensics with expert reporting for legal proceedings.',
+      'ZEROVECTOR is a Hong Kong–based virtual asset RegTech company providing blockchain analytics and investigations, wallet and asset security solutions, and digital forensics with expert reporting for legal proceedings.',
   },
   nav: {
     services: 'Services',
@@ -18,13 +18,13 @@ export default {
   hero: {
     eyebrow: 'Hong Kong · Virtual Asset RegTech',
     h1: ['Built to stand up', 'to scrutiny.'],
-    lead: 'ZEROVECTOR delivers blockchain analytics, legal advisory and asset security — built to evidentiary standards — for enterprises, individuals and public institutions.',
+    lead: 'ZEROVECTOR delivers blockchain analytics, asset security and digital forensics — built to evidentiary standards — for enterprises, individuals and public institutions.',
     cta1: 'Request an Assessment',
     cta2: 'Explore Our Services',
     artCaption: 'tx-graph · attribution path',
   },
   trust: [
-    { num: '100+', label: 'Chains & assets covered †' },
+    { num: '100+', label: 'Chains & assets covered' },
     { num: 'Court-grade', label: 'Forensic reporting standard' },
     { num: '7×24', label: 'Incident response' },
     { num: 'Verifiable', label: 'Reproducible methodology' },
@@ -32,17 +32,12 @@ export default {
   services: {
     eyebrow: 'Services',
     title: 'Core Services',
-    sub: 'From on-chain analytics and legal advisory to asset security and forensics — delivered with reproducible methodology.',
+    sub: 'From on-chain analytics and asset security to digital forensics — delivered with reproducible methodology.',
     items: [
       {
         icon: 'graph',
         title: 'On-chain Analytics & Investigations',
         desc: 'Transaction-graph analytics, fund-flow tracing and risk attribution supporting due diligence, incident response and dispute resolution.',
-      },
-      {
-        icon: 'scale',
-        title: 'Digital Asset Legal Advisory',
-        desc: 'Compliance assessment and technical support for holding, handling and disputes involving digital assets — working with legal teams to prepare opinions and evidence for legal proceedings.',
       },
       {
         icon: 'lock',
@@ -105,7 +100,7 @@ export default {
     eyebrow: 'About',
     title: 'About ZEROVECTOR',
     body: [
-      'ZEROVECTOR LIMITED is a Hong Kong–based virtual asset RegTech company focused on blockchain analytics, digital asset legal advisory, asset security and digital forensics — combining technical innovation with legal expertise.',
+      'ZEROVECTOR LIMITED is a Hong Kong–based virtual asset RegTech company focused on blockchain analytics, asset security and digital forensics — delivering to reproducible methodology and evidentiary standards.',
       'A “zero vector” is the origin of a coordinate system: the point every measurement starts from. We exist to provide that neutral, verifiable reference frame for the virtual asset world — where on-chain activity can be professionally analyzed, compliantly handled, and presented to evidentiary standards.',
     ],
     facts: [
@@ -124,13 +119,12 @@ export default {
     responseNote: 'We typically respond within 1–2 business days',
   },
   footer: {
-    tagline: 'A Hong Kong–based virtual asset RegTech company: blockchain analytics · legal advisory · asset security.',
+    tagline: 'A Hong Kong–based virtual asset RegTech company: blockchain analytics · asset security · digital forensics.',
     cols: [
       {
         title: 'Services',
         links: [
           { text: 'On-chain Analytics & Investigations', href: '#services' },
-          { text: 'Digital Asset Legal Advisory', href: '#services' },
           { text: 'Wallet & Asset Security', href: '#services' },
           { text: 'Digital Forensics & Expert Reporting', href: '#services' },
           { text: 'Public Sector Solutions', href: '#services' },
@@ -152,7 +146,7 @@ export default {
         ],
       },
     ],
-    statsNote: '† Coverage and capability figures are as defined in formal engagement and service agreements.',
+    complianceNote: 'Compliance note: ZEROVECTOR does not operate a virtual-asset trading platform and does not provide trade matching, exchange, token issuance, custody or investment advice — activities that require licensing in Hong Kong or are prohibited in Mainland China. Nothing on this site constitutes investment advice or solicitation.',
     legal: [
       { text: 'Legal Notice', href: '/en/legal.html' },
       { text: 'Privacy Policy', href: '/en/privacy.html' },
