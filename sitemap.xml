@@ -28,4 +28,10 @@
   <url><loc>https://zerovector.hk/legal.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://zerovector.hk/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://zerovector.hk/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://zerovector.hk/cn/legal.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://zerovector.hk/cn/privacy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://zerovector.hk/cn/terms.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://zerovector.hk/en/legal.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://zerovector.hk/en/privacy.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://zerovector.hk/en/terms.html</loc><changefreq>yearly</changefreq><priority>0.2</priority></url>
 </urlset>

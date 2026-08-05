@@ -3,9 +3,9 @@ export default {
   htmlLang: 'zh-CN',
   path: '/cn/',
   meta: {
-    title: 'ZEROVECTOR — 香港虚拟资产监管科技 | 区块链分析 · 法律合规 · 资产安全',
+    title: 'ZEROVECTOR — 香港虚拟资产监管科技 | 区块链分析 · 法律咨询 · 资产安全',
     description:
-      'ZEROVECTOR 是总部位于香港的虚拟资产监管科技（RegTech）企业，提供区块链分析与调查、数字资产法律合规、钱包与资产安全方案，以及可供司法程序使用的数字取证与专家报告。',
+      'ZEROVECTOR 是总部位于香港的虚拟资产监管科技（RegTech）企业，提供区块链分析与调查、数字资产法律咨询、钱包与资产安全方案，以及可供司法程序使用的数字取证与专家报告。',
   },
   nav: {
     services: '服务',
@@ -18,7 +18,7 @@ export default {
   hero: {
     eyebrow: '香港 · 虚拟资产监管科技',
     h1: ['让虚拟资产，', '经得起审视。'],
-    lead: 'ZEROVECTOR 以区块链分析、法律合规与资产安全三大能力，为企业、个人与公共机构提供以证据标准构建的专业技术服务。',
+    lead: 'ZEROVECTOR 以区块链分析、法律咨询与资产安全三大能力，为企业、个人与公共机构提供以证据标准构建的专业技术服务。',
     cta1: '预约咨询评估',
     cta2: '了解我们的服务',
     artCaption: 'tx-graph · attribution path',
@@ -32,7 +32,7 @@ export default {
   services: {
     eyebrow: 'Services',
     title: '核心服务',
-    sub: '从链上分析、法律合规到资产安全与取证，以可复核的专业方法交付。',
+    sub: '从链上分析、法律咨询到资产安全与取证，以可复核的专业方法交付。',
     items: [
       {
         icon: 'graph',
@@ -41,7 +41,7 @@ export default {
       },
       {
         icon: 'scale',
-        title: '数字资产法律合规',
+        title: '数字资产法律咨询',
         desc: '围绕数字资产的持有、处置与争议场景提供合规评估与技术支持，并与律师团队协作，准备法律程序所需的意见与证据材料。',
       },
       {
@@ -105,7 +105,7 @@ export default {
     eyebrow: 'About',
     title: '关于 ZEROVECTOR',
     body: [
-      'ZEROVECTOR LIMITED 是总部位于香港的虚拟资产监管科技（RegTech）企业，专注区块链分析、数字资产法律合规、资产安全与数字取证，将技术创新与法律专业相结合。',
+      'ZEROVECTOR LIMITED 是总部位于香港的虚拟资产监管科技（RegTech）企业，专注区块链分析、数字资产法律咨询、资产安全与数字取证，将技术创新与法律专业相结合。',
       '“零向量”是坐标系的原点——一切度量由此出发。我们致力于为虚拟资产世界提供一个中立、可验证的专业参照系：让每一笔链上活动都能被专业地分析、合规地处理、以证据标准呈现。',
     ],
     facts: [
@@ -124,13 +124,13 @@ export default {
     responseNote: '一般于 1–2 个工作日内回复',
   },
   footer: {
-    tagline: '总部位于香港的虚拟资产监管科技企业：区块链分析 · 法律合规 · 资产安全。',
+    tagline: '总部位于香港的虚拟资产监管科技企业：区块链分析 · 法律咨询 · 资产安全。',
     cols: [
       {
         title: '服务',
         links: [
           { text: '链上分析与调查', href: '#services' },
-          { text: '数字资产法律合规', href: '#services' },
+          { text: '数字资产法律咨询', href: '#services' },
           { text: '钱包与资产安全', href: '#services' },
           { text: '数字取证与专家报告', href: '#services' },
           { text: '公共部门技术支持', href: '#services' },
@@ -154,9 +154,9 @@ export default {
     ],
     statsNote: '† 覆盖范围等能力数据以正式委托与服务协议载明口径为准。',
     legal: [
-      { text: '法律声明', href: '/legal.html' },
-      { text: '隐私政策', href: '/privacy.html' },
-      { text: '服务条款', href: '/terms.html' },
+      { text: '法律声明', href: '/cn/legal.html' },
+      { text: '隐私政策', href: '/cn/privacy.html' },
+      { text: '服务条款', href: '/cn/terms.html' },
     ],
     copyright: 'ZEROVECTOR LIMITED · 香港 · 版权所有',
   },

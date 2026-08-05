@@ -2,12 +2,12 @@
 
 > 香港虛擬資產監管科技 | Virtual Asset RegTech, Hong Kong | 让虚拟资产，经得起审视
 
-ZEROVECTOR LIMITED is a Hong Kong–based virtual asset RegTech company. We provide blockchain analytics and investigations, digital asset legal compliance, wallet and asset security solutions, and digital forensics with expert reporting suitable for legal proceedings — combining technical innovation with legal expertise.
+ZEROVECTOR LIMITED is a Hong Kong–based virtual asset RegTech company. We provide blockchain analytics and investigations, digital asset legal advisory, wallet and asset security solutions, and digital forensics with expert reporting suitable for legal proceedings — combining technical innovation with legal expertise.
 
 ## Services
 
 - **On-chain Analytics & Investigations (鏈上分析與調查)**: Transaction-graph analytics, fund-flow tracing and risk attribution supporting due diligence, incident response and dispute resolution.
-- **Digital Asset Legal Compliance (數字資產法律合規)**: Compliance assessment and technical support for holding, handling and disputes involving digital assets — working with legal teams to prepare opinions and evidence for legal proceedings.
+- **Digital Asset Legal Advisory (數字資產法律諮詢)**: Compliance assessment and technical support for holding, handling and disputes involving digital assets — working with legal teams to prepare opinions and evidence for legal proceedings.
 - **Wallet & Asset Security (錢包與資產安全)**: Security assessment, incident response and long-term monitoring for hardware-wallet vulnerabilities, signing and key-management risks — for individual holders and corporate treasuries.
 - **Digital Forensics & Expert Reporting (數字取證與專家報告)**: Evidence preservation, on-chain forensics, and expert reports and witness support suitable for legal proceedings.
 - **Public Sector Solutions (公共部門技術支持)**: Capability building, analytics tooling and case support for duly authorized agencies in the Hong Kong SAR and Mainland China.

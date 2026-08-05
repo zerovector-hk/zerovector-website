@@ -1,0 +1,22 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import Base from '../../layouts/Base.astro';
+import LegalDoc from '../../components/LegalDoc.astro';
+import base from '../../content/en.js';
+import L from '../../content/legal/en.js';
+const t = {
+  ...base,
+  meta: { title: L.legal.title + ' — ZEROVECTOR', description: L.legal.metaDesc },
+  path: '/en/legal.html'.replace('//', '/'),
+  home: '/en/',
+  langHrefs: { tw: '/legal.html', cn: '/cn/legal.html', en: '/en/legal.html' },
+  altPaths: { tw: '/legal.html', cn: '/cn/legal.html', en: '/en/legal.html' },
+};
+---
+<Base t={t}>
+  <LegalDoc doc={L.legal} meta={{ backHome: L.backHome, updatedLabel: L.updatedLabel, home: '/en/' }} />
+</Base>

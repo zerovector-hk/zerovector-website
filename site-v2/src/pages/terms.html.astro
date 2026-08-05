@@ -1,0 +1,25 @@
+---
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource/noto-sans-tc/400.css';
+import '@fontsource/noto-sans-tc/500.css';
+import '@fontsource/noto-sans-tc/700.css';
+import Base from '../layouts/Base.astro';
+import LegalDoc from '../components/LegalDoc.astro';
+import base from '../content/zh-tw.js';
+import L from '../content/legal/zh-tw.js';
+const t = {
+  ...base,
+  meta: { title: L.terms.title + ' — ZEROVECTOR', description: L.terms.metaDesc },
+  path: '/terms.html'.replace('//', '/'),
+  home: '/',
+  langHrefs: { tw: '/terms.html', cn: '/cn/terms.html', en: '/en/terms.html' },
+  altPaths: { tw: '/terms.html', cn: '/cn/terms.html', en: '/en/terms.html' },
+};
+---
+<Base t={t}>
+  <LegalDoc doc={L.terms} meta={{ backHome: L.backHome, updatedLabel: L.updatedLabel, home: '/' }} />
+</Base>

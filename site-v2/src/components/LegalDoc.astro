@@ -1,0 +1,19 @@
+---
+const { doc, meta } = Astro.props;
+---
+<section class="legal-page">
+  <div class="wrap">
+    <a class="legal-back" href={meta.home}>{meta.backHome}</a>
+    <p class="eyebrow" style="margin-top:26px">Legal</p>
+    <h1>{doc.title}</h1>
+    <p class="legal-updated">{meta.updatedLabel}</p>
+    <div class="legal-body">
+      {doc.sections.map((s, i) => (
+        <section class="legal-sec">
+          <h2><span class="num">{String(i + 1).padStart(2, '0')}</span>{s.h}</h2>
+          {s.ps.map((p) => <p>{p}</p>)}
+        </section>
+      ))}
+    </div>
+  </div>
+</section>

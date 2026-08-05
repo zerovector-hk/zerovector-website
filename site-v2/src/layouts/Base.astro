@@ -5,6 +5,10 @@ import { ClientRouter } from 'astro:transitions';
 const { t } = Astro.props;
 const site = 'https://zerovector.hk';
 const canonical = site + t.path;
+const home = t.home ?? '';
+const langHrefs = t.langHrefs ?? { tw: '/', cn: '/cn/', en: '/en/' };
+const altPaths = t.altPaths ?? { tw: '/', cn: '/cn/', en: '/en/' };
+const prefix = (href) => (href.startsWith('#') ? home + href : href);
 
 const orgJsonLd = JSON.stringify({
   '@context': 'https://schema.org',
@@ -27,10 +31,10 @@ const orgJsonLd = JSON.stringify({
     <title>{t.meta.title}</title>
     <meta name="description" content={t.meta.description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="zh-Hant" href={site + '/'} />
-    <link rel="alternate" hreflang="zh-Hans" href={site + '/cn/'} />
-    <link rel="alternate" hreflang="en" href={site + '/en/'} />
-    <link rel="alternate" hreflang="x-default" href={site + '/'} />
+    <link rel="alternate" hreflang="zh-Hant" href={site + altPaths.tw} />
+    <link rel="alternate" hreflang="zh-Hans" href={site + altPaths.cn} />
+    <link rel="alternate" hreflang="en" href={site + altPaths.en} />
+    <link rel="alternate" hreflang="x-default" href={site + altPaths.tw} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={t.meta.title} />
@@ -65,16 +69,16 @@ const orgJsonLd = JSON.stringify({
 
         <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true" />
         <div class="nav-links" id="nav-links">
-          <a href="#services">{t.nav.services}</a>
-          <a href="#products">{t.nav.products}</a>
-          <a href="#technology">{t.nav.technology}</a>
-          <a href="#about">{t.nav.about}</a>
+          <a href={home + '#services'}>{t.nav.services}</a>
+          <a href={home + '#products'}>{t.nav.products}</a>
+          <a href={home + '#technology'}>{t.nav.technology}</a>
+          <a href={home + '#about'}>{t.nav.about}</a>
           <div class="lang-switch" aria-label="Language">
-            <a href="/" aria-current={t.lang === 'zh-TW' ? 'true' : undefined}>繁</a>
-            <a href="/cn/" aria-current={t.lang === 'zh-CN' ? 'true' : undefined}>简</a>
-            <a href="/en/" aria-current={t.lang === 'en' ? 'true' : undefined}>EN</a>
+            <a href={langHrefs.tw} aria-current={t.lang === 'zh-TW' ? 'true' : undefined}>繁</a>
+            <a href={langHrefs.cn} aria-current={t.lang === 'zh-CN' ? 'true' : undefined}>简</a>
+            <a href={langHrefs.en} aria-current={t.lang === 'en' ? 'true' : undefined}>EN</a>
           </div>
-          <a class="nav-cta" href="#contact">{t.nav.cta}</a>
+          <a class="nav-cta" href={home + '#contact'}>{t.nav.cta}</a>
         </div>
         <label for="menu-toggle" class="menu-btn" aria-label={t.nav.menuLabel}>
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -109,7 +113,7 @@ const orgJsonLd = JSON.stringify({
             <div class="footer-col">
               <h4>{col.title}</h4>
               {col.links.map((l) => (
-                <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener' : undefined}>{l.text}</a>
+                <a href={prefix(l.href)} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener' : undefined}>{l.text}</a>
               ))}
             </div>
           ))}
