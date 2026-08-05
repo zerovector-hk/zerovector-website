@@ -4,7 +4,7 @@ const { doc, meta } = Astro.props;
 <section class="legal-page">
   <div class="wrap">
     <a class="legal-back" href={meta.home}>{meta.backHome}</a>
-    <p class="eyebrow" style="margin-top:26px">Legal</p>
+    <p class="eyebrow" style="margin-top:26px">{meta.kicker}</p>
     <h1>{doc.title}</h1>
     <p class="legal-updated">{meta.updatedLabel}</p>
     <div class="legal-body">

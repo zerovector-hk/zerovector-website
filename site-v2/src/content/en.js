@@ -21,7 +21,8 @@ export default {
     lead: 'ZEROVECTOR delivers blockchain analytics, asset security and digital forensics — built to evidentiary standards — for enterprises, individuals and public institutions.',
     cta1: 'Request an Assessment',
     cta2: 'Explore Our Services',
-    artCaption: 'tx-graph · attribution path',
+    ticker: ['tracing 0x4f3a…9e2c', 'hop 3 · bridge transfer', 'cluster attributed ✓'],
+    chip: 'ATTRIBUTED ✓',
   },
   trust: [
     { num: '100+', label: 'Chains & assets covered' },
@@ -30,7 +31,6 @@ export default {
     { num: 'Verifiable', label: 'Reproducible methodology' },
   ],
   services: {
-    eyebrow: 'Services',
     title: 'Core Services',
     sub: 'From on-chain analytics and asset security to digital forensics — delivered with reproducible methodology.',
     items: [
@@ -57,7 +57,6 @@ export default {
     ],
   },
   products: {
-    eyebrow: 'Products',
     title: 'Products',
     sub: 'A proprietary suite spanning asset monitoring, on-chain intelligence and threat collaboration.',
     items: [
@@ -85,7 +84,6 @@ export default {
     ],
   },
   tech: {
-    eyebrow: 'Methodology',
     title: 'Technology & Methodology',
     sub: 'Every finding is backed by reproducible methodology.',
     items: [
@@ -97,17 +95,16 @@ export default {
     note: 'Our work follows reproducibility principles — transparent methods, documented process, verifiable findings — with reports prepared to the standards required by legal proceedings where needed.',
   },
   about: {
-    eyebrow: 'About',
     title: 'About ZEROVECTOR',
     body: [
-      'ZEROVECTOR LIMITED is a Hong Kong–based virtual asset RegTech company focused on blockchain analytics, asset security and digital forensics — delivering to reproducible methodology and evidentiary standards.',
-      'A “zero vector” is the origin of a coordinate system: the point every measurement starts from. We exist to provide that neutral, verifiable reference frame for the virtual asset world — where on-chain activity can be professionally analyzed, compliantly handled, and presented to evidentiary standards.',
+      'ZEROVECTOR is a RegTech company dedicated to virtual asset security, built on on-chain analytics, asset security and court-grade digital forensics. Decentralization brings freedom — and risk. In an on-chain world where anonymity and transparency coexist, we support enterprises, individuals and public institutions across the full cycle: defense beforehand, response in the moment, forensics afterwards.',
+      'From Hong Kong, an international financial centre, we serve the Asia-Pacific region and clients worldwide. A "zero vector" is the origin of a coordinate system — we aim to be the neutral, verifiable reference frame of the virtual asset world.',
     ],
+    quote: '"Technology as our eyes, evidence as our measure — rebuilding accountable trust in an anonymous world."',
     facts: [
-      { b: 'ZEROVECTOR LIMITED', s: 'Registered in Hong Kong' },
-      { b: 'RegTech', s: 'Industry positioning' },
-      { b: '繁中 · 简中 · EN', s: 'Trilingual service' },
-      { b: 'zerovector.hk', s: 'Official website' },
+      { b: 'Security Researchers', s: 'Deep threat-intelligence and on-chain tracing experience' },
+      { b: 'Blockchain Engineers', s: 'On-chain data analytics and smart-contract auditing across major protocols and DeFi' },
+      { b: 'Compliance & Forensics Advisors', s: 'Cross-border e-forensics procedure and evidentiary standards — lawful process, court-ready output' },
     ],
   },
   contact: {

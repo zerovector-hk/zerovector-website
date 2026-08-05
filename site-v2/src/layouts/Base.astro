@@ -159,10 +159,27 @@ const orgJsonLd = JSON.stringify({
     </footer>
 
     <script>
+      function runCount(el) {
+        const target = parseInt(el.dataset.n, 10) || 0;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          el.textContent = String(target);
+          return;
+        }
+        const t0 = performance.now();
+        const dur = 950;
+        function tick(now) {
+          const p = Math.min(1, (now - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
       function initReveal() {
         const els = document.querySelectorAll('.reveal:not(.in)');
         if (!('IntersectionObserver' in window)) {
           els.forEach((el) => el.classList.add('in'));
+          document.querySelectorAll('.count').forEach((c) => (c.textContent = c.dataset.n));
           return;
         }
         const io = new IntersectionObserver(
@@ -170,6 +187,7 @@ const orgJsonLd = JSON.stringify({
             for (const e of entries) {
               if (e.isIntersecting) {
                 e.target.classList.add('in');
+                e.target.querySelectorAll('.count').forEach(runCount);
                 io.unobserve(e.target);
               }
             }

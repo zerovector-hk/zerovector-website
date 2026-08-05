@@ -1,4 +1,5 @@
 export default {
+  kicker: '法律文件',
   backHome: '← 返回首页',
   updatedLabel: '生效日期：2026 年 8 月 5 日',
   legal: {

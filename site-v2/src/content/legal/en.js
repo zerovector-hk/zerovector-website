@@ -1,4 +1,5 @@
 export default {
+  kicker: 'Legal',
   backHome: '← Back to home',
   updatedLabel: 'Effective date: 5 August 2026',
   legal: {
