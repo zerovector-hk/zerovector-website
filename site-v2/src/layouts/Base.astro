@@ -51,6 +51,27 @@ const orgJsonLd = JSON.stringify({
     <script is:inline>
       if ('IntersectionObserver' in window) document.documentElement.classList.add('js');
     </script>
+    {t.path === '/' && (
+      <script is:inline>
+        /* Auto language routing on first landing at root.
+           Manual choice (stored in localStorage) always wins; runs before paint. */
+        (function () {
+          try {
+            if (localStorage.getItem('zv-lang')) return;
+            var p = location.pathname;
+            if (p !== '/' && p !== '/index.html') return;
+            var l = ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase();
+            if (!l) return;
+            if (l.indexOf('zh') === 0) {
+              if (/hans|cn|sg|my/.test(l)) location.replace('/cn/');
+              /* zh-hant / zh-tw / zh-hk / zh-mo → stay on default */
+            } else {
+              location.replace('/en/');
+            }
+          } catch (e) {}
+        })();
+      </script>
+    )}
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -167,8 +188,19 @@ const orgJsonLd = JSON.stringify({
         onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });
       }
+      function initLangChoice() {
+        const map = { '繁': 'tw', '简': 'cn', 'EN': 'en' };
+        document.querySelectorAll('.lang-switch a').forEach((a) => {
+          a.addEventListener('click', () => {
+            try {
+              localStorage.setItem('zv-lang', map[a.textContent.trim()] || 'tw');
+            } catch (e) {}
+          });
+        });
+      }
       initReveal();
       initHeader();
+      initLangChoice();
     </script>
   </body>
 </html>
