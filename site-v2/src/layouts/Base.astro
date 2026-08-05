@@ -219,9 +219,38 @@ const orgJsonLd = JSON.stringify({
           });
         });
       }
+      function initScrollSpy() {
+        const links = Array.from(document.querySelectorAll('.nav-links a[href*="#"]')).filter(
+          (a) => !a.classList.contains('nav-cta')
+        );
+        if (!links.length || !('IntersectionObserver' in window)) return;
+        const byId = {};
+        links.forEach((a) => {
+          const id = a.getAttribute('href').split('#')[1];
+          if (id) byId[id] = a;
+        });
+        const spy = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              const link = byId[e.target.id];
+              if (!link) return;
+              if (e.isIntersecting) {
+                links.forEach((a) => a.classList.remove('active'));
+                link.classList.add('active');
+              }
+            });
+          },
+          { rootMargin: '-38% 0px -55% 0px' }
+        );
+        Object.keys(byId).forEach((id) => {
+          const sec = document.getElementById(id);
+          if (sec) spy.observe(sec);
+        });
+      }
       initReveal();
       initHeader();
       initLangChoice();
+      initScrollSpy();
     </script>
   </body>
 </html>

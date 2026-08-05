@@ -155,21 +155,24 @@ const techIcons = [
   </div>
 </section>
 
-<!-- ═══ Technology (dark) ═══ -->
+<!-- ═══ Technology pipeline (dark) ═══ -->
 <section class="sec tech" id="technology">
   <div class="wrap">
     <p class="sec-num dark reveal"><span>03</span></p>
     <h2 class="reveal">{t.tech.title}</h2>
     <p class="sub reveal">{t.tech.sub}</p>
-    <div class="tech-grid">
-      {t.tech.items.map((item, i) => (
-        <article class="tech-card reveal" style={`--d:${i * 0.07}s`}>
-          <div class="t-ic" set:html={techIcons[i]} />
-          <h3>{item.title}</h3>
-          <p>{item.desc}</p>
-        </article>
+    <ol class="pipeline">
+      {t.tech.stages.map((st, i) => (
+        <li class="stage reveal" style={`--d:${i * 0.12}s`}>
+          <div class="s-ic" set:html={techIcons[i]} />
+          <div class="s-body">
+            <h3><span class="s-idx">{String(i + 1).padStart(2, '0')}</span>{st.title}</h3>
+            <p>{st.desc}</p>
+            <p class="s-tag">{st.tag}</p>
+          </div>
+        </li>
       ))}
-    </div>
+    </ol>
     <div class="tech-note reveal"><p>{t.tech.note}</p></div>
   </div>
 </section>

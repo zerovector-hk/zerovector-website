@@ -27,7 +27,7 @@ export default {
   trust: [
     { num: '100+', label: 'Chains & assets covered' },
     { num: 'Court-grade', label: 'Forensic reporting standard' },
-    { num: '7×24', label: 'Incident response' },
+    { num: '24/7', label: 'Incident response' },
     { num: 'Verifiable', label: 'Reproducible methodology' },
   ],
   services: {
@@ -85,12 +85,12 @@ export default {
   },
   tech: {
     title: 'Technology & Methodology',
-    sub: 'Every finding is backed by reproducible methodology.',
-    items: [
-      { title: 'Transaction-graph Analytics', desc: 'Cross-chain fund-flow reconstruction and clustering attribution.' },
-      { title: 'Behavioral Modeling', desc: 'Address profiling and anomaly detection.' },
-      { title: 'Smart-contract Forensics', desc: 'Interaction tracing and exploit-path reconstruction.' },
-      { title: 'Evidence Engineering', desc: 'Preservation, chain of custody and reporting standards.' },
+    sub: 'One reproducible analysis pipeline — every step leaves a defined output and an audit trail.',
+    stages: [
+      { title: 'Data Ingestion', desc: 'Full-node and multi-source collection — cleaned, validated and normalized.', tag: 'Output: raw on-chain dataset' },
+      { title: 'Graph Construction', desc: 'Address clustering and transaction modeling into a queryable fund-flow graph.', tag: 'Output: transaction graph' },
+      { title: 'Attribution Analysis', desc: 'Behavioral modeling and cross-chain tracing with reproducible findings.', tag: 'Output: attribution findings' },
+      { title: 'Evidence Output', desc: 'Preservation and chain of custody — reports built for legal proceedings.', tag: 'Output: court-grade report' },
     ],
     note: 'Our work follows reproducibility principles — transparent methods, documented process, verifiable findings — with reports prepared to the standards required by legal proceedings where needed.',
   },
